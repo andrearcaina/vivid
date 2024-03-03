@@ -69,8 +69,8 @@ Here is a breakdown:
    - Members can schedule an existing practice session and quickly pay on the application. 
 
 6. **`Coach Management System`**:
-  - Administrators, particularly the treasurer, have tools to manage coach lists.
-  - This ties to #3: **`Expense Tracking Panel`**.
+   - Administrators, particularly the treasurer, have tools to manage coach lists.
+   - This ties to #3: **`Expense Tracking Panel`**.
 
 7. **`Coach Scheduling System`**:
    - Coaches have a dedicated section where they can manage their schedules, availability, and coaching sessions.
