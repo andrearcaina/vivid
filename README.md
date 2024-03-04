@@ -90,10 +90,10 @@ Then, from your command line:
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/andrearcaina/finances-tracker.git
+$ git clone https://github.com/andrearcaina/vivid.git
 
 # Go into the backend folder
-$ cd finances-tracker/server
+$ cd vivid/server
 
 # install virtual environment
 $ python3 -m venv .venv # for linux
