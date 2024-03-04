@@ -8,7 +8,7 @@ add later when we have a logo
 
 -->
 
-<h4 align="center">Vivid is a full-stack web application that for &lt;enter random club name&gt; that allows administrators to manage the finances, membership, and coaches in &lt;enter random club name&gt;. It includes user authentication, a messaging platform for all members and administrators, an expense tracking panel, and a membership management system for admins (treasurer and coaches).</h4>
+<h4 align="center">Vivid is a full-stack web application for any general amateur or professional club that allows administrators to manage the finances, membership, and coaches. It includes user authentication, a messaging platform for all members and administrators, an expense tracking panel, and a membership management system for administration.</h4>
 
 
 <hr>
