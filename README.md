@@ -110,5 +110,8 @@ $ pip install -r requirements.txt
 $ cd ../client
 
 # install necessary packages
-$ npm install
+$ npm install # using npm
+$ bun install # using bun
+$ pnpm install # using pnpm
+$ yarn install # using yarn
 ```
