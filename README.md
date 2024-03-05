@@ -37,13 +37,13 @@ Here is a breakdown:
 
 ## Functionality
 1. **`User Authentication`**:
-   - Users can register accounts and log in securely to access the application.
+   - Members can register accounts and log in securely to access the application.
    - Passwords are securely hashed and stored in the database.
-   - Administrators can manage user accounts, including resetting passwords and deactivating accounts if necessary.
+   - Administrators can manage member accounts, including resetting passwords and deactivating accounts if necessary.
 
 2. **`Messaging Platform`**:
    - All members and administrators have access to a messaging platform within the application.
-   - Users can send and receive messages, announcements, and notifications.
+   - Members can send and receive messages, announcements, and notifications.
    - Administrators can broadcast messages to all members or specific groups.
    - Messages can be organized by topic or category for easy navigation and reference.
 
@@ -52,7 +52,7 @@ Here is a breakdown:
    - Expenses incurred by the club, such as rent for the meeting hall, coach salaries, and other operational costs, can be recorded and tracked.
    - The panel includes a log of any unpaid debts from previous months, including instances where the rent for the hall was not paid in full or not paid at all, as well as any unpaid coach expenses.
      - The treasurer can review and prioritize outstanding debts, follow up with relevant parties, and take necessary actions to settle outstanding balances.
-   - Historical data on unpaid debts allows athe treasurer to identify trends, assess financial risks, and implement strategies to improve financial management and accountability within the club.
+   - Historical data on unpaid debts allows the treasurer to identify trends, assess financial risks, and implement strategies to improve financial management and accountability within the club.
    - The panel also provides information on the current month’s account payables, including members who have paid in advance. This allows the treasurer to maintain accurate records of prepaid fees, track membership dues, and ensure timely invoicing and collection processes.
    - The treasurer has access to managing the coaches salary in this panel.
 
@@ -66,7 +66,8 @@ Here is a breakdown:
      - Give a discount for members higher on the database, and a charge for those on the bottom.
 
 5. **`Member Scheduling System`**:
-   - Members can schedule an existing practice session and quickly pay on the application. 
+   - Members can schedule an existing practice session and quickly pay on the application.
+   - Members can update their profiles as well.
 
 6. **`Coach Management System`**:
    - Administrators, particularly the treasurer, have tools to manage coach lists.
