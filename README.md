@@ -26,7 +26,7 @@ The frontend is developed using `JavaScript` and the Next.js framework, with Tai
 [![SUPABASE](https://shields.io/badge/supabase-black?logo=supabase&style=for-the-badge)](https://supabase.com/)\
 The backend framework chosen for this project is Django, a high level `Python`-based framework. In Django, we create database schemas and API endpoints to communicate with the frontend (the client).
 These endpoints are designed for retrieving data from a PostgreSQL database structure, which is hosted and created using Supabase.
-Built on a RESTful API architecture, Vivid leverages HTTP methods such as GET, POST, PUT, and DELETE, adhering to the CRUD (Create, Read, Update, Delete) operation paradigm.
+Built on a RESTful API architecture, Vivid leverages HTTP methods such as GET, POST, PUT, PATCH, and DELETE, adhering to the CRUD (Create, Read, Update, Delete) operation paradigm.
 
 <hr>
 
