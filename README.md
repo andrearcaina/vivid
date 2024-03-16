@@ -1,15 +1,26 @@
-<!-- 
-
-add later when we have a logo
-
 <h1 align="center">
-  <img src="client/public/images/logo.png" alt="logo">
+  Vivid
 </h1>
 
--->
 
-<h4 align="center">Vivid is a full-stack web application for any general amateur or professional club that allows administrators to manage the finances, membership, and coaches of their club. It includes user authentication, a messaging platform for all members and administrators, an expense tracking panel, and a membership management system for administration.</h4>
+<h4 align="center">... is a full-stack web application for any general amateur or professional club that allows administrators to manage the finances, membership, and coaches of their club. It includes user authentication, a messaging platform for all members and administrators, an expense tracking panel, and a membership management system for administration.</h4>
 
+<hr>
+
+<div align="center">
+  <table align="center">
+    <tr>
+      <th colspan="5">Developers</th>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/andrearcaina">Andre Arcaina</a></th>
+      <th><a href="https://github.com/Tristanv0">Tristan Cheng</a></th>
+      <th><a href="https://github.com/heintzJ">Jack Heintz</a></th>
+      <th><a href="https://github.com/josephleungg">Joseph Leung</a></th>
+      <th><a href="https://github.com/feli-quiroga">Felipe Quiroga</a></th>
+    </tr>
+  </table>
+</div>
 
 <hr>
 
