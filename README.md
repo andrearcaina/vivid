@@ -49,11 +49,11 @@ Built on a RESTful API architecture, Vivid leverages HTTP methods such as GET, P
 
 2. **`Messaging Platform`**:
    - All members and administrators have access to a messaging platform within the application.
-   - Members can send and receive messages, announcements, and notifications.
-   - Administrators can broadcast messages to all members or specific groups.
-   - Messages can be organized by topic or category for easy navigation and reference.
+   - Administrators, notably the coaches and the treasurer, can broadcast annoucements to all members.
+     - Administrators can send and receive messages.
+   - Members can send and receive messages, and access announcements from coaches.
 
-3. **`Expense Tracking Panel`**:
+4. **`Expense Tracking Panel`**:
    - Administrators, particularly the treasurer, have access to an expense tracking panel.
    - Expenses incurred by the club, such as rent for the meeting hall, coach salaries, and other operational costs, can be recorded and tracked.
    - The panel includes a log of any unpaid debts from previous months, including instances where the rent for the hall was not paid in full or not paid at all, as well as any unpaid coach expenses.
@@ -62,7 +62,7 @@ Built on a RESTful API architecture, Vivid leverages HTTP methods such as GET, P
    - The panel also provides information on the current month’s account payables, including members who have paid in advance. This allows the treasurer to maintain accurate records of prepaid fees, track membership dues, and ensure timely invoicing and collection processes.
    - The treasurer has access to managing the coaches salary in this panel.
 
-4. **`Membership Management System`**:
+5. **`Membership Management System`**:
    - Administrators, including the treasurer and coaches, have tools to manage club memberships.
    - New members can register and apply for membership through the application.
    - Coaches can approve (add) or reject (remove) membership applications, and manage membership statuses.
@@ -71,15 +71,15 @@ Built on a RESTful API architecture, Vivid leverages HTTP methods such as GET, P
    - Both the treasurer and coaches can sort the membership list by attendance, and number of unpaid/paid times.
      - Give a discount for members higher on the database, and a charge for those on the bottom.
 
-5. **`Member Scheduling System`**:
+6. **`Member Scheduling System`**:
    - Members can schedule an existing practice session and quickly pay on the application.
    - Members can update their profiles as well.
 
-6. **`Coach Management System`**:
+7. **`Coach Management System`**:
    - Administrators, particularly the treasurer, have tools to manage coach lists.
    - This ties to #3: **`Expense Tracking Panel`**.
 
-7. **`Coach Scheduling System`**:
+8. **`Coach Scheduling System`**:
    - Coaches have a dedicated section where they can manage their schedules, availability, and coaching sessions.
    - Coaches can mark their availability for practice sessions, update their profiles, and communicate with club members.
    - Administrators have oversight of coach activities, including scheduling, attendance, and performance evaluations.
