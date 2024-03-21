@@ -86,6 +86,18 @@ Built on a RESTful API architecture, Vivid leverages HTTP methods such as GET, P
 
 <hr>
 
+## Quality Assurance and Test Reports
+Our plan for testing if our system and our implementation works will consist of 5 different types of tests:
+1. User Authentication
+3. Finance Tracking
+5. Membership Logging
+6. Message Platform
+7. Database Tracking
+
+These tests will ensure that our product in mind is to the client's expectation.
+
+<hr>
+
 ## Installation Process
 
 To clone this application, you'll need: 
