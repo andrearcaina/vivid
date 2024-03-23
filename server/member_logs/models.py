@@ -5,13 +5,11 @@ class Member(models.Model):
     class Meta:
         db_table = 'member_logs'
 
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
+    email = models.EmailField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=100)
+    date_of_birth = models.DateField()
     payment_status = models.CharField(max_length=100)
     membership_approved = models.BooleanField(default=False)
     attendance_count = models.IntegerField(default=0)

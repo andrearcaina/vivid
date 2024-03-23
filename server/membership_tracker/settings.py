@@ -34,6 +34,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'member_logs.apps.MemberLogsConfig',
+    'user_auth.apps.UserAuthConfig',
+    'message_platform.apps.MessagePlatformConfig',
+    'scheduling.apps.SchedulingConfig',
+    'finance_tracking.apps.FinanceTrackingConfig',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'membership_tracker.urls'
@@ -124,3 +131,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user_auth.User'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
