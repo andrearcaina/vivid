@@ -15,6 +15,11 @@ class RegisterView(APIView):
         serializer.save()
         return Response(serializer.data, status=200)
 
+# this is the login view
+# it is used to authenticate the user's credentials
+# and to generate a JWT token for the user
+# the JWT token is then stored as a cookie in the client's browser
+# this enables secure authentication for subsequent requests
 class LoginView(APIView):
     def post(self, request):
         email = request.data['email']
@@ -58,13 +63,21 @@ class LoginView(APIView):
 class LogoutView(APIView):
     def post(self, request):
         resp = Response()
+        
+        # deleting the cookie successfully logs out the user
+        # this is necessary to prevent unauthorized access to the user's account
         resp.delete_cookie('jwt')
+
         resp.data = {
             'message': 'successfully logged out'
         }
 
         return resp
 
+# this class is used to retrieve the cookie from the server
+# and decode the JWT token to get the user's information
+# this is necessary to authenticate the user's request
+# and to provide the user's information to the client
 class UserView(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')
