@@ -7,7 +7,6 @@ class User(AbstractUser):
     class Meta:
         db_table = 'user_auth_db'
     
-    name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
     is_member = models.BooleanField(default=False)
