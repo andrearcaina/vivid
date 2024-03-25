@@ -14,6 +14,7 @@ export async function POST(req) {
     
     const data = await res.json();
     
+    // this gets the JWT token for the cookie
     console.log(data);
 
     if (data) {
