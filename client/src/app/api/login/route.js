@@ -1,24 +1,31 @@
+'use server';
+
+import { fetchUserInfo } from "@/utils/fetchUser";
+import { fetchLoginCookie } from "@/utils/fetchCookie";
+
 export async function POST(req) {
     const { email, password } = await req.json();
-
-    const res = await fetch('http://127.0.0.1:8000/user-auth/login/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "email": email,
-            "password": password,
-        }),
-    });
     
-    const data = await res.json();
+    const cookie = await fetchLoginCookie(email, password);
     
-    // this gets the JWT token for the cookie
-    console.log(data);
+    if (cookie.jwt) {
+        const userData = await fetchUserInfo();
 
-    if (data) {
-        return Response.json({ 'message': 'success' }, {
+        console.log(cookie);
+        console.log(userData);
+
+        const role = userData.role;
+
+        let redirectURL = '/dashboard';
+        if (role == 'treasurer') {
+            redirectURL += '/treasurer';
+        } else if (role == 'coach') {
+            redirectURL += '/coach';
+        } else {
+            redirectURL += '/member';
+        }
+
+        return Response.json({ 'message': 'success', redirect: redirectURL }, {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',

@@ -9,9 +9,7 @@ class User(AbstractUser):
     
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
-    is_member = models.BooleanField(default=False)
-    is_treasurer = models.BooleanField(default=False)
-    is_coach = models.BooleanField(default=False)
+    role = models.CharField(max_length=20, default='member')
 
     username = None
 
