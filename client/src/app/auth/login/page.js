@@ -1,18 +1,10 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { fetchUserInfo } from '@/utils/fetchUserData';
+import { fetchJWT } from '@/utils/fetchLoginCookie';
 
 export default function LoginPage() {
     const router = useRouter();
-
-    const correctID = async () => {
-        const data = await fetchUserInfo();
-        if (data.role) {
-            router.push(`/dashboard/${data.role}`);
-        }
-    }
-
-    correctID(); 
 
     const submitLogin = async (event) => { 
         event.preventDefault();
@@ -22,18 +14,7 @@ export default function LoginPage() {
         const password = formData.get('password');
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/user-auth/login/', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            });
-            const data = await response.json();
+            const data = await fetchJWT(email, password);
             
             if (data.jwt) {
                 const userData = await fetchUserInfo();
