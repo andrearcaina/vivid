@@ -51,7 +51,7 @@ class LoginView(APIView):
         # Set the response data with the JWT token
         # Note: The client receives the JWT token in the response
         resp.data = {
-            'jwt': 'success'
+            'jwt': token
         }
 
         # Return the response object with the JWT token as a cookie

@@ -1,10 +1,19 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { fetchUserInfo } from '@/utils/fetchUserData';
 
 export default function LoginPage() {
-    const [login, setLogin] = useState([]);
-    
-    // this is just client side fetching (might change to server side maybe for less performance on client)
+    const router = useRouter();
+
+    const correctID = async () => {
+        const data = await fetchUserInfo();
+        if (data.role) {
+            router.push(`/dashboard/${data.role}`);
+        }
+    }
+
+    correctID(); 
+
     const submitLogin = async (event) => { 
         event.preventDefault();
         
@@ -13,8 +22,9 @@ export default function LoginPage() {
         const password = formData.get('password');
 
         try {
-            const response = await fetch('http://localhost:3000/api/login/', {
+            const response = await fetch('http://127.0.0.1:8000/user-auth/login/', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                 'Content-Type': 'application/json',
                 },
@@ -24,7 +34,20 @@ export default function LoginPage() {
                 }),
             });
             const data = await response.json();
-            setLogin(data);
+            
+            if (data.jwt) {
+                const userData = await fetchUserInfo();
+                
+                router.push(`../dashboard/${userData.role}`);
+
+            } else {
+                // fix this later
+                return (
+                    <div>
+                        <p>Invalid login</p>
+                    </div>
+                )
+            }
         } catch (error) {
             console.error('Error:', error);
         }
@@ -51,12 +74,6 @@ export default function LoginPage() {
                 
                 <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
             </form>
-
-            {login && (
-                <div>
-                    <p>{JSON.stringify(login)}</p>
-                </div>
-            )}
         </main>
     );
 }

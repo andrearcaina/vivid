@@ -1,8 +1,6 @@
-'use server';
-
 export async function fetchUserInfo() {
     try {
-        const res = await fetch('http://l:8000/user-auth/user/', {
+        const res = await fetch('http://127.0.0.1:8000/user-auth/user/', {
             method: 'GET',
             credentials: 'include',
             headers: {
