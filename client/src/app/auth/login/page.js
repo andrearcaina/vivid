@@ -18,9 +18,7 @@ export default function LoginPage() {
             
             if (data.jwt) {
                 const userData = await fetchUserInfo();
-                
                 router.push(`../dashboard/${userData.role}`);
-
             } else {
                 // fix this later
                 return (

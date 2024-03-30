@@ -1,19 +1,21 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { Welcome } from '@/components';
-import { fetchUserInfo } from '@/utils/fetchUserData';
+import { useAuth } from '@/hooks/useAuth';
+import { useCorrectDashboard } from '@/hooks/useCorrectDashboard';
 
 export default function CoachDashboard() {
     const router = useRouter();
+    const { isLoggedIn, isLoading } = useAuth();
 
-    const correctID = async () => {
-        const data = await fetchUserInfo();
-        if (data.role !== 'coach') {
-            router.push(`/dashboard/${data.role}`);
+    useEffect(() => {
+        if (!isLoading && !isLoggedIn) {
+            router.push('/auth/login');
         }
-    }
+    }, [isLoading, isLoggedIn]);
 
-    correctID();
+    useCorrectDashboard('coach');
 
     return (
         <div>
