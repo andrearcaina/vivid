@@ -1,10 +1,11 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuthContext } from '@/hooks/useAuthContext';
 
 export default function LoginPage() {
-    const [login, setLogin] = useState([]);
-    
-    // this is just client side fetching (might change to server side maybe for less performance on client)
+    const router = useRouter();
+    const { login, role } = useAuthContext();
+
     const submitLogin = async (event) => { 
         event.preventDefault();
         
@@ -13,18 +14,7 @@ export default function LoginPage() {
         const password = formData.get('password');
 
         try {
-            const response = await fetch('http://localhost:3000/api/login/', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            });
-            const data = await response.json();
-            setLogin(data);
+            login(email, password);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -32,7 +22,7 @@ export default function LoginPage() {
 
     // we have to make a form basically that only sends the data to the server when entered
     // the user will either go into two pages: their actual screen meant for them (member/treasurer/coach)
-    // or they will say they are not in the database, so they will be redirected to the register page
+    // or they will say they are not in the database, so they will be alerted and then redirected to the register page
 
     return (
         <main className="flex flex-col items-center justify-center min-h-screen">
@@ -51,12 +41,6 @@ export default function LoginPage() {
                 
                 <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
             </form>
-
-            {login && (
-                <div>
-                    <p>{JSON.stringify(login)}</p>
-                </div>
-            )}
         </main>
     );
 }
