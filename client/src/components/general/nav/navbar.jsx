@@ -1,68 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { LogoutButton } from './logoutButton';
 import { NavMobile } from './nav-mobile';
-import { useAuth } from '@/hooks/useAuth';
-import { fetchUserInfo } from '@/utils/fetchUserData';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Navbar() {
-    const {isLoggedIn, isLoading} = useAuth();
-    const [navItems, setNavItems] = useState([
-        { name: 'Login', link: '/auth/login' },
-        { name: 'Register', link: '/auth/register' }
-    ]);
-
-    const getNavItems = async () => {
-        try {
-            const userInfo = await fetchUserInfo();
-            if (userInfo.role) {
-                setNavItems([
-                    { name: 'Dashboard', link: `/dashboard/${userInfo.role}` },
-                    { name: 'Log Out', link: '/logout' }
-                ]);
-            } else {
-                setNavItems([
-                    { name: 'Login', link: '/auth/login' },
-                    { name: 'Register', link: '/auth/register' }
-                ]);
-            }
-        } catch (err) {
-            console.error(err);
-            // Set default nav items if fetching user info fails
-            setNavItems([
-                { name: 'Login', link: '/auth/login' },
-                { name: 'Register', link: '/auth/register' }
-            ]);
-        }
-    };
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/user-auth/logout/", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            const data = await response.json();
-            
-            console.log(data);
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    useEffect(() => {
-        if (isLoggedIn && !isLoading) {
-            getNavItems();
-        } else {
-            setNavItems([
-                { name: 'Login', link: '/auth/login' },
-                { name: 'Register', link: '/auth/register' }
-            ]);
-        }
-    }, [isLoggedIn, isLoading]);
+    const { role, authReady } = useAuthContext();
+    const navItems = authReady ? roleItems(role) : regularItems();
 
     return (
         <nav className="bg-white shadow-lg p-4 sticky top-0 z-50">
@@ -78,25 +22,11 @@ export default function Navbar() {
 
                 <div className="hidden lg:flex lg:items-center lg:w-auto">
                     <div className="flex flex-col lg:flex-row lg:space-x-4">
-                        <Link href="/">
-                            <p className="text-black text-xl hover:text-green-500 transition-colors duration-200">Home</p>
-                        </Link>
-                        
-                        {navItems.map((navItem, index) => {
-                            if (navItem.name !== 'Log Out') {
-                                return (
-                                    <Link href={navItem.link} key={index}>
-                                        <p className="text-black text-xl hover:text-green-500 transition-colors duration-200">{navItem.name}</p>
-                                    </Link>
-                                )
-                            }
-
-                            return (
-                                <Link href="/" key={index}>
-                                    <p className="text-black text-xl hover:text-green-500 transition-colors duration-200 cursor-pointer" key={index} onClick={handleLogout}>{navItem.name}</p>
-                                </Link>
-                            )
-                        })}
+                        {navItems.map((navItem, index) => (
+                            <Link key={index} href={navItem.link}>
+                                <div className="text-black text-xl hover:text-green-500 transition-colors duration-200">{navItem.text}</div>
+                            </Link>
+                        ))}
                     </div>
                 </div>
 
@@ -104,4 +34,38 @@ export default function Navbar() {
             </div>
         </nav>
     );
+}
+
+const defaultItems = () => {
+    return [
+        { text: 'Home', link: '/' },
+        { text: 'About', link: '/about' },
+        { text: 'Contact', link: '/contact' }
+    ];
+}
+
+const roleItems = (role) => {
+    return [
+        ...defaultItems(),
+        {
+            text: 'Dashboard', link: `/dashboard/${role}`, options: [
+                { text: 'Chat', link: `/dashboard/${role}/chat`}, // might need to change this later
+                { text: 'Calendar', link: `/dashboard/${role}/calendar` }
+            ]
+        },
+        {
+            text: 'Profile', link: '/profile'
+        },
+        {
+            text: <LogoutButton />, link: ''
+        }
+    ]; 
+}
+
+const regularItems = () => {
+    return [
+        ...defaultItems(),
+        { text: 'Login', link: '/auth/login' },
+        { text: 'Register', link: '/auth/register' }
+    ];
 }

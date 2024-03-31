@@ -66,7 +66,7 @@ class LogoutView(APIView):
         
         # deleting the cookie successfully logs out the user
         # this is necessary to prevent unauthorized access to the user's account
-        resp.delete_cookie('jwt')
+        resp.delete_cookie(key='jwt', path='/', samesite='None')
 
         resp.data = {
             'message': 'successfully logged out'

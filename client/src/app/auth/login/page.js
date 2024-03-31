@@ -1,10 +1,10 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { fetchUserInfo } from '@/utils/fetchUserData';
-import { fetchJWT } from '@/utils/fetchLoginCookie';
+import { useAuthContext } from '@/hooks/useAuthContext';
 
 export default function LoginPage() {
     const router = useRouter();
+    const { login, role } = useAuthContext();
 
     const submitLogin = async (event) => { 
         event.preventDefault();
@@ -14,19 +14,7 @@ export default function LoginPage() {
         const password = formData.get('password');
 
         try {
-            const data = await fetchJWT(email, password);
-            
-            if (data.jwt) {
-                const userData = await fetchUserInfo();
-                router.push(`../dashboard/${userData.role}`);
-            } else {
-                // fix this later
-                return (
-                    <div>
-                        <p>Invalid login</p>
-                    </div>
-                )
-            }
+            login(email, password);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -34,7 +22,7 @@ export default function LoginPage() {
 
     // we have to make a form basically that only sends the data to the server when entered
     // the user will either go into two pages: their actual screen meant for them (member/treasurer/coach)
-    // or they will say they are not in the database, so they will be redirected to the register page
+    // or they will say they are not in the database, so they will be alerted and then redirected to the register page
 
     return (
         <main className="flex flex-col items-center justify-center min-h-screen">
