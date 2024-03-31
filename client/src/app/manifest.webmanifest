@@ -1,0 +1,16 @@
+{
+    "name": "Vivid",
+    "short_name": "Vivid",
+    "description": "A finance membership tracker for CPS406",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "icons": [
+        {
+            "src": "/images/icon.ico",
+            "sizes": "any",
+            "type": "image/ico"
+        }
+    ]
+}

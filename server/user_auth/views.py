@@ -46,7 +46,7 @@ class LoginView(APIView):
         resp = Response()
 
         # Set the JWT token as a HTTP-only cookie in the response
-        resp.set_cookie(key='jwt', value=token, httponly=True)
+        resp.set_cookie(key='jwt', value=token, httponly=True, secure=True, samesite='None')
 
         # Set the response data with the JWT token
         # Note: The client receives the JWT token in the response
@@ -66,7 +66,7 @@ class LogoutView(APIView):
         
         # deleting the cookie successfully logs out the user
         # this is necessary to prevent unauthorized access to the user's account
-        resp.delete_cookie('jwt')
+        resp.delete_cookie(key='jwt', path='/', samesite='None')
 
         resp.data = {
             'message': 'successfully logged out'
