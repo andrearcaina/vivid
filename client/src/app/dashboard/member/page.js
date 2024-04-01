@@ -12,7 +12,7 @@ export default function MemberDashboard() {
             <div className='grid grid-cols-2'>
                 <div className='w-full rounded-md overflow-hidden shadow-md ml-2 mr-2 bg-white p-4'>
                     <h2 className='underline'>Announcements</h2>
-                    <Announcements></Announcements>
+                    <p>Announcements go here</p>
                 </div>
                 <div className='flex flex-col w-full'>
                     <div className='rounded-md overflow-hidden shadow-md mb-4 ml-4 mr-2 bg-white p-4'>
