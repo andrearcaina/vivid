@@ -1,9 +1,14 @@
 'use client';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 
 export default function Home() {
+  const { darkMode } = useDarkMode();
+
   return (
-    <main>
-      hello
-    </main>
+    <div className={darkMode ? 'dark' : ''}>
+      <main className="dark:bg-gray-900">
+        <h3 className="dark:text-neutral-300">hello</h3>
+      </main>
+    </div>
   );
 }
