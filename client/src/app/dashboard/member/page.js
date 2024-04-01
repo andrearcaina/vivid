@@ -1,6 +1,5 @@
 'use client';
 import { Welcome } from '@/components';
-import Announcements from '@/components/general/announcements';
 import { useRedirect } from '@/hooks/useRedirect';
 
 export default function MemberDashboard() {
