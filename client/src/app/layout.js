@@ -1,5 +1,6 @@
-import { Navbar, Footer } from '@/components';
+import { Navbar, Footer, DarkMode } from '@/components';
 import { AuthContextProvider } from '@/contexts/authContext';
+import { DarkModeProvider } from '@/contexts/darkmodeContext';
 import './globals.css';
 
 export const metadata = {
@@ -11,13 +12,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthContextProvider>
-      <html lang="en">
-        <body className="font-serif">
-          <Navbar />
-          <main className="space-y-20"> {children} </main>
-          <Footer />
-        </body>
-      </html>
+      <DarkModeProvider>
+        <html lang="en">
+          <body className="font-serif">
+            <Navbar />
+            <main className="space-y-20"> {children} </main>
+            <DarkMode />
+            <Footer />
+          </body>
+        </html>
+      </DarkModeProvider>
     </AuthContextProvider>
   )
 };
