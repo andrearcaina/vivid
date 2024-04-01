@@ -1,14 +1,14 @@
 'use client';
-import { Welcome } from '@/components';
 import { useRedirect } from '@/hooks/useRedirect';
+import { Menu, Welcome } from '@/components';
 
 export default function TreasurerDashboard() {
     useRedirect('treasurer');
 
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <main>
+            <Menu />
             <Welcome />
-        </div>
+        </main>
     );
 }
