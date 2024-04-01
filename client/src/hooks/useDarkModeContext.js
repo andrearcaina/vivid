@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import DarkModeContext from '@/contexts/darkmodeContext';
+import { DarkModeContext } from '@/contexts/darkModeContext';
 
 export const useDarkMode = () => {
     const context = useContext(DarkModeContext);
