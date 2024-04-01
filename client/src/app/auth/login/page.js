@@ -1,10 +1,10 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import { useAuthContext } from '@/hooks/useAuthContext';
+import { useRedirect } from '@/hooks/useRedirect';
 
 export default function LoginPage() {
-    const router = useRouter();
-    const { login, role } = useAuthContext();
+    const { login } = useAuthContext();
+    useRedirect('role');
 
     const submitLogin = async (event) => { 
         event.preventDefault();

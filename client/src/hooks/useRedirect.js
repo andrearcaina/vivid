@@ -15,9 +15,11 @@ export function useRedirect(expectedRole) {
             if (authReady) {
                 if (user === null) {
                     router.push('/auth/login');
-                } else if (role !== expectedRole) {
+                } else if (role !== expectedRole || expectedRole === 'role') {
                     router.push(`/dashboard/${role}`);
                 }
+            } else if (expectedRole === 'role') {
+                return;
             } else {
                 router.push('/auth/login');
             }
