@@ -40,17 +40,9 @@ export default function Navbar() {
     );
 }
 
-const defaultItems = () => {
-    return [
-        { text: 'Home', link: '/' },
-        { text: 'About', link: '/about' },
-        { text: 'Contact', link: '/contact' }
-    ];
-}
-
 const roleItems = (role) => {
     return [
-        ...defaultItems(),
+        // ...defaultItems(),
         {
             text: 'Dashboard', link: `/dashboard/${role}`, options: [
                 { text: 'Chat', link: `/dashboard/${role}/chat`}, // might need to change this later
@@ -68,7 +60,10 @@ const roleItems = (role) => {
 
 const regularItems = () => {
     return [
-        ...defaultItems(),
+        // ...defaultItems(),
+        { text: 'Home', link: '/' },
+        { text: 'About', link: '/about' },
+        { text: 'Contact', link: '/contact' },
         { text: 'Login', link: '/auth/login' },
         { text: 'Register', link: '/auth/register' }
     ];
