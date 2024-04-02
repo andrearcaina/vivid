@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'member_logs.apps.MemberLogsConfig',
+    'classes_offered.apps.ClassesOfferedConfig',
     'user_auth.apps.UserAuthConfig',
     'message_platform.apps.MessagePlatformConfig',
     'scheduling.apps.SchedulingConfig',
