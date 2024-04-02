@@ -1,4 +1,5 @@
-import { useDarkMode } from "@/hooks/useDarkModeContext";
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import Welcome from './welcome';
 
 export default function Menu({ role }) {
     const { darkMode } = useDarkMode();
@@ -25,6 +26,8 @@ export default function Menu({ role }) {
                         </div>
                     </div>
                 </div>
+
+                <Welcome />
             </div>
         </main>
     )
