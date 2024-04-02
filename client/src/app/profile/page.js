@@ -1,8 +1,17 @@
-// add redirect later (after figuring out the redirect for treasurer/coach/member)
+'use client';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { UnAuthorized } from '@/components';
+
 export default function Profile() {
-    return (
-        <div>
-            <h1>Profile Page</h1>
-        </div>
-    )
+    const { authReady } = useAuthContext();
+
+    if (authReady) {
+        return (
+            <main className="h-[80vh]">
+                Profile Page
+            </main>
+        );
+    } else {
+        return <UnAuthorized />;
+    }
 }

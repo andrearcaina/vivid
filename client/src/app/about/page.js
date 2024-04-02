@@ -7,7 +7,7 @@ export default function AboutPage() {
 
     return (
         <div className={darkMode ? 'dark' : ''}>
-            <main className="dark:bg-gray-900">
+            <main className="h-[80vh] dark:bg-gray-900">
                 <h3 className="dark:text-neutral-300">about page</h3>
             </main>
         </div>

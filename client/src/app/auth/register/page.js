@@ -1,11 +1,17 @@
 'use client';
-import { useRedirect } from "@/hooks/useRedirect";
 import { RegisterUser } from "@/utils/registerUser";
 import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { useAuthContext } from "@/hooks/useAuthContext";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+    const router = useRouter();
+    const { authReady } = useAuthContext();
     const { darkMode } = useDarkMode();
-    useRedirect('role');
+    
+    if (authReady) {
+        router.push('/dashboard');
+    }
 
     const submitRegister = async (event) => {
         event.preventDefault();
@@ -35,7 +41,7 @@ export default function RegisterPage() {
 
     return (
         <div className={darkMode ? 'dark' : ''}>
-            <main className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-900">
+            <main className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
                 <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300">Register</h1>
                 
                 <form className="w-64" onSubmit={submitRegister}>

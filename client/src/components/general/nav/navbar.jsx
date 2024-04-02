@@ -6,9 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Navbar() {
-    const { role, authReady } = useAuthContext();
+    const { authReady } = useAuthContext();
     const { darkMode } = useDarkMode();
-    const navItems = authReady ? roleItems(role) : regularItems();
+    const navItems = authReady ? roleItems() : regularItems();
 
     return (
         <div className={darkMode ? 'dark' : ''}>
@@ -40,27 +40,18 @@ export default function Navbar() {
     );
 }
 
-const roleItems = (role) => {
+const roleItems = () => {
     return [
-        // ...defaultItems(),
-        {
-            text: 'Dashboard', link: `/dashboard/${role}`, options: [
-                { text: 'Chat', link: `/dashboard/${role}/chat`}, // might need to change this later
-                { text: 'Calendar', link: `/dashboard/${role}/calendar` }
-            ]
-        },
-        {
-            text: 'Profile', link: '/profile'
-        },
-        {
-            text: <LogoutButton />, link: ''
-        }
+        { text: 'Dashboard', link: `/dashboard` },
+        { text: 'Calendar', link: '/calendar' },
+        { text: 'Finances', link: '/finances' },
+        { text: 'Profile', link: '/profile' },
+        { text: <LogoutButton />, link: '' }
     ]; 
 }
 
 const regularItems = () => {
     return [
-        // ...defaultItems(),
         { text: 'Home', link: '/' },
         { text: 'About', link: '/about' },
         { text: 'Contact', link: '/contact' },

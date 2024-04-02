@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
                 setRole(data.role);
                 setAuthReady(true);
 
-                router.push(`/dashboard/${data.role}`);
+                router.push('/dashboard/');
             } else {
                 setUser(null);
                 setRole('');
