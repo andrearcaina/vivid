@@ -6,8 +6,8 @@ export default function Footer() {
 
     return (
         <div className={darkMode ? 'dark' : ''}>
-            <footer className="dark:bg-gray-800">
-                <h3 className="dark:text-neutral-300">placeholder footer</h3>
+            <footer className="h-[10vh] dark:bg-gray-800">
+                <h3 className="dark:text-neutral-300 text-center">placeholder footer</h3>
             </footer>            
         </div>
 
