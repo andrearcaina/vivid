@@ -1,25 +1,13 @@
-import { useState, useEffect } from 'react';
-import { fetchUserInfo } from '@/utils/fetchUserData';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 
 export default function Welcome() {
-    const [userProfile, setProfile] = useState([]);
-
-    const setData = async () => {
-        try {
-            const data = await fetchUserInfo();
-            setProfile(data);
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    useEffect(() => {
-        setData();
-    }, []);
+    const { user } = useAuthContext();
+    const { darkMode } = useDarkMode();
 
     return (
-        <div>
-            <h1>{JSON.stringify(userProfile)}</h1>
+        <div className="dark:bg-gray-900">
+            <h1 className="dark:text-neutral-300">{JSON.stringify(user)}</h1>
         </div>
     );
 }
