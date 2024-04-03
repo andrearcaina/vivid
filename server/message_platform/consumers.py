@@ -1,6 +1,7 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import Room, Message
+from user_auth.models import User
 from datetime import datetime
 import json
 import jwt
@@ -25,15 +26,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_group_name = f'chat_{self.room_name}'
         self.token = self.scope['url_route']['kwargs']['token']
 
+        print(self.token)
+
         try:
             payload = jwt.decode(self.token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
+            self.scope['user'] = await self.get_user(payload['id'])
         except jwt.ExpiredSignatureError:
             await self.close(code=4001)
             return
-
-        self.scope['user'] = payload['id']
         
-        print("id:", self.scope['user'])
+        print("first_name:", self.scope['user'].first_name)
+        print("last_name:", self.scope['user'].last_name)
+        print("email:", self.scope['user'].email)
+        print("date_of_birth:", self.scope['user'].date_of_birth)
+        print("password:", self.scope['user'].password)
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -61,8 +67,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         and sends the message to the room group.
         """
         text_data_json = json.loads(text_data)
-        first_name = text_data_json['first_name']
-        last_name = text_data_json['last_name']
+        first_name = self.scope['user'].first_name
+        last_name = self.scope['user'].last_name
         message = text_data_json['message']
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -90,12 +96,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = event['message']
         date = event['date']
 
-        new_message = message.split(": ")[1]
-
         await self.send(text_data=json.dumps({
             'first_name': first_name,
             'last_name': last_name,
-            'message': new_message,
+            'message': message,
             'date': date
         }))
 
@@ -112,3 +116,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if not Message.objects.filter(user=self.scope['user'], room=room, content=message).exists():
             new_message = Message(user=self.scope['user'], room=room, content=message, timestamp=datetime.now())
             new_message.save()
+
+    @database_sync_to_async
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return None
