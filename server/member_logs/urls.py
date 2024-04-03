@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
+# modify these paths for profile management
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("<int:member_id>/", views.member, name="member")
+    
 ]
