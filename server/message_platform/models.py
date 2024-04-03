@@ -1,3 +1,4 @@
+import datetime
 from user_auth.models import User
 from django.db import models
 
@@ -6,6 +7,7 @@ class Room(models.Model):
         db_table = 'rooms'
 
     room_name = models.CharField(max_length=255)
+    users = models.ManyToManyField(User, related_name="rooms")
 
     def __str__(self):
         return self.room_name
@@ -21,9 +23,10 @@ class Message(models.Model):
     class Meta:
         db_table = 'messages'
     
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE)
+    content = models.TextField(default="")
+    timestamp = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
         return str(self.room)
