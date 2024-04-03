@@ -3,6 +3,7 @@ import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { UnAuthorized } from '@/components';
 import Image from 'next/image';
+import Link from 'next/link'
 
 export default function Profile() {
     const { user, authReady } = useAuthContext();
@@ -14,7 +15,7 @@ export default function Profile() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="grid grid-cols-3 h-[80vh] dark:bg-gray-900">
+                <div className="grid grid-cols-3 h-[80vh] dark:bg-gray-900 mt-3">
                     <div className='flex flex-col p-4'>
                         <section className='flex justify-end'>
                             <Image src='/images/profile_placeholder.webp' width={200} height={200} alt='Profile Picture' style={pfpStyle} />
@@ -48,6 +49,9 @@ export default function Profile() {
                             { user && (
                                 <p className='dark:text-neutral-300 ml-2 mt-5'>{user.email}</p>
                             )}
+                        </div>
+                        <div className='flex flex-row mt-5'>
+                            <Link className='text-blue-500 underline' href="/profile/password">Change Password</Link>
                         </div>
                     </div>
                 </div>
