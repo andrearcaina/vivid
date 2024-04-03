@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
 from .serializers import UserSerializer
+from member_logs.models import Member
 from .models import User
 import datetime
 import jwt
@@ -12,7 +13,25 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        user = serializer.save()
+        
+        print(user)
+
+        # create a member object for the user
+        # this is necessary to store additional information about the user
+        # such as the user's membership status, attendance count, etc.
+        if user.role == 'member':
+            member = Member.objects.create(
+                first_name=user.first_name,
+                last_name=user.last_name,
+                email=user.email,
+                date_of_birth=user.date_of_birth,
+                payment_status='pending',
+                membership_approved=False,
+                attendance_count=0
+            )
+            member.save()
+        
         return Response(serializer.data, status=200)
 
 # this is the login view
