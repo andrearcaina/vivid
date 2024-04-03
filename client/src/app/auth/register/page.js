@@ -20,11 +20,12 @@ export default function RegisterPage() {
         const first = formData.get('firstname');
         const last = formData.get('lastname');
         const email = formData.get('email');
+        const date = formData.get('date');
         const password = formData.get('password');
         const role = formData.get('role');
 
         try {
-            const data = await RegisterUser(first, last, email, password, role);
+            const data = await RegisterUser(first, last, email, date, password, role);
 
             if (data.id) {
                 alert('Successfully registered user!');
@@ -60,6 +61,11 @@ export default function RegisterPage() {
                         <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="email" name="email" />
                     </label>
                     
+                    <label className="block mb-2 dark:text-neutral-300">
+                        Date of Birth:
+                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="date" name="date" />
+                    </label>
+
                     <label className="block mb-2 dark:text-neutral-300">
                         Password:
                         <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="password" name="password" />

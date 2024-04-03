@@ -8,7 +8,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'role']
+        fields = ['id', 'first_name', 'last_name', 'email', 'date_of_birth', 'password', 'role']
         extra_kwargs = {'password': {'write_only': True}}
 
     # hashes the password before saving the user object to the database

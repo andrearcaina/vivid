@@ -1,4 +1,4 @@
-export async function RegisterUser(first, last, email, password, role) {
+export async function RegisterUser(first, last, email, date, password, role) {
     try {
         const res = await fetch('http://127.0.0.1:8000/user-auth/register/', {
             method: 'POST',
@@ -10,6 +10,7 @@ export async function RegisterUser(first, last, email, password, role) {
                 first_name: first,
                 last_name: last,
                 email: email,
+                date: date,
                 password: password,
                 role: role
             }),
