@@ -81,6 +81,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'membership_tracker.wsgi.application'
+ASGI_APPLICATION = 'membership_tracker.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

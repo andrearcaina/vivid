@@ -4,13 +4,15 @@ from .models import Room, Message
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from datetime import datetime
+import json
 
 # the @csrf_exempt decorator is used to exempt the view from CSRF verification
 @method_decorator(csrf_exempt, name="dispatch")
 class CreateRoom(View):
     def post(self, request):
         # get the room name from the POST request
-        room_name = request.POST.get("room_name")
+        data = json.loads(request.body)
+        room_name = data.get("room_name")
 
         # check if the room already exists
         try:
@@ -41,10 +43,11 @@ class MessageView(View):
         # create a new message with the room, sender, and message
         # send a JSON response with a success message
         room = Room.objects.get(room_name=room_name)
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
+        data = json.loads(request.body)
+        first_name = data.get("first_name")
+        last_name = data.get("last_name")
         sender = f"{first_name} {last_name}"
-        message = request.POST.get("message")
+        message = data.get("message")
         new_message = Message(user=sender, room=room, message=message, datetime=datetime.now())
         new_message.save()
         return JsonResponse({"message": "Message sent successfully!"})

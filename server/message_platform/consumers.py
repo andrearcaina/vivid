@@ -3,6 +3,8 @@ from channels.db import database_sync_to_async
 from .models import Room, Message
 from datetime import datetime
 import json
+import jwt
+import os
 
 class ChatConsumer(AsyncWebsocketConsumer):
     """
@@ -21,6 +23,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         """
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = f'chat_{self.room_name}'
+        self.token = self.scope['url_route']['kwargs']['token']
+
+        try:
+            payload = jwt.decode(self.token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            await self.close(code=4001)
+            return
+
+        self.scope['user'] = payload['id']
+        
+        print("id:", self.scope['user'])
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -48,7 +61,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         and sends the message to the room group.
         """
         text_data_json = json.loads(text_data)
+        first_name = text_data_json['first_name']
+        last_name = text_data_json['last_name']
         message = text_data_json['message']
+        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         await self.save_message(message)
 
@@ -56,7 +72,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': message
+                'first_name': first_name,
+                'last_name': last_name,
+                'message': message,
+                'date': date
             }
         )
 
@@ -66,10 +85,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         It sends the message to the WebSocket.
         """
+        first_name = event['first_name']
+        last_name = event['last_name']
         message = event['message']
+        date = event['date']
+
+        new_message = message.split(": ")[1]
 
         await self.send(text_data=json.dumps({
-            'message': message
+            'first_name': first_name,
+            'last_name': last_name,
+            'message': new_message,
+            'date': date
         }))
 
     @database_sync_to_async
