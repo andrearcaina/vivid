@@ -33,12 +33,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'member_logs.apps.MemberLogsConfig',
-    'classes_offered.apps.ClassesOfferedConfig',
-    'user_auth.apps.UserAuthConfig',
     'message_platform.apps.MessagePlatformConfig',
-    'scheduling.apps.SchedulingConfig',
     'finance_tracking.apps.FinanceTrackingConfig',
+    'classes_offered.apps.ClassesOfferedConfig',
+    'member_logs.apps.MemberLogsConfig',
+    'user_auth.apps.UserAuthConfig',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
