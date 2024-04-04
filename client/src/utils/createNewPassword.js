@@ -11,13 +11,7 @@ export async function createNewPassword(old_password, new_password) {
                 new_password: new_password
             }),
         });
-        console.log(new_password);
-        const data = await res.json();
-        if (data.message === 'Password updated successfully') {
-            alert('Password changed successfully!');
-        } else {
-            alert('Unable to update password: ' + data.message);
-        }
+        return await res.json();
     } catch (err) {
         console.error(err);
     }

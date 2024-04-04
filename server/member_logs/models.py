@@ -1,5 +1,4 @@
 from django.db import models
-from user_auth.models import User
 
 class Member(models.Model):
     # change table name on Supabase
@@ -15,4 +14,4 @@ class Member(models.Model):
     attendance_count = models.IntegerField(default=0)
     # can connect two tables with a foreign key
     # get password with Member.userAuth.password
-    userAuth = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    # userAuth = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
