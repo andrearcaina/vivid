@@ -1,6 +1,7 @@
 from django.views import View
 from django.http import JsonResponse
 from .models import Room, Message
+from user_auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from datetime import datetime
@@ -32,8 +33,16 @@ class MessageView(View):
     # so that they can see the chat history
     def get(self, request, room_name):
         room = Room.objects.get(room_name=room_name)
-        messages = Message.objects.filter(room=room).values()
-        return JsonResponse({"messages": list(messages)})
+        messages = list(Message.objects.filter(room=room).values())
+        # get the id of the user who sent the message
+        # and get the first name and last name of the user
+
+        for message in messages:
+            user = User.objects.get(id=message['user_id'])
+            message['first_name'] = user.first_name
+            message['last_name'] = user.last_name
+
+        return JsonResponse({"messages": messages})
 
     # post a message to a room based on the room name provided
     def post(self, request, room_name):

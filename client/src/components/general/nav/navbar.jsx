@@ -45,6 +45,7 @@ const roleItems = () => {
         { text: 'Dashboard', link: `/dashboard` },
         { text: 'Calendar', link: '/calendar' },
         { text: 'Finances', link: '/finances' },
+        { text: 'Chat', link: '/chat'},
         { text: 'Profile', link: '/profile' },
         { text: <LogoutButton />, link: '' }
     ]; 

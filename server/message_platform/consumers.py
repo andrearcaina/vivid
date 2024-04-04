@@ -24,23 +24,24 @@ class ChatConsumer(AsyncWebsocketConsumer):
         """
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = f'chat_{self.room_name}'
-        self.token = self.scope['url_route']['kwargs']['token']
+        headers = self.scope['headers']
 
-        print(self.token)
+        for key, value in headers:
+            if key == b'cookie':
+                self.token = value.decode().split('=')[1]
+                break
+            if key == b'authorization':
+                self.token = value
+                break
 
         try:
             payload = jwt.decode(self.token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
             self.scope['user'] = await self.get_user(payload['id'])
+            await self.add_user_to_room(self.scope['user'])
         except jwt.ExpiredSignatureError:
             await self.close(code=4001)
             return
         
-        print("first_name:", self.scope['user'].first_name)
-        print("last_name:", self.scope['user'].last_name)
-        print("email:", self.scope['user'].email)
-        print("date_of_birth:", self.scope['user'].date_of_birth)
-        print("password:", self.scope['user'].password)
-
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
@@ -119,7 +120,29 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def get_user(self, user_id):
+        """
+        Gets the user based on the user ID.
+
+        This is to retrieve the user from the database based on the user ID from the JWT payload.
+
+        If the user does not exist, it returns None.
+
+        This basically authorizes the user to connect to the WebSocket.
+        """
         try:
             return User.objects.get(id=user_id)
         except User.DoesNotExist:
+            return None
+        
+    @database_sync_to_async
+    def add_user_to_room(self, user):
+        """
+        Adds the user to the room_user table.
+
+        This is to keep track of the users in a specific room.
+        """
+        try:
+            room, _ = Room.objects.get_or_create(room_name=self.room_name)
+            room.users.add(user)
+        except Room.DoesNotExist:
             return None
