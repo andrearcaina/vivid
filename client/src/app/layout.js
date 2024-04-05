@@ -14,7 +14,9 @@ export default function RootLayout({ children }) {
     <AuthContextProvider>
       <DarkModeProvider>
         <html lang="en">
-          <Body>{children}</Body>
+          <Body>
+            {children}
+          </Body>
         </html>
       </DarkModeProvider>
     </AuthContextProvider>

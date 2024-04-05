@@ -8,6 +8,7 @@ import {
     IoCalendarNumberOutline,
     IoWalletOutline,
     IoPersonOutline,
+    IoChatbubblesOutline,
     IoLogOutOutline
 } from "react-icons/io5";
 
@@ -31,31 +32,31 @@ export default function Navbar() {
 const roleItems = () => {
     return [
         {
-            key: 'dashboard',
             text: 'Dashboard',
             link: '/dashboard',
             icon: <IoSpeedometerOutline />
         },
         {
-            key: 'calendar',
             text: 'Calendar',
             link: '/calendar',
             icon: <IoCalendarNumberOutline />
         },
         {
-            key: 'finances',
             text: 'Finances',
             link: '/finances',
             icon: <IoWalletOutline />
         },
         {
-            key: 'profile',
+            text: 'Chat',
+            link: '/chat',
+            icon: <IoChatbubblesOutline />
+        },
+        {
             text: 'Profile',
             link: '/profile',
             icon: <IoPersonOutline />
         },
         {
-            key: 'logout',
             text: <LogoutButton />,
             link: '',
             icon: <IoLogOutOutline />

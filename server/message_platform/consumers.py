@@ -68,23 +68,24 @@ class ChatConsumer(AsyncWebsocketConsumer):
         and sends the message to the room group.
         """
         text_data_json = json.loads(text_data)
+
         first_name = self.scope['user'].first_name
         last_name = self.scope['user'].last_name
         message = text_data_json['message']
         title = text_data_json['title'] or ""
-        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        date = text_data_json['timestamp']
 
-        await self.save_message(message, title)
+        await self.save_message(message, date, title)
 
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
+                'title': title,
                 'first_name': first_name,
                 'last_name': last_name,
                 'message': message,
-                'date': date,
-                'title': title
+                'date': date
             }
         )
 
@@ -101,15 +102,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
         title = event['title']
 
         await self.send(text_data=json.dumps({
+            'title': title,
             'first_name': first_name,
             'last_name': last_name,
             'message': message,
-            'date': date,
-            'title': title
+            'date': date
         }))
 
     @database_sync_to_async
-    def save_message(self, message, title=""):
+    def save_message(self, message, date, title):
         """
         Saves the message to the database.
 
@@ -119,7 +120,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         room = Room.objects.get(room_name=self.room_name)
         
         if not Message.objects.filter(user=self.scope['user'], room=room, content=message).exists():
-            new_message = Message(user=self.scope['user'], room=room, content=message, timestamp=datetime.now(), title=title)
+            new_message = Message(user=self.scope['user'], room=room, content=message, timestamp=date, title=title)
             new_message.save()
 
     @database_sync_to_async
