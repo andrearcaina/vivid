@@ -2,7 +2,6 @@
 import { UnAuthorized } from "@/components";
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { createNewPassword } from "@/utils/createNewPassword";
 
 export default function Password() {
     const { logout, authReady } = useAuthContext();
@@ -38,23 +37,25 @@ export default function Password() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="flex flex-col w-full h-[77.4vh] overflow-hidden p-4 dark:bg-gray-900">
-                    <section>
-                        <h1 className="dark:text-neutral-300 text-3xl">Change Email</h1>
-                    </section>
-                    <form onSubmit={submitNewEmail}>
-                    <label className="block mb-2 mt-4 dark:text-neutral-300">
-                        New Email:
-                        <br />
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="email" name="newEmail" />
-                    </label>
-                    <label className="block mb-2 dark:text-neutral-300">
-                        Confirm New Email:
-                        <br />
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="email" name="checkNewEmail" />
-                    </label>
-                    <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Update</button>
-                    </form>
+                <div className="flex flex-col w-full h-[80vh] overflow-hidden p-4 dark:bg-gray-900 items-center">
+                    <div>
+                        <section>
+                            <h1 className="dark:text-neutral-300 text-3xl text-left">Change Email</h1>
+                        </section>
+                        <form onSubmit={submitNewEmail}>
+                        <label className="block mb-2 mt-4 dark:text-neutral-300">
+                            New Email:
+                            <br />
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="email" name="newEmail" />
+                        </label>
+                        <label className="block mb-2 dark:text-neutral-300">
+                            Confirm New Email:
+                            <br />
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="email" name="checkNewEmail" />
+                        </label>
+                        <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Update</button>
+                        </form>
+                    </div>
                 </div>
             </main>
         );

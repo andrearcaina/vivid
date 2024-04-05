@@ -43,13 +43,14 @@ export default function Password() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="flex flex-col w-full h-[77.4vh] overflow-hidden p-4 dark:bg-gray-900">
+                <div className="flex flex-col w-full h-[80vh] overflow-hidden p-4 dark:bg-gray-900 items-center">
                     <section>
                         <h1 className="dark:text-neutral-300 text-3xl">Change Password</h1>
                     </section>
                     <form onSubmit={submitNewPassword}>
                     <label className="block mb-2 mt-4 dark:text-neutral-300">
                         Current Password:
+                        <br />
                         <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type='password' name='oldPassword' />
                     </label>
                     <label className="block mb-2 mt-4 dark:text-neutral-300">

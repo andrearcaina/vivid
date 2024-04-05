@@ -15,12 +15,13 @@ export default function Profile() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="grid grid-cols-3 h-[80vh] dark:bg-gray-900 mt-3">
-                    <div className='flex flex-col p-4'>
-                        <section className='flex justify-end'>
+                <div className="grid grid-cols-5 h-[80vh] dark:bg-gray-900">
+                    <div></div>
+                    <div className='flex flex-col p-4 items-center'>
+                        <section className='flex'>
                             <Image src='/images/profile_placeholder.webp' width={200} height={200} alt='Profile Picture' style={pfpStyle} />
                         </section>
-                        <section className='flex flex-row justify-end'>
+                        <section className='flex flex-row'>
                         { user && (
                             <section className='dark:text-neutral-300 text-center mt-2'>
                                 <p className="font-bold">{user.first_name} {user.last_name}</p>
