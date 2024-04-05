@@ -1,4 +1,4 @@
-import { Navbar, Footer, DarkMode } from '@/components';
+import { Body } from '@/components';
 import { AuthContextProvider } from '@/contexts/authContext';
 import { DarkModeProvider } from '@/contexts/darkModeContext';
 import './globals.css';
@@ -14,12 +14,9 @@ export default function RootLayout({ children }) {
     <AuthContextProvider>
       <DarkModeProvider>
         <html lang="en">
-          <body className="font-serif">
-            <Navbar />
-            <main className="space-y-20"> {children} </main>
-            <DarkMode />
-            <Footer />
-          </body>
+          <Body>
+            {children}
+          </Body>
         </html>
       </DarkModeProvider>
     </AuthContextProvider>

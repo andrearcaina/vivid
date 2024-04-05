@@ -43,20 +43,3 @@ class MessageView(View):
             message['last_name'] = user.last_name
 
         return JsonResponse({"messages": messages})
-
-    # post a message to a room based on the room name provided
-    def post(self, request, room_name):
-        # get the room based on the room name
-        # get the first name, last name, and message from the POST request
-        # the sender is a combination of the first name and last name
-        # create a new message with the room, sender, and message
-        # send a JSON response with a success message
-        room = Room.objects.get(room_name=room_name)
-        data = json.loads(request.body)
-        first_name = data.get("first_name")
-        last_name = data.get("last_name")
-        sender = f"{first_name} {last_name}"
-        message = data.get("message")
-        new_message = Message(user=sender, room=room, message=message, datetime=datetime.now())
-        new_message.save()
-        return JsonResponse({"message": "Message sent successfully!"})

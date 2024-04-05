@@ -1,5 +1,5 @@
 'use client';
-import { RegisterUser } from "@/utils/registerUser";
+import { RegisterUser } from "@/utils/userAuth/registerUser";
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { useRouter } from "next/navigation";
