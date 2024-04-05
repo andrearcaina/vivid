@@ -1,9 +1,9 @@
 'use client';
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetchJWT } from '@/utils/fetchLoginCookie';
-import { deleteCookie } from '@/utils/deleteCookie';
-import { fetchUserInfo } from '@/utils/fetchUserData';
+import { fetchJWT } from '@/utils/userAuth/fetchLoginCookie';
+import { deleteCookie } from '@/utils/userAuth/deleteCookie';
+import { fetchUserInfo } from '@/utils/userAuth/fetchUserData';
 
 export const AuthContext = createContext({
     user: null,

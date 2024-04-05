@@ -2,8 +2,10 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { useDarkMode } from "@/hooks/useDarkModeContext";
+import { fetchChatHistory } from '@/utils/socket/WebSocket';
+import { sendMessage } from '@/utils/socket/WebSocket';
+import { convertTimestamp } from '@/utils/helpers/convertTime';
 import { UnAuthorized } from "@/components";
-import { fetchChatHistory } from '@/utils/fetchMessages';
 
 export default function Chat() {
     const { authReady } = useAuthContext();
@@ -18,17 +20,14 @@ export default function Chat() {
             const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat/club/');
             setSocket(ws);
 
-            ws.onopen = () => {
-                console.log('connected to websocket on client side from server side');
-            };
-
             ws.onmessage = (e) => {
                 const data = JSON.parse(e.data);
                 setMessage((prev) => [...prev, {
+                    title: data.title,
                     first_name: data.first_name,
                     last_name: data.last_name,
                     content: data.message,
-                    timestamp: Date.now()
+                    timestamp: new Date().toISOString(),
                 }]);
             };
 
@@ -40,7 +39,7 @@ export default function Chat() {
 
     const fetchMessages = async () => {
         try {
-            const chatHistory = await fetchChatHistory();
+            const chatHistory = await fetchChatHistory("club");
 
             if (chatHistory && chatHistory.messages) {
                 setMessage(chatHistory.messages);
@@ -50,24 +49,12 @@ export default function Chat() {
         }
     };
 
-    const sendMessage = async (message) => {
-        try {
-            socket.send(JSON.stringify({ message: message }));
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
     const handleMessageSubmit = (e) => {
         e.preventDefault();
         const message = e.target.message.value;
-        sendMessage(message);
+        const timestamp = new Date().toISOString();
+        sendMessage(socket, message, "", timestamp);
         e.target.reset();
-    };
-
-    const convertTimestamp = (timestamp) => {
-        const date = new Date(timestamp);
-        return date.toLocaleString();
     };
 
     if (authReady) {
@@ -89,7 +76,8 @@ export default function Chat() {
                         <input
                             type="text"
                             name="message"
-                            className="border border-gray-300 dark:bg-gray-900 dark:border-white rounded-md p-2 mb-2 flex-grow w-[100%]"
+                            className="border border-gray-300 dark:text-neutral-300 dark:bg-gray-900 dark:border-white rounded-md p-2 mb-2 flex-grow w-[100%]"
+                            required
                         />
 
                         <button type="submit" className="bg-blue-500 dark:bg-blue-900 dark:text-neutral-300 text-white py-2 px-4 rounded-md ml-2">

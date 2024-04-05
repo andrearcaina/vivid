@@ -25,6 +25,7 @@ class Message(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE)
+    title = models.TextField(default="") # for annoucements only
     content = models.TextField(default="")
     timestamp = models.DateTimeField(default=datetime.datetime.now)
 
