@@ -53,6 +53,9 @@ export default function Profile() {
                         <div className='flex flex-row mt-5'>
                             <Link className='text-blue-500 underline' href="/profile/password">Change Password</Link>
                         </div>
+                        <div className='flex flex-row mt-5'>
+                            <Link className='text-blue-500 underline' href="/profile/email">Change Email</Link>
+                        </div>
                     </div>
                 </div>
             </main>
