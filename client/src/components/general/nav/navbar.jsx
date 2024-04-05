@@ -67,8 +67,6 @@ const roleItems = () => {
 const regularItems = () => {
     return [
         { text: 'Home', link: '/' },
-        { text: 'About', link: '/about' },
-        { text: 'Contact', link: '/contact' },
         { text: 'Login', link: '/auth/login' },
         { text: 'Register', link: '/auth/register' }
     ];
