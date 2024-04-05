@@ -40,7 +40,7 @@ export default function Chat() {
 
     const fetchMessages = async () => {
         try {
-            const chatHistory = await fetchChatHistory();
+            const chatHistory = await fetchChatHistory("club");
 
             if (chatHistory && chatHistory.messages) {
                 setMessage(chatHistory.messages);
@@ -52,7 +52,7 @@ export default function Chat() {
 
     const sendMessage = async (message) => {
         try {
-            socket.send(JSON.stringify({ message: message }));
+            socket.send(JSON.stringify({ message: message, title: ""}));
         } catch (err) {
             console.error(err);
         }

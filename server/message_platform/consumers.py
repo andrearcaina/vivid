@@ -71,9 +71,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         first_name = self.scope['user'].first_name
         last_name = self.scope['user'].last_name
         message = text_data_json['message']
+        title = text_data_json['title'] or ""
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        await self.save_message(message)
+        await self.save_message(message, title)
 
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -82,7 +83,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'first_name': first_name,
                 'last_name': last_name,
                 'message': message,
-                'date': date
+                'date': date,
+                'title': title
             }
         )
 
@@ -96,16 +98,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
         last_name = event['last_name']
         message = event['message']
         date = event['date']
+        title = event['title']
 
         await self.send(text_data=json.dumps({
             'first_name': first_name,
             'last_name': last_name,
             'message': message,
-            'date': date
+            'date': date,
+            'title': title
         }))
 
     @database_sync_to_async
-    def save_message(self, message):
+    def save_message(self, message, title=""):
         """
         Saves the message to the database.
 
@@ -115,7 +119,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         room = Room.objects.get(room_name=self.room_name)
         
         if not Message.objects.filter(user=self.scope['user'], room=room, content=message).exists():
-            new_message = Message(user=self.scope['user'], room=room, content=message, timestamp=datetime.now())
+            new_message = Message(user=self.scope['user'], room=room, content=message, timestamp=datetime.now(), title=title)
             new_message.save()
 
     @database_sync_to_async

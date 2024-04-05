@@ -1,6 +1,6 @@
-export async function fetchChatHistory() {
+export async function fetchChatHistory(room) {
     try {
-        const res = await fetch('http://127.0.0.1:8000/chat-channels/rooms/club/', {
+        const res = await fetch(`http://127.0.0.1:8000/chat-channels/rooms/${room}/`, {
             method: 'GET',
             credentials: 'include',
             headers: {
