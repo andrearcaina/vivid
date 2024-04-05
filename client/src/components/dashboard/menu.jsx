@@ -5,7 +5,7 @@ export default function Menu({ role }) {
 
     return (
         <main className={darkMode ? 'dark' : ''}>
-            <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+            <div className="h-[95vh] bg-gray-100 dark:bg-gray-900">
                 <h1 className="text-center text-3xl p-5 dark:text-neutral-300">{role} Dashboard</h1>
                 <div className="grid grid-cols-2 ">
                     <div className="w-full rounded-md overflow-hidden shadow-md ml-2 mr-2 bg-white p-4 dark:bg-gray-600">

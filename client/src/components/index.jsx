@@ -6,3 +6,4 @@ export { default as UnAuthorized } from './general/unAuthorized';
 export { default as CoachDashboard } from './dashboard/coachDashboard';
 export { default as MemberDashboard } from './dashboard/memberDashboard';
 export { default as TreasurerDashboard } from './dashboard/treasurerDashboard';
+export { default as Body } from './general/body';
