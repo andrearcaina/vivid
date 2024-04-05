@@ -86,12 +86,17 @@ class UserShowClasses(APIView):
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
 
-        user_id = payload['id']
+        # getting user's id for showing their classes
+        user_id = str(payload['id'])
+
+        queryset = classes_offered.objects.all()
+        serializer = classSerializer(queryset, many=True)
+        serialized_data = serializer.data
 
         # filtering through participants list to show class name, instructor name, and class datetime
-        enrolled_class_name = [i.class_title for i in classes_offered.objects.filter(participants__contains=[user_id])]
-        enrolled_class_instructor = [i.instructor_name for i in classes_offered.objects.filter(participants__contains=[user_id])]
-        enrolled_class_datetime = [i.class_datetime for i in classes_offered.objects.filter(participants__contains=[user_id])]
+        enrolled_class_name = [i['class_title'] for i in serialized_data if user_id in i['participants']]
+        enrolled_class_instructor = [i['instructor_name'] for i in serialized_data if user_id in i['participants']]
+        enrolled_class_datetime = [i['class_datetime'] for i in serialized_data if user_id in i['participants']]
 
         # displaying message to user if they have no classes enrolled
         if len(enrolled_class_name) == 0:
@@ -131,27 +136,36 @@ class ShowAllClassesCoach(APIView):
         data = User.objects.get(id=payload['id'])
         full_name = data.first_name + " " + data.last_name # getting the user's full name to check for objects
 
-        teaching_class_titles = [i.class_title for i in classes_offered.objects.filter(instructor_name=full_name)]
-        teaching_class_datetime = [i.class_datetime for i in classes_offered.objects.filter(instructor_name=full_name)]
+        # serializing data into python dictionary
+        queryset = classes_offered.objects.all()
+        serializer = classSerializer(queryset, many=True)
+        serialized_data = serializer.data
+
+        teaching_class_titles = [i['class_title'] for i in serialized_data if i['instructor_name'] == full_name]
+        teaching_datetimes = [i['class_datetime'] for i in serialized_data if i['instructor_name'] == full_name]
 
         # displaying message to coach if they have no classes enrolled
         if len(teaching_class_titles) == 0:
             return Response({'error': 'You are currently not teaching any classes'})
         
-        return Response({'class_titles': teaching_class_titles, 'datetimes': teaching_class_datetime}, status=200)
+        return Response({'class_titles': teaching_class_titles, 'datetimes': teaching_datetimes}, status=200)
 
 # function for showing all classes available for enrollment for member
 class ShowAvailableClasses(APIView):
     def get(self, request):
+        queryset = classes_offered.objects.all()
 
-        all_class_titles = [i.class_title for i in classes_offered.objects.all()]
-        all_class_instructors = [i.instructor_name for i in classes_offered.objects.all()]
-        all_class_datetime = [i.class_datetime for i in classes_offered.objects.all()]
-
-        if (not all_class_titles):
+        if not queryset:
             return Response({"error": "There are no classes available for enrollment!"}, status=404)
 
-        return Response({"class_titles": all_class_titles, "instructors": all_class_instructors, "datetimes": all_class_datetime}, status=200)
+        serializer = classSerializer(queryset, many=True)
+        serialized_data = serializer.data
+
+        class_titles = [item['class_title'] for item in serialized_data]
+        instructors = [item['instructor_name'] for item in serialized_data]
+        datetimes = [item['class_datetime'] for item in serialized_data]
+
+        return Response({"class_titles": class_titles, "instructors": instructors, "datetimes": datetimes}, status=200)
     
 # function for deleting a class from coach dashboard
 class DeleteClass(APIView):
