@@ -89,14 +89,14 @@ class UserShowClasses(APIView):
         # getting user's id for showing their classes
         user_id = str(payload['id'])
 
-        queryset = classes_offered.objects.all()
+        queryset = classes_offered.objects.filter(participants__contains=[user_id])
         serializer = classSerializer(queryset, many=True)
         serialized_data = serializer.data
 
         # filtering through participants list to show class name, instructor name, and class datetime
-        enrolled_class_name = [i['class_title'] for i in serialized_data if user_id in i['participants']]
-        enrolled_class_instructor = [i['instructor_name'] for i in serialized_data if user_id in i['participants']]
-        enrolled_class_datetime = [i['class_datetime'] for i in serialized_data if user_id in i['participants']]
+        enrolled_class_name = [i['class_title'] for i in serialized_data]
+        enrolled_class_instructor = [i['instructor_name'] for i in serialized_data]
+        enrolled_class_datetime = [i['class_datetime'] for i in serialized_data]
 
         # displaying message to user if they have no classes enrolled
         if len(enrolled_class_name) == 0:
@@ -137,12 +137,12 @@ class ShowAllClassesCoach(APIView):
         full_name = data.first_name + " " + data.last_name # getting the user's full name to check for objects
 
         # serializing data into python dictionary
-        queryset = classes_offered.objects.all()
+        queryset = classes_offered.objects.filter(instructor_name=full_name)
         serializer = classSerializer(queryset, many=True)
         serialized_data = serializer.data
 
-        teaching_class_titles = [i['class_title'] for i in serialized_data if i['instructor_name'] == full_name]
-        teaching_datetimes = [i['class_datetime'] for i in serialized_data if i['instructor_name'] == full_name]
+        teaching_class_titles = [i['class_title'] for i in serialized_data]
+        teaching_datetimes = [i['class_datetime'] for i in serialized_data]
 
         # displaying message to coach if they have no classes enrolled
         if len(teaching_class_titles) == 0:
