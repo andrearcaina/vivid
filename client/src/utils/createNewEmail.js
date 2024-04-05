@@ -1,5 +1,4 @@
 export async function createNewEmail(new_email) {
-    console.log(old_password);
     try {
         const res = await fetch('http://127.0.0.1:8000/member-logs/profile/email/', {
             method: 'PUT',
