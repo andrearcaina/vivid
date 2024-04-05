@@ -22,10 +22,7 @@ class RegisterView(APIView):
         # such as the user's membership status, attendance count, etc.
         if user.role == 'member':
             member = Member.objects.create(
-                first_name=user.first_name,
-                last_name=user.last_name,
-                email=user.email,
-                date_of_birth=user.date_of_birth,
+                user=user,
                 payment_status='pending',
                 membership_approved=False,
                 attendance_count=0
