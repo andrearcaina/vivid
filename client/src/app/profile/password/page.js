@@ -5,27 +5,34 @@ import { useDarkMode } from "@/hooks/useDarkModeContext";
 import { createNewPassword } from "@/utils/createNewPassword";
 
 export default function Password() {
-    const { authReady } = useAuthContext();
+    const { logout, authReady } = useAuthContext();
     const { darkMode } = useDarkMode();
 
     const submitNewPassword = async (event) => {
+        event.preventDefault();
         const formData = new FormData(event.target);
         if (formData.get('newPassword').length != 0) {
-            if (formData.get('newPassword') == formData.get('checkNewPassword')){
-                const oldPassword = formData.get('oldPassword');
-                const newPassword = formData.get('newPassword');
-                try {
-                    const data = await createNewPassword(oldPassword, newPassword);
-                    if (data.password) {
-                        alert('Password change successfully!');
-                    } else {
-                        alert('Unable to create new password');
-                    }
-                } catch (err) {
-                    console.error('Error:', err);
-                }
+            if (formData.get('newPassword') === formData.get('oldPassword')) {
+                alert("Cannot reuse old password!")
             } else {
-                alert("Passwords do not match");
+                if (formData.get('newPassword') === formData.get('checkNewPassword')){  
+                    const old_password = formData.get('oldPassword');
+                    const new_password = formData.get('newPassword');
+                    try {
+                        const data = await createNewPassword(old_password, new_password);
+                        console.log(data);
+                        if (data.message === "Password updated successfully") {
+                            alert('Password changed successfully!');
+                            logout()
+                        } else {
+                            alert('Unable to create new password');
+                        }
+                    } catch (err) {
+                        console.error('Error:', err);
+                    }
+                } else {
+                    alert("Passwords do not match");
+                }
             }
         } else {
             alert("Fields are empty");
@@ -40,11 +47,11 @@ export default function Password() {
                     <section>
                         <h1 className="dark:text-neutral-300 text-3xl">Change Password</h1>
                     </section>
-                    <div>
-                        <p className="dark:text-neutral-300">Current Password</p>
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type='password' name='oldPassword' />
-                    </div>
                     <form onSubmit={submitNewPassword}>
+                    <label className="block mb-2 mt-4 dark:text-neutral-300">
+                        Current Password:
+                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type='password' name='oldPassword' />
+                    </label>
                     <label className="block mb-2 mt-4 dark:text-neutral-300">
                         New Password:
                         <br />
