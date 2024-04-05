@@ -1,5 +1,4 @@
 export async function createNewPassword(old_password, new_password) {
-    console.log(old_password);
     try {
         const res = await fetch('http://127.0.0.1:8000/member-logs/profile/password/', {
             method: 'PUT',

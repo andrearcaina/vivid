@@ -15,7 +15,6 @@ export default function Password() {
                 const new_email = formData.get('newEmail');
                 try {
                     const data = await createNewEmail(new_email);
-                    console.log(data);
                     if (data.message === "Email updated successfully") {
                         alert('Email changed successfully!');
                         logout()

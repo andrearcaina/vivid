@@ -20,7 +20,6 @@ export default function Password() {
                     const new_password = formData.get('newPassword');
                     try {
                         const data = await createNewPassword(old_password, new_password);
-                        console.log(data);
                         if (data.message === "Password updated successfully") {
                             alert('Password changed successfully!');
                             logout()
