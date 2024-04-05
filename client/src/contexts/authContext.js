@@ -68,8 +68,6 @@ export const AuthContextProvider = ({ children }) => {
         try {
             const data = await fetchUserInfo();
 
-            console.log(data);
-
             if (data.detail) {
                 setUser(null);
                 setRole('');

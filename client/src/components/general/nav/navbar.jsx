@@ -60,7 +60,7 @@ const roleItems = () => {
             link: '',
             icon: <IoLogOutOutline />
         }
-    ]
+    ];
 }
 
 const regularItems = () => {

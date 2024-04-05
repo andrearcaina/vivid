@@ -22,10 +22,7 @@ class RegisterView(APIView):
         # such as the user's membership status, attendance count, etc.
         if user.role == 'member':
             member = Member.objects.create(
-                first_name=user.first_name,
-                last_name=user.last_name,
-                email=user.email,
-                date_of_birth=user.date_of_birth,
+                user=user,
                 payment_status='pending',
                 membership_approved=False,
                 attendance_count=0
@@ -108,7 +105,7 @@ class UserView(APIView):
             payload = jwt.decode(token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
-        
+
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=200)
