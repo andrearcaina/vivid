@@ -1,9 +1,9 @@
-import CoachMenu from './coachMenu';
+import Menu from './menu';
 
 export default function CoachDashboard() {
     return (
         <main>
-            <CoachMenu role={"Coach"} />
+            <Menu role={"Coach"} />
         </main>
     );
 }

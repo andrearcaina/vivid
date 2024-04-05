@@ -1,7 +1,7 @@
-export async function RegisterClass(courseName, instructor, date) {
+export async function UserRegisterClass(courseName, userName) {
     try {
         // Need to add proper routing for the API
-        const res = await fetch('http://127.0.0.1:8000/classes-offered/createclass/', {
+        const res = await fetch('http://127.0.0.1:8000/user-auth/register/', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -9,8 +9,7 @@ export async function RegisterClass(courseName, instructor, date) {
             },
             body: JSON.stringify({
                 class_title: courseName,
-                instructor_name: instructor,
-                class_datetime: date
+                // Need to add code to append userName to participants list
             }),
         });
         return await res.json();
