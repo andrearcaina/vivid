@@ -1,6 +1,7 @@
 import { useDarkMode } from '@/hooks/useDarkModeContext';
+import Announcements from './functionality/announcements';
+import Functionality from './functionality/rightSide';
 import Welcome from './welcome';
-import Announcements from './announcements';
 
 export default function Menu({ role }) {
     const { darkMode } = useDarkMode();
@@ -10,19 +11,12 @@ export default function Menu({ role }) {
             <div className="h-[95vh] bg-gray-100 dark:bg-gray-900">
                 <h1 className="text-center text-3xl p-5 dark:text-neutral-300">{role} Dashboard</h1>
                 <Welcome />
+                
                 <div className="grid lg:grid-cols-2 md:grid-cols-1 md:ml-2 md:mr-2 gap-4 content-evenly">
-                    <Announcements />
+                    <Announcements/>
                     
                     <div className="flex flex-col w-full">
-                        <div className="rounded-md overflow-hidden shadow-md mb-2 bg-white p-4 dark:bg-gray-600">
-                            <h2 className="underline dark:text-neutral-300">Calendar</h2>
-                            <p className="dark:text-neutral-300">Need to create a calendar</p>
-                        </div>
-                        
-                        <div className="rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
-                            <h2 className="underline dark:text-neutral-300">Finances</h2>
-                            <p className="dark:text-neutral-300">money stuffs</p>
-                        </div>
+                        <Functionality />
                     </div>
                 </div>
             </div>

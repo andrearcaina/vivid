@@ -180,3 +180,17 @@ class DeleteClass(APIView):
         
         class_name.delete()
         return Response({'message': 'class successfully deleted'}, status=200)
+    
+# function to show all the members in a specific class
+# body:
+# {
+#     "class_title": "class title name" 
+# }
+class ClassShowMembers(APIView):
+    def get(self, request):
+        class_title = request.data['class_title']
+
+        selected_class = classes_offered.objects.get(class_title=class_title)
+        list_of_participants = selected_class.participants
+        
+        return Response({"message": list_of_participants}, status=200)
