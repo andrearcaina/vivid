@@ -7,6 +7,6 @@ class classes_offered(models.Model):
                 db_table = 'classes_offered_db'
 
         class_title = models.CharField(max_length=200, unique=True)
-        instructor_name = models.CharField(max_length=100, unique=True)
+        instructor_name = models.CharField(max_length=100)
         class_datetime = models.DateTimeField() #"YYYY-MM-DDTHH:MM:SS"
         participants = ArrayField(base_field=models.CharField(max_length=100, blank=True), default=list ,size=None)
