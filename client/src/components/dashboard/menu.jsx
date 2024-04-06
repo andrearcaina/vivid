@@ -12,7 +12,7 @@ export default function Menu({ role }) {
                 <h1 className="text-center text-3xl p-5 dark:text-neutral-300">{role} Dashboard</h1>
                 <Welcome />
                 
-                <div className="grid grid-cols-2 ">
+                <div className="grid lg:grid-cols-2 md:grid-cols-1 md:ml-2 md:mr-2 gap-4 content-evenly">
                     <Announcements/>
                     
                     <div className="flex flex-col w-full">

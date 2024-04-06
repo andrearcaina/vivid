@@ -57,7 +57,7 @@ export default function Announcements() {
 
     const showMessages = (message) => {
         return (
-            <div className="flex-grow overflow-y-scroll border border-gray-300 dark:border-w rounded-md w-3/4">
+            <div className="flex-grow overflow-y-scroll border border-gray-300 dark:bg-gray-900 dark:border-w rounded-md w-3/4">
                 <div className="flex flex-col-reverse">
                     {message && [...message].reverse().map((msg, index) => (
                         <div key={index} className="flex flex-col">
@@ -76,7 +76,7 @@ export default function Announcements() {
             <div className="w-full rounded-md overflow-hidden shadow-md ml-2 bg-white p-4 dark:bg-gray-600">
                 <h2 className="underline dark:text-neutral-300 text-center">Announcements</h2>
                 
-                <div className="h-[40vh] flex flex-col items-center dark:bg-gray-900">
+                <div className="h-[40vh] flex flex-col items-center dark:bg-gray-600">
                     {showMessages(message)}
 
                     <form onSubmit={handleMessageSubmit} className="flex flex-col w-3/4 dark:bg-gray-900">
@@ -105,10 +105,10 @@ export default function Announcements() {
         );
     } else if(authReady && role != 'coach') {
         return (
-            <div className="w-full rounded-md overflow-hidden shadow-md ml-2 mr-2 bg-white p-4 dark:bg-gray-600">
+            <div className="w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                 <h2 className="underline dark:text-neutral-300 text-center">Announcements</h2>
                 
-                <div className="h-[40vh] flex flex-col items-center dark:bg-gray-900">
+                <div className="h-[40vh] flex flex-col items-center dark:bg-gray-600">
                     {showMessages(message)}
                 </div>
             </div>

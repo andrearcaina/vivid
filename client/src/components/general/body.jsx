@@ -8,8 +8,8 @@ export default function Body({ children }) {
     return (
         <body className={authReady ? "reddit-mono flex flex-col lg:flex-row" : "reddit-mono"}>
             <Navbar />
-            <main className={authReady ? "lg:flex-grow" : ""}> 
-                {children} 
+            <main className={authReady ? "lg:flex-grow" : ""}>
+                {children}
                 <DarkMode />
                 <Footer />
             </main>
