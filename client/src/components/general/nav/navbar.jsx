@@ -1,5 +1,4 @@
 import { useAuthContext } from '@/hooks/useAuthContext';
-import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { NavDashboard } from './nav-dashboard';
 import { NavGeneral } from './nav-general';
 import { LogoutButton } from './logoutButton';
@@ -9,27 +8,22 @@ import {
     IoWalletOutline,
     IoPersonOutline,
     IoChatbubblesOutline,
-    IoLogOutOutline
-} from "react-icons/io5";
+    IoLogOutOutline,
+} from 'react-icons/io5';
+import { MdOutlineManageAccounts } from 'react-icons/md';
 
 export default function Navbar() {
-    const { authReady } = useAuthContext();
-    const { darkMode } = useDarkMode();
-    const navItems = authReady ? roleItems() : regularItems();
+    const { authReady, role } = useAuthContext();
+    const navItems = authReady ? roleItems(role) : regularItems();
 
-    return (
-        <div className={darkMode ? 'dark' : ''}>
-                    {authReady && navItems.some(item => item.text === 'Dashboard') ? 
-                    (
-                        <NavDashboard links={navItems} />
-                    ) : (
-                        <NavGeneral links={navItems} />
-                    )}
-        </div>
-    );
+    if (authReady) {
+        return <NavDashboard links={navItems} />;
+    } else {
+        return <NavGeneral links={navItems} />;
+    }
 }
 
-const roleItems = () => {
+const dashboardItems = () => {
     return [
         {
             text: 'Dashboard',
@@ -41,11 +35,11 @@ const roleItems = () => {
             link: '/calendar',
             icon: <IoCalendarNumberOutline />
         },
-        {
-            text: 'Finances',
-            link: '/finances',
-            icon: <IoWalletOutline />
-        },
+    ]
+}
+
+const defaultItems = () => {
+    return [
         {
             text: 'Chat',
             link: '/chat',
@@ -62,6 +56,40 @@ const roleItems = () => {
             icon: <IoLogOutOutline />
         }
     ];
+}
+
+const roleItems = (role) => {
+    if (role == "member") {
+        return [
+            ...dashboardItems(),
+            ...defaultItems()
+        ]
+    } else if (role == "coach") {
+        return [
+            ...dashboardItems(),
+            {
+                text: 'Management',
+                link: '/management',
+                icon: <MdOutlineManageAccounts />
+            },
+            ...defaultItems()
+        ];
+    } else if (role == "treasurer") {
+        return [
+            ...dashboardItems(),
+            {
+                text: 'Management',
+                link: '/management',
+                icon: <MdOutlineManageAccounts />
+            },
+            {
+                text: 'Finances',
+                link: '/finances',
+                icon: <IoWalletOutline />
+            },
+            ...defaultItems()
+        ];
+    }
 }
 
 const regularItems = () => {
