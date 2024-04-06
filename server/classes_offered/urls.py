@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreateClass, JoinClass, UserShowClasses, DeleteClass, ShowAllClassesCoach, ShowAvailableClasses
+from .views import CreateClass, JoinClass, UserShowClasses, DeleteClass, ShowAllClassesCoach, ShowAvailableClasses, ClassShowMembers
 
 urlpatterns = [
     path("createclass/", CreateClass.as_view(), name="createclass"),
@@ -8,4 +8,5 @@ urlpatterns = [
     path("deleteclass/", DeleteClass.as_view(), name="deleteclass"),
     path("coachshowclasses/", ShowAllClassesCoach.as_view(), name="coachshowclasses"),
     path("showavailableclasses/", ShowAvailableClasses.as_view(), name="showavailableclasses"),
+    path("showmembersinclass/", ClassShowMembers.as_view(), name="showmembersinclass"),
 ]

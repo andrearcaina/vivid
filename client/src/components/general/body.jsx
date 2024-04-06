@@ -6,10 +6,10 @@ export default function Body({ children }) {
     const { authReady } = useAuthContext();
 
     return (
-        <body className={authReady ? "font-serif flex flex-col lg:flex-row" : "font-serif"}>
+        <body className={authReady ? "reddit-mono flex flex-col lg:flex-row" : "reddit-mono"}>
             <Navbar />
-            <main className={authReady ? "lg:flex-grow" : ""}> 
-                {children} 
+            <main className={authReady ? "lg:flex-grow" : ""}>
+                {children}
                 <DarkMode />
                 <Footer />
             </main>
