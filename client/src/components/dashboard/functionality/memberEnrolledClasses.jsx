@@ -1,4 +1,4 @@
-import { fetchMemberEnrolledClasses } from "@/utils/classesOffered/fetchMemberEnrolledClasses";
+import { fetchMemberEnrolledClasses } from "@/utils/classes/fetchMemberEnrolledClasses";
 import { useEffect, useState} from 'react';
 import { convertTimestamp } from "@/utils/helpers/convertTime";
 

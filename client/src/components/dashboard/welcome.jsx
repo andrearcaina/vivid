@@ -1,4 +1,5 @@
 import { useAuthContext } from '@/hooks/useAuthContext';
+import { Capitalize } from '@/utils/helpers/capitalize';
 
 export default function Welcome() {
     const { user } = useAuthContext();
@@ -12,7 +13,7 @@ export default function Welcome() {
     return (
         <main>
             <div className="dark:bg-gray-900 p-3 text-center">
-                <h1 className="dark:text-neutral-300 whitespace-normal break-words">{greeting} {JSON.stringify(user.first_name).replace(/\"/g, "")}</h1>
+                <h1 className="dark:text-neutral-300 whitespace-normal break-words">{greeting} {Capitalize(user.first_name)} {Capitalize(user.last_name)}!</h1>
             </div>
         </main>
     );

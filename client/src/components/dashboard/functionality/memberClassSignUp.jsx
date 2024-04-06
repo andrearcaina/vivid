@@ -1,6 +1,6 @@
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { UserRegisterClass } from "@/utils/classesOffered/userRegisterClass";
-import { fetchClassesOffered } from "@/utils/classesOffered/fetchClassesOffered";
+import { UserRegisterClass } from "@/utils/classes/userRegisterClass";
+import { fetchClassesOffered } from "@/utils/classes/fetchClassesOffered";
 import { useEffect, useState} from 'react';
 
 export default function MemberClassSignUp(){

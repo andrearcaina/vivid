@@ -63,7 +63,7 @@ export default function Management() {
     if (role == "treasurer" || role == "coach") {
         return (
             <main className={darkMode ? "dark" : ""}>
-                <div className="h-[85vh] dark:bg-gray-900 dark:text-neutral-300 p-4">
+                <div className="h-[92.5vh] dark:bg-gray-900 dark:text-neutral-300 p-4">
                     <h1 className="text-center text-3xl py-5">All Members</h1>
                     
                     <DataTable

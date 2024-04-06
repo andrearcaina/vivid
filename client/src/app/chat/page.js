@@ -55,7 +55,7 @@ export default function Chat() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="h-[85vh] flex flex-col items-center dark:bg-gray-900">
+                <div className="h-[92.5vh] flex flex-col items-center dark:bg-gray-900">
                     <div className="flex-grow overflow-y-scroll border border-gray-300 dark:border-w rounded-md p-2 mt-[5rem] mb-[3rem] w-3/4">
                         <div className="flex flex-col-reverse">
                             {message && [...message].reverse().map((msg, index) => (

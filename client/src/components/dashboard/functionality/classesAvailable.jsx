@@ -1,4 +1,4 @@
-import { fetchClassesOffered } from "@/utils/classesOffered/fetchClassesOffered";
+import { fetchClassesOffered } from "@/utils/classes/fetchClassesOffered";
 import { useEffect, useState} from 'react';
 import { convertTimestamp } from "@/utils/helpers/convertTime";
 
