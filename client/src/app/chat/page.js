@@ -2,10 +2,14 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { fetchChatHistory } from '@/utils/socket/WebSocket';
-import { sendMessage } from '@/utils/socket/WebSocket';
 import { convertTimestamp } from '@/utils/helpers/convertTime';
 import { UnAuthorized } from "@/components";
+import {
+    joinWebSocket,
+    listenSocket,
+    fetchChatHistory,
+    sendMessage
+} from '@/utils/socket/WebSocket';
 
 export default function Chat() {
     const { authReady } = useAuthContext();
@@ -17,19 +21,10 @@ export default function Chat() {
         if (authReady) {
             fetchMessages();
 
-            const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat/club/');
+            const ws = joinWebSocket("club");
             setSocket(ws);
 
-            ws.onmessage = (e) => {
-                const data = JSON.parse(e.data);
-                setMessage((prev) => [...prev, {
-                    title: data.title,
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    content: data.message,
-                    timestamp: new Date().toISOString(),
-                }]);
-            };
+            ws.onmessage = listenSocket(setMessage);
 
             return () => {
                 ws.close();

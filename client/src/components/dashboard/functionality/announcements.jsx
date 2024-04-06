@@ -1,9 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useAuthContext } from "@/hooks/useAuthContext";
-import { fetchChatHistory } from "@/utils/socket/WebSocket";
-import { sendMessage } from '@/utils/socket/WebSocket';
 import { convertTimestamp } from '@/utils/helpers/convertTime';
+import {
+    joinWebSocket,
+    listenSocket,
+    fetchChatHistory,
+    sendMessage
+} from '@/utils/socket/WebSocket';
 
 export default function Announcements() {
     const { role, authReady } = useAuthContext();
@@ -14,19 +18,10 @@ export default function Announcements() {
         if (authReady) {
             fetchMessages();
 
-            const ws = new WebSocket('ws://127.0.0.1:8000/ws/chat/announcements/');
+            const ws = joinWebSocket("announcements");
             setSocket(ws);
 
-            ws.onmessage = (e) => {
-                const data = JSON.parse(e.data);
-                setMessage((prev) => [...prev, {
-                    title: data.title,
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    content: data.message,
-                    timestamp: new Date().toISOString(),
-                }]);
-            };
+            ws.onmessage = listenSocket(setMessage);
 
             return () => {
                 ws.close();
@@ -59,7 +54,7 @@ export default function Announcements() {
         return (
             <div className="flex-grow overflow-y-scroll border border-gray-300 dark:bg-gray-900 dark:border-w rounded-md w-3/4">
                 <div className="flex flex-col-reverse">
-                    {message && [...message].reverse().map((msg, index) => (
+                    {message && message.map((msg, index) => (
                         <div key={index} className="flex flex-col">
                             <p className="text-gray-500 dark:text-neutral-300 text-center mb-1">{convertTimestamp(msg.timestamp)}</p>
                             <p className="text-black font-bold text-xl dark:text-neutral-300 text-center mb-1">{msg.title}</p> 
