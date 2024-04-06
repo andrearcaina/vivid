@@ -8,8 +8,8 @@ export default function Body({ children }) {
     return (
         <body className={authReady ? "font-serif flex flex-col lg:flex-row" : "font-serif"}>
             <Navbar />
-            <main className={authReady ? "lg:flex-grow" : ""}> 
-                {children} 
+            <main className={authReady ? "lg:flex-grow" : ""}>
+                {children}
                 <DarkMode />
                 <Footer />
             </main>
