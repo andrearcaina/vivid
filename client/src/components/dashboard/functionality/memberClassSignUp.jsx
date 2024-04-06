@@ -1,5 +1,5 @@
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { UserRegisterClass } from "@/utils/userRegisterClass";
+import { UserRegisterClass } from "@/utils/classesOffered/userRegisterClass";
 import { fetchClassesOffered } from "@/utils/classesOffered/fetchClassesOffered";
 import { useEffect, useState} from 'react';
 

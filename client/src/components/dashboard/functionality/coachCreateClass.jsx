@@ -1,5 +1,5 @@
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { RegisterClass } from "@/utils/registerClass";
+import { RegisterClass } from "@/utils/classesOffered/registerClass";
 import { useAuthContext } from '@/hooks/useAuthContext';
 
 export default function CoachCreateClass() {

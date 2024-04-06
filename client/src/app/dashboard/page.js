@@ -1,16 +1,12 @@
 'use client';
 import { useAuthContext } from "@/hooks/useAuthContext";
-import { TreasurerDashboard, CoachDashboard, MemberDashboard, UnAuthorized } from "@/components";
+import { Menu, UnAuthorized } from "@/components";
 
 export default function Dashboard() {
-    const { role } = useAuthContext();
+    const { role, authReady } = useAuthContext();
     
-    if (role == "treasurer") {
-        return <TreasurerDashboard />;
-    } else if (role == "coach") {
-        return <CoachDashboard />;
-    } else if (role == "member") {
-        return <MemberDashboard />;
+    if (authReady) {
+        return <Menu role={role[0].toUpperCase()+role.slice(1)} />;
     } else {
         return <UnAuthorized />;
     }
