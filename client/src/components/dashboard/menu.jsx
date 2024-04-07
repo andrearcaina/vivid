@@ -8,8 +8,8 @@ export default function Menu({ role }) {
 
     return (
         <main className={darkMode ? 'dark' : ''}>
-            <div className="h-[95vh] bg-gray-100 dark:bg-gray-900">
-                <h1 className="text-center text-3xl p-5 dark:text-neutral-300">{role} Dashboard</h1>
+            <div className="h-100vh pb-5 bg-gray-100 dark:bg-gray-900 bg-cover">
+                <h1 className="text-center text-3xl pt-2 dark:text-neutral-300">{role} Dashboard</h1>
                 <Welcome />
                 
                 <div className="grid lg:grid-cols-2 md:grid-cols-1 md:ml-2 md:mr-2 gap-4 content-evenly">
