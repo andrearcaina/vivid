@@ -15,7 +15,7 @@ export default function Profile() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="grid grid-cols-5 h-[80vh] dark:bg-gray-900">
+                <div className="grid grid-cols-5 h-screen dark:bg-gray-900">
                     <div></div>
                     <div className='flex flex-col p-4 items-center'>
                         <section className='flex'>
