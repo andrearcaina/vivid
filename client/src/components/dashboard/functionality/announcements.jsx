@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useAuthContext } from "@/hooks/useAuthContext";
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { convertTimestamp } from '@/utils/helpers/convertTime';
 import {
     joinWebSocket,

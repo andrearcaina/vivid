@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { fetchJWT } from '@/utils/userAuth/fetchLoginCookie';
 import { deleteCookie } from '@/utils/userAuth/deleteCookie';
 import { fetchUserInfo } from '@/utils/userAuth/fetchUserData';
+import toast from 'react-hot-toast';
 
 export const AuthContext = createContext({
     user: null,
@@ -33,10 +34,14 @@ export const AuthContextProvider = ({ children }) => {
                 setAuthReady(true);
 
                 router.push('/dashboard/');
+
+                toast.success('Successfully logged in!');
             } else {
                 setUser(null);
                 setRole('');
                 setAuthReady(false);
+                
+                toast.error('Invalid email or password! Please try again.');
             }
         } catch (err) {
             console.error(err);
@@ -55,6 +60,8 @@ export const AuthContextProvider = ({ children }) => {
                 setAuthReady(false);
             
                 router.push('/');
+
+                toast.success('Successfully logged out!');
             }
         } catch (err) {
             console.error(err);
@@ -73,11 +80,15 @@ export const AuthContextProvider = ({ children }) => {
                 setRole('');
                 setAuthReady(false);
                 return;
-            }
+            } else {
+                setUser(data);
+                setRole(data.role);
+                setAuthReady(true);
 
-            setUser(data);
-            setRole(data.role);
-            setAuthReady(true);
+                toast.success('Session restored.');
+                
+                return;
+            }
         } catch (err) {
             console.error(err);
         }
@@ -85,9 +96,6 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         checkSession();
-        console.log("User:", user);
-        console.log("Role:", role);
-        console.log("AuthReady:", authReady);
     }, []);
 
     return (
