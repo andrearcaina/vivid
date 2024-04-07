@@ -40,8 +40,8 @@ export default function LoginPage() {
     // or they will say they are not in the database, so they will be alerted and then redirected to the register page
 
     return (
-        <div className={darkMode ? 'dark' : ''}>
-            <main className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
+        <main className={darkMode ? 'dark' : ''}>
+            <div className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
                 <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300">Login</h1>
                 
                 <form className="w-64" action={submitLogin}>
@@ -57,7 +57,7 @@ export default function LoginPage() {
                     
                     <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
                 </form>
-            </main>
-        </div>
+            </div>
+        </main>
     );
 }
