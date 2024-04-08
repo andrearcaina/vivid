@@ -1,10 +1,10 @@
 'use client';
 import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetchJWT } from '@/utils/userAuth/fetchLoginCookie';
-import { deleteCookie } from '@/utils/userAuth/deleteCookie';
-import { fetchUserInfo } from '@/utils/userAuth/fetchUserData';
-import { Approval } from '@/utils/userAuth/membershipApproval';
+import { fetchJWT } from '@/utils/services/fetchLoginCookie';
+import { deleteCookie } from '@/utils/services/deleteCookie';
+import { fetchUserInfo } from '@/utils/services/fetchUserData';
+import { Approval } from '@/utils/services/membershipApproval';
 import toast from 'react-hot-toast';
 
 export const AuthContext = createContext({

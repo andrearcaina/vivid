@@ -96,6 +96,7 @@ const regularItems = () => {
     return [
         { text: 'Home', link: '/' },
         { text: 'Login', link: '/auth/login' },
-        { text: 'Register', link: '/auth/register' }
+        { text: 'Register', link: '/auth/register' },
+        { text: 'Reset Password', link: '/auth/reset'}
     ];
 }

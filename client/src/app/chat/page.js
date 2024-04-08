@@ -9,7 +9,7 @@ import {
     listenSocket,
     fetchChatHistory,
     sendMessage
-} from '@/utils/socket/WebSocket';
+} from '@/utils/connections/WebSocket';
 export default function Chat() {
     const { authReady, role, activated } = useAuthContext();
     const { darkMode } = useDarkMode();
