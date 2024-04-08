@@ -56,8 +56,8 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className={darkMode ? 'dark' : ''}>
-            <main className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
+        <main className={darkMode ? 'dark' : ''}>
+            <div className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
                 <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300">Register</h1>
                 
                 <form className="w-64" action={submitRegister}>
@@ -97,7 +97,7 @@ export default function RegisterPage() {
                     
                     <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Register</button>
                 </form>
-            </main>
-        </div>
+            </div>
+        </main>
     )
 }

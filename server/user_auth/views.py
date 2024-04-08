@@ -123,7 +123,7 @@ class ResetPasswordView(APIView):
 
         if user is None:
             raise AuthenticationFailed('User not found!')
-
+        
         user.set_password(password)
         user.save()
 

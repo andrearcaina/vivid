@@ -44,7 +44,7 @@ export default function Password() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="flex flex-col w-full h-[80vh] overflow-hidden p-4 dark:bg-gray-900 items-center">
+                <div className="flex flex-col w-full h-screen overflow-hidden p-4 dark:bg-gray-900 items-center">
                     <div>
                         <section>
                             <h1 className="dark:text-neutral-300 text-3xl text-left">Change Email</h1>

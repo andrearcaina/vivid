@@ -98,7 +98,7 @@ export default function Announcements() {
             <div className="w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                 <h2 className="underline dark:text-neutral-300 text-center">Announcements</h2>
                 
-                <div className="h-[40vh] flex flex-col items-center dark:bg-gray-600">
+                <div className="h-[75vh] flex flex-col items-center dark:bg-gray-600">
                     {showMessages(message)}
                 </div>
             </div>

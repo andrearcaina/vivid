@@ -2,8 +2,12 @@
 import { UnAuthorized } from "@/components";
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from "@/hooks/useDarkModeContext";
+<<<<<<< HEAD
 import { createNewPassword } from "@/utils/settings";
 import { toast } from 'react-hot-toast';
+=======
+import { createNewPassword } from "@/utils/settings/createNewPassword";
+>>>>>>> 6d32ef75572c20abe207e3eab4746bbff0bf0c54
 
 export default function Password() {
     const { logout, authReady } = useAuthContext();
@@ -51,7 +55,7 @@ export default function Password() {
     if (authReady) {
         return (
             <main className={darkMode ? 'dark' : ''}>
-                <div className="flex flex-col w-full h-[80vh] overflow-hidden p-4 dark:bg-gray-900 items-center">
+                <div className="flex flex-col w-full h-screen overflow-hidden p-4 dark:bg-gray-900 items-center">
                     <section>
                         <h1 className="dark:text-neutral-300 text-3xl">Change Password</h1>
                     </section>

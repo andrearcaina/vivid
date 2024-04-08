@@ -5,10 +5,10 @@ from rest_framework.exceptions import AuthenticationFailed
 from user_auth.models import User
 from .serializers import MemberSerializer
 from .models import Member
+import secrets
 import jwt
 import os
 
-# make a PUT request to change certain fields in here for profile management
 class UpdatePassword(APIView):
     def put(self, request):
         token = request.COOKIES.get('jwt')
@@ -86,6 +86,7 @@ class UpdateMembership(APIView):
         approved = request.data['membership_approved']
 
         user = User.objects.filter(id=payload['id']).first()
+        
         if user.role != 'coach':
             return Response({'error': 'You are not authorized to approve memberships'}, status=401)
         
@@ -103,12 +104,12 @@ class DeleteMember(APIView):
             raise AuthenticationFailed('Unauthenticated!')
 
         member_id = request.data['id']
-
+        
         admin = User.objects.filter(id=payload['id']).first()
-
+        
         if admin.role != 'coach':
             return Response({'error': 'You are not authorized to delete members'}, status=401)
-
+        
         member = Member.objects.filter(id=member_id).first()
         user = member.user
         member.delete()
@@ -140,7 +141,6 @@ class ResetPassword(APIView):
 class MembershipApproval(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')
-
         if not token:
             raise AuthenticationFailed('Unauthenticated!')
 
@@ -158,7 +158,6 @@ class MembershipApproval(APIView):
 class ActivityStatus(APIView):
     def put(self, request):
         token = request.COOKIES.get('jwt')
-
         try:
             payload = jwt.decode(token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
         except jwt.ExpiredSignatureError:

@@ -1,5 +1,4 @@
 from django.urls import path
-from .views import UpdatePassword, UpdateEmail, GetMembers, UpdateMembership
 from .views import (
     UpdatePassword, 
     UpdateEmail, 

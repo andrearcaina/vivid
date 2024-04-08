@@ -30,7 +30,9 @@ export default function MemberEnrolledClasses() {
                         </div>
                     ))}
                 </div>
-            )}
+            ) :
+                <p>You have not enrolled in any classes</p>
+            }
         </div>
     )
 }

@@ -79,7 +79,7 @@ export default function Chat() {
         );
     } else if (role == 'member' && !activated) {
         return <Deactivated />;
-    }else {
+    } else {
         return <UnAuthorized />;
     }
 } 
