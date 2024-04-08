@@ -3,5 +3,8 @@ export { default as Navbar } from './general/nav/navbar';
 export { default as Footer } from './general/footer';
 export { default as DarkMode } from './general/darkModeButton';
 export { default as UnAuthorized } from './general/unAuthorized';
+export { default as Deactivated } from './general/deactivated';
+export { default as CustomDropdown } from './general/dropdownMenu';
+export { default as CustomButton } from './general/manageButton';
 export { default as Menu } from './dashboard/menu';
 export { default as Body } from './general/body';

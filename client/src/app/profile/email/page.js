@@ -2,6 +2,7 @@
 import { UnAuthorized } from "@/components";
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from "@/hooks/useDarkModeContext";
+import { createNewEmail } from "@/utils/settings/createNewEmail";
 
 export default function Password() {
     const { logout, authReady } = useAuthContext();

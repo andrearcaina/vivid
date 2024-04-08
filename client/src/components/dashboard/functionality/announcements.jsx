@@ -7,7 +7,7 @@ import {
     listenSocket,
     fetchChatHistory,
     sendMessage
-} from '@/utils/socket/WebSocket';
+} from '@/utils/connections/WebSocket';
 
 export default function Announcements() {
     const { role, authReady } = useAuthContext();
