@@ -8,7 +8,7 @@ export default function DarkMode() {
     return (
         <div className={darkMode ? 'dark' : ''}>
             <motion.button
-                className="absolute w-12 h-12 bottom-16 right-16 bg-neutral-900 dark:bg-neutral-200 rounded-full text-white dark:text-black font-semibold flex justify-center items-center"
+                className="fixed w-12 h-12 bottom-16 right-16 bg-neutral-900 dark:bg-neutral-200 rounded-full text-white dark:text-black font-semibold flex justify-center items-center"
                 onClick={toggleDarkMode}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
