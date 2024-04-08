@@ -48,13 +48,6 @@ export default function LoginPage() {
         }
     };
 
-<<<<<<< HEAD
-=======
-    // we have to make a form basically that only sends the data to the server when entered
-    // the user will either go into two pages: their actual screen meant for them (member/treasurer/coach)
-    // or they will say they are not in the database, so they will be alerted and then redirected to the register page
-
->>>>>>> 6d32ef75572c20abe207e3eab4746bbff0bf0c54
     return (
         <main className={darkMode ? 'dark' : ''}>
             <div className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
