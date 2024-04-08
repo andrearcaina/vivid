@@ -10,13 +10,18 @@ import os
 
 # Create your views here.
 class RegisterView(APIView):
+    """
+        This class is used to register a new user.
+        It receives the user's information in the request body
+        and creates a new user object in the database.
+        Additionally, it creates a member object for the user,
+        which stores additional information such as membership status and attendance count.
+    """
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         
-        print(user)
-
         # create a member object for the user
         # this is necessary to store additional information about the user
         # such as the user's membership status, attendance count, etc.
@@ -37,6 +42,13 @@ class RegisterView(APIView):
 # the JWT token is then stored as a cookie in the client's browser
 # this enables secure authentication for subsequent requests
 class LoginView(APIView):
+    """
+        This class is used to authenticate a user.
+        It receives the user's email and password in the request body
+        and checks if the user exists in the database.
+        If the user exists and the password is correct, it generates a JWT token
+        and stores it as a cookie in the client's browser.
+    """
     def post(self, request):
         email = request.data['email']
         password = request.data['password']
@@ -70,6 +82,8 @@ class LoginView(APIView):
             'jwt': token
         }
 
+        resp.status_code = 200
+
         # Return the response object with the JWT token as a cookie
         # the reason is that the client stores the JWT token as a cookie and can send it 
         # back to the server for authentication purposes
@@ -77,6 +91,11 @@ class LoginView(APIView):
         return resp
 
 class LogoutView(APIView):
+    """
+        This class is used to log out a user.
+        It deletes the JWT token cookie from the client's browser.
+        This effectively logs out the user and prevents unauthorized access to the user's account.
+    """
     def post(self, request):
         resp = Response()
         
@@ -88,6 +107,8 @@ class LogoutView(APIView):
             'message': 'successfully logged out'
         }
 
+        resp.status_code = 200
+
         return resp
 
 # this class is used to retrieve the cookie from the server
@@ -95,6 +116,12 @@ class LogoutView(APIView):
 # this is necessary to authenticate the user's request
 # and to provide the user's information to the client
 class UserView(APIView):
+    """
+        This class is used to retrieve the user's information.
+        It decodes the JWT token stored in the client's browser
+        and retrieves the user's information from the database.
+        It then returns the user's information to the client.
+    """
     def get(self, request):
         token = request.COOKIES.get('jwt')
 
@@ -111,6 +138,11 @@ class UserView(APIView):
         return Response(serializer.data, status=200)
 
 class ResetPasswordView(APIView):
+    """
+        This class is used to reset the user's password.
+        It receives the user's email, new password, and confirm password in the request body.
+        It then updates the user's password in the database.
+    """
     def put(self, request):
         email = request.data['email']
         password = request.data['password']
