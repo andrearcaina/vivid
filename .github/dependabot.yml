@@ -8,9 +8,9 @@ updates:
   - package-ecosystem: "pip" # For Python dependencies in Django
     directory: "server/" # Location of package manifests for backend
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: "npm" # For Node.js dependencies in Next.js
     directory: "client/" # Location of package manifests for frontend
     schedule:
-      interval: "weekly"
+      interval: "monthly"
