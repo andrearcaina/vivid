@@ -1,8 +1,9 @@
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { NavDashboard } from './nav-dashboard';
 import { NavGeneral } from './nav-general';
-import { LogoutButton } from './logoutButton';
-import { 
+import { LogoutButton } from '../buttons/logoutButton';
+import { MdOutlineManageAccounts } from 'react-icons/md';
+import {
     IoSpeedometerOutline,
     IoCalendarNumberOutline,
     IoWalletOutline,
@@ -10,7 +11,6 @@ import {
     IoChatbubblesOutline,
     IoLogOutOutline,
 } from 'react-icons/io5';
-import { MdOutlineManageAccounts } from 'react-icons/md';
 
 export default function Navbar() {
     const { authReady, role } = useAuthContext();
@@ -96,6 +96,7 @@ const regularItems = () => {
     return [
         { text: 'Home', link: '/' },
         { text: 'Login', link: '/auth/login' },
-        { text: 'Register', link: '/auth/register' }
+        { text: 'Register', link: '/auth/register' },
+        { text: 'Reset Password', link: '/auth/reset' }
     ];
 }

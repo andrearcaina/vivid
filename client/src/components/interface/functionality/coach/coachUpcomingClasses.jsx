@@ -1,6 +1,6 @@
-import { fetchClassesOffered } from "@/utils/classes/fetchClassesOffered";
+import { fetchClassesOffered } from '@/utils/classes';
 import { useEffect, useState} from 'react';
-import { convertTimestamp } from "@/utils/helpers/convertTime";
+import { convertTimestamp } from '@/utils/helpers';
 import { useAuthContext } from '@/hooks/useAuthContext';
 
 export default function CoachUpcomingClasses(){
@@ -10,7 +10,6 @@ export default function CoachUpcomingClasses(){
     let instructorName;
     if (user) {
         instructorName =  user.first_name + " " + user.last_name;
-            
     }
 
     useEffect(() => {
@@ -28,7 +27,7 @@ export default function CoachUpcomingClasses(){
     return (
         <div>
             <h1 className="text-3xl font-bold mb-4">Your Upcoming Classes</h1>
-            {courses ? (
+            {courses && courses.class_titles ? (
                 <div>
                     {courses.class_titles.map((title, index) => {
                         // Check if instructorName matches the instructor for the current course

@@ -2,41 +2,50 @@
 import { UnAuthorized } from "@/components";
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { createNewPassword } from "@/utils/profile/createNewPassword";
+import { createNewPassword } from "@/utils/settings";
+import { toast } from 'react-hot-toast';
 
 export default function Password() {
     const { logout, authReady } = useAuthContext();
     const { darkMode } = useDarkMode();
 
-    const submitNewPassword = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        if (formData.get('newPassword').length != 0) {
-            if (formData.get('newPassword') === formData.get('oldPassword')) {
-                alert("Cannot reuse old password!")
-            } else {
-                if (formData.get('newPassword') === formData.get('checkNewPassword')){  
-                    const old_password = formData.get('oldPassword');
-                    const new_password = formData.get('newPassword');
-                    try {
-                        const data = await createNewPassword(old_password, new_password);
-                        if (data.message === "Password updated successfully") {
-                            alert('Password changed successfully!');
-                            logout()
-                        } else {
-                            alert('Unable to create new password');
-                        }
-                    } catch (err) {
-                        console.error('Error:', err);
-                    }
-                } else {
-                    alert("Passwords do not match");
-                }
-            }
-        } else {
-            alert("Fields are empty");
-        }
+    const submitNewPassword = async (formData) => {
+        const oldPassword = formData.get('oldPassword');
+        const newPassword = formData.get('oldPassword');
+        const checkNewPassword = formData.get('checkNewPassword');
         
+        if (!oldPassword && !newPassword && !checkNewPassword) {
+            toast.error("Please enter valid inputs!");
+            return;
+        } else if (!oldPassword) {
+            toast.error("Please enter a valid password!");
+            return;
+        } else if (!newPassword) {
+            toast.error("Please enter a valid new password!");
+            return;
+        } else if (!checkNewPassword) {
+            toast.error("Please confirm your new password!");
+            return;
+        } else if (oldPassword === newPassword) { 
+            toast.error("New password cannot be the same as old password!");
+            return;
+        } else if (newPassword !== checkNewPassword) {
+            toast.error("Passwords do not match!");
+            return;
+        }
+
+        try {
+            const data = await createNewPassword(oldPassword, newPassword);
+
+            if (data.message) {
+                toast.success("Successfully updated password!");
+                logout();
+            } else {
+                toast.error("Unable to create new password.");
+            }
+        } catch (err) {
+            console.error('Error:', err);
+        }
     }
 
     if (authReady) {

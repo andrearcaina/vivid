@@ -1,6 +1,6 @@
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { motion } from 'framer-motion';
-import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
+import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
 
 export default function DarkMode() {
     const { darkMode, toggleDarkMode } = useDarkMode();

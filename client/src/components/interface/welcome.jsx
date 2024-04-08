@@ -1,5 +1,5 @@
 import { useAuthContext } from '@/hooks/useAuthContext';
-import { Capitalize } from '@/utils/helpers/capitalize';
+import { Capitalize } from '@/utils/helpers';
 
 export default function Welcome() {
     const { user } = useAuthContext();

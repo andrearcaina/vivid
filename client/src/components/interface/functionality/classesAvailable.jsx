@@ -1,6 +1,6 @@
-import { fetchClassesOffered } from "@/utils/classes/fetchClassesOffered";
-import { useEffect, useState} from 'react';
-import { convertTimestamp } from "@/utils/helpers/convertTime";
+import { fetchClassesOffered } from '@/utils/classes';
+import { useEffect, useState } from 'react';
+import { convertTimestamp } from "@/utils/helpers";
 
 export default function ClassesAvailable (){
     const [courses, setCourses] = useState();
@@ -20,7 +20,7 @@ export default function ClassesAvailable (){
     return (
         <div>
             <h1 className="text-3xl font-bold mb-4">Available Classes</h1>
-            {courses && (
+            {courses && courses.class_titles && (
                 <div>
                     {courses.class_titles.map((title, index) => (
                         <div key={index} className="bg-blue-200 rounded-md p-4 mb-4">

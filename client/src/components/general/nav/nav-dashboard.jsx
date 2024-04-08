@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image'; 
 
-const linkClasses = 
-    'flex items-center gap-2 lg:font-light px-3 py-2 hover:bg-neutral-400 hover:dark:bg-neutral-600 hover:no-underline dark:active:bg-neutral-600 rounded-sm lg:text-base'
+const linkClasses = 'flex items-center gap-2 lg:font-light px-3 py-2 hover:bg-neutral-400 hover:dark:bg-neutral-600 hover:no-underline dark:active:bg-neutral-600 rounded-sm lg:text-base'
 
 export const NavDashboard = ({ links }) => {
     const { darkMode } = useDarkMode();

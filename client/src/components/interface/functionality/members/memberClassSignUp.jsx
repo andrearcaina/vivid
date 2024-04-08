@@ -1,23 +1,20 @@
-import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { UserRegisterClass } from "@/utils/classes/userRegisterClass";
-import { fetchClassesOffered } from "@/utils/classes/fetchClassesOffered";
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { UserRegisterClass, fetchClassesOffered } from '@/utils/classes';
 import { useEffect, useState} from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function MemberClassSignUp(){
     const { darkMode } = useDarkMode();
-    // Member Sign Up for Class form:
-    const submitSignUp = async (event) => {
-        event.preventDefault();
 
-        const formData = new FormData(event.target);
+    const submitSignUp = async (formData) => {
         const courseName = formData.get('classes_available');
 
         try {
             const data = await UserRegisterClass(courseName);
             if (data.message) {
-                alert('Successfully Enrolled in class!');
+                toast.success('Successfully enrolled in class!');
             } else {
-                alert('Error Enrolling in  class!');
+                toast.error('Error enrolling in  class!');
             }
         } catch (err) {
             console.error('Error:', err);
@@ -38,11 +35,12 @@ export default function MemberClassSignUp(){
         }
         fetchData();
     }, []);
+    
     return (
         <div>
-            {courses && (
+            {courses && courses.class_titles && (
                 <div className="flex justify-center">
-                <form className="w-96 bg-white shadow-md dark:border-gray-700 dark:bg-gray-500 rounded px-8 pt-6 pb-8 mb-4" onSubmit={submitSignUp}>
+                <form className="w-96 bg-white shadow-md dark:border-gray-700 dark:bg-gray-500 rounded px-8 pt-6 pb-8 mb-4" action={submitSignUp}>
                     <div className="mb-4">
                         <label htmlFor="classes_available" className="block text-gray-700 text-sm font-bold  dark:text-neutral-300 mb-2">Choose an option:</label>
                         <select id="classes_available" name="classes_available" className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">

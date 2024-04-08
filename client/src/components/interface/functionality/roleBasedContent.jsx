@@ -1,9 +1,9 @@
-import { useAuthContext } from "@/hooks/useAuthContext";
-import CoachCreateClass from './coachCreateClass';
-import MemberClassSignUp from './memberClassSignUp';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import ClassesAvailable from './classesAvailable';
-import MemberEnrolledClasses from './memberEnrolledClasses';
-import CoachUpcomingClasses from './coachUpcomingClasses';
+import MemberClassSignUp from './members/memberClassSignUp';
+import MemberEnrolledClasses from './members/memberEnrolledClasses';
+import CoachCreateClass from './coach/coachCreateClass';
+import CoachUpcomingClasses from './coach/coachUpcomingClasses';
 
 export default function Functionality() {
     const { role } = useAuthContext();

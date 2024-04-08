@@ -109,3 +109,22 @@ class UserView(APIView):
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=200)
+
+class ResetPasswordView(APIView):
+    def put(self, request):
+        email = request.data['email']
+        password = request.data['password']
+        confirm_password = request.data['confirmPassword']
+
+        if password != confirm_password:
+            raise AuthenticationFailed('Passwords do not match!')
+
+        user = User.objects.filter(email=email).first()
+
+        if user is None:
+            raise AuthenticationFailed('User not found!')
+
+        user.set_password(password)
+        user.save()
+
+        return Response({'message': 'Password reset successful!'}, status=200)

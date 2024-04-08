@@ -1,5 +1,5 @@
 'use client';
-import { RegisterUser } from '@/utils/userAuth/registerUser';
+import { RegisterUser } from '@/utils/services';
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useRouter } from 'next/navigation';
@@ -26,8 +26,8 @@ export default function RegisterPage() {
             toast.error("Please enter a valid first name, last name, email, date of birth, and password");
             return;
         } else if (!first || /\d/.test(first)) {
-                toast.error("Please enter a valid first name");
-                return;
+            toast.error("Please enter a valid first name");
+            return;
         } else if (!last || /\d/.test(last)) {
             toast.error("Please enter a valid last name");
             return;
@@ -54,9 +54,6 @@ export default function RegisterPage() {
             console.error('Error:', err);
         }
     };
-
-    // we will make a form that basically registers a new user into the database
-    // then we will redirect them to the login page with a message saying "successfully registered!"
 
     return (
         <div className={darkMode ? 'dark' : ''}>

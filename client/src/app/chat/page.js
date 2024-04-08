@@ -1,18 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useAuthContext } from "@/hooks/useAuthContext";
-import { useDarkMode } from "@/hooks/useDarkModeContext";
-import { convertTimestamp } from '@/utils/helpers/convertTime';
-import { UnAuthorized } from "@/components";
-import {
-    joinWebSocket,
-    listenSocket,
-    fetchChatHistory,
-    sendMessage
-} from '@/utils/socket/WebSocket';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { convertTimestamp } from '@/utils/helpers';
+import { UnAuthorized, Deactivated } from '@/components';
+import { joinWebSocket, listenSocket, fetchChatHistory, sendMessage } from '@/utils/socket';
 
 export default function Chat() {
-    const { authReady } = useAuthContext();
+    const { role, authReady, activated } = useAuthContext();
     const { darkMode } = useDarkMode();
     const [socket, setSocket] = useState(null);
     const [message, setMessage] = useState([]);
@@ -52,7 +47,7 @@ export default function Chat() {
         e.target.reset();
     };
 
-    if (authReady) {
+    if (authReady && activated) {
         return (
             <main className={darkMode ? 'dark' : ''}>
                 <div className="h-[92.5vh] flex flex-col items-center dark:bg-gray-900">
@@ -82,7 +77,9 @@ export default function Chat() {
                 </div>
             </main>
         );
-    } else {
+    } else if (role == 'member' && !activated) {
+        return <Deactivated />;
+    }else {
         return <UnAuthorized />;
     }
 } 
