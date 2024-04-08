@@ -20,7 +20,7 @@ export default function MemberEnrolledClasses() {
     return (
         <div>
             <h1 className="text-3xl font-bold mb-4">Your Enrolled Classes</h1>
-            {courses && courses.class_name && (
+            {courses && courses.class_name ? (
                 <div>
                     {courses.class_name.map((name, index) => (
                         <div key={index} className="bg-green-500 rounded-md p-4 mb-4">
