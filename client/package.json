@@ -21,7 +21,7 @@
     "react-use": "^17.5.0"
   },
   "devDependencies": {
-    "@types/node": "20.12.2",
+    "@types/node": "20.12.5",
     "@types/react": "18.2.73",
     "autoprefixer": "^10.4.19",
     "eslint": "^8",
