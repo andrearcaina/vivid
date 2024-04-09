@@ -51,7 +51,7 @@ export default function CalendarPage() {
                     ) : []}
                     startAccessor="start" 
                     endAccessor="end"
-                    defaultView='month'
+                    // defaultView='month'
                     />
                 </div>
             </div>
