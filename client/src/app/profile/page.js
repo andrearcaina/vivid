@@ -18,10 +18,10 @@ export default function Profile() {
                 <div className="grid grid-cols-5 min-h-[92.5vh] dark:bg-gray-900">
                     <div></div>
                     <div className="flex flex-col p-4">
-                        <section className="flex">
+                        <section className="flex justify-center">
                             <Image src="/images/profile_placeholder.webp" width={200} height={200} alt="Profile Picture" style={pfpStyle} />
                         </section>
-                        <section className="flex flex-row">
+                        <section className="flex flex-row justify-center">
                             <section className="dark:text-neutral-300 text-center mt-2">
                                 <p className="font-bold">{user.first_name} {user.last_name}</p>
                                 <p>{user.email}</p>
