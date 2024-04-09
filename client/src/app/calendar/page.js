@@ -1,11 +1,11 @@
 'use client';
+import { Calendar, momentLocalizer, } from 'react-big-calendar'
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { UnAuthorized, Deactivated } from '@/components';
 import { fetchMemberEnrolledClasses } from '@/utils/classes';
-import { Calendar, dayjsLocalizer, Toolbar } from 'react-big-calendar'
-import dayjs from 'dayjs'
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState, useEffect } from 'react';
 
 
@@ -13,7 +13,7 @@ export default function CalendarPage() {
     const { authReady, role, activated } = useAuthContext();
     const { darkMode } = useDarkMode();
     // constants needed for calendar
-    const localizer = dayjsLocalizer(dayjs)
+    const localizer = momentLocalizer(moment);
 
     // fetching all user's course data
     const [courses, setCourses] = useState();
