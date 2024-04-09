@@ -61,6 +61,10 @@ class LoginView(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password!')
 
+        # this payload is used to generate the JWT token and specifies the user's id,
+        # the expiration time of the token, and the time the token was issued
+        # this is for security purposes and to prevent unauthorized access to the user's account
+        # since the token expires after a certain time
         payload = {
             'id': user.id,
             'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=60),

@@ -26,6 +26,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_group_name = f'chat_{self.room_name}'
         headers = self.scope['headers']
 
+        # get the token from the headers
         for key, value in headers:
             if key == b'cookie':
                 self.token = value.decode().split('=')[1]

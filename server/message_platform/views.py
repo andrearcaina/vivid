@@ -4,15 +4,21 @@ from .models import Room, Message
 from user_auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from datetime import datetime
-import json
+from json import loads
 
 # the @csrf_exempt decorator is used to exempt the view from CSRF verification
+# this is mandatory for POST requests from external sources like the frontend
 @method_decorator(csrf_exempt, name="dispatch")
 class CreateRoom(View):
+    """
+        This class is used to create a new room.
+        It receives the room name in the request body
+        and checks if the room already exists in the database.
+        If the room does not exist, it creates a new room object.
+    """
     def post(self, request):
         # get the room name from the POST request
-        data = json.loads(request.body)
+        data = loads(request.body)
         room_name = data.get("room_name")
 
         # check if the room already exists
@@ -28,9 +34,11 @@ class CreateRoom(View):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class MessageView(View):
-    # get the messages in a room based on the room name provided
-    # this is to get all the messages in a room when a user joins the room
-    # so that they can see the chat history
+    """ 
+        get the messages in a room based on the room name provided
+        this is to get all the messages in a room when a user joins the room
+        so that they can see the chat history
+    """
     def get(self, request, room_name):
         room = Room.objects.get(room_name=room_name)
         messages = list(Message.objects.filter(room=room).values())

@@ -7,15 +7,15 @@ from user_auth.models import User
 import jwt
 import os
 
-# used for instructor to create classes, data is passed in the body of the request
-# {
-#     "class_title": "name",
-#     "instructor_name": "name",
-#     "class_datetime": "YYYY-MM-DDTHH:MM:SS"
-# }
 class CreateClass(APIView):
+    """
+    Used for instructors (coaches) to create classes.
+    """
     def post(self, request):
-        # request body take the user's id from the user and sends it as a json to this function
+        """
+        Handles the POST request to create a new class.
+        """
+        # Retrieve the user's token from the request cookies
         token = request.COOKIES.get('jwt')
 
         if not token:
@@ -26,31 +26,39 @@ class CreateClass(APIView):
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
 
+        # Check if the user's role is "coach"
         role = User.objects.get(id=payload['id']).role
 
-        if (role != "coach"):
-            return Response({"error": "role is not coach"}, status=404)
+        if role != "coach":
+            return Response({"error": "Role is not coach"}, status=404)
 
+        # Create a new instance of the classSerializer and validate the request data
         serializer = classSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=200)
-    
-# allows user to join the class, appending them to the participants list
-# must give body {'class_title': 'name of the class'}
-class JoinClass(APIView):
-    def put(self, request):
 
+        # Save the serialized data to create a new class
+        serializer.save()
+
+        return Response(serializer.data, status=200)
+
+class JoinClass(APIView):
+    """
+    Allows users to join a class by appending them to the participants list.
+    """
+    def put(self, request):
+        """
+        Handles the PUT request to join a class.
+        """
         class_title = request.data.get('class_title')
         print(classes_offered.objects.get(class_title=class_title))
 
-        # error checking if class name is correct for debugging
+        # Error checking if class name is correct for debugging
         try:
             class_name = classes_offered.objects.get(class_title=class_title)
         except classes_offered.DoesNotExist:
             return Response({'error': 'Class not found'}, status=404)
 
-        # request body take the user's id from the user and sends it as a json to this function
+        # Retrieve the user's token from the request cookies
         token = request.COOKIES.get('jwt')
 
         if not token:
@@ -63,7 +71,7 @@ class JoinClass(APIView):
 
         user_id = str(payload['id'])
 
-        # adding the user's id to the list of participants
+        # Adding the user's id to the list of participants
         if user_id in class_name.participants:
             return Response({'error': 'User is already enrolled'}, status=404)
 
@@ -72,10 +80,15 @@ class JoinClass(APIView):
 
         return Response({'message': 'Participant added successfully'}, status=200)
 
-# function for users to show which classes they're enrolled in
 class UserShowClasses(APIView):
+    """
+    Shows the classes that a user is enrolled in.
+    """
     def get(self, request):
-        # request body take the user's id from the user and sends it as a json to this function
+        """
+        Handles the GET request to show user's enrolled classes.
+        """
+        # Retrieve the user's token from the request cookies
         token = request.COOKIES.get('jwt')
 
         if not token:
@@ -86,43 +99,34 @@ class UserShowClasses(APIView):
         except jwt.ExpiredSignatureError:
             raise AuthenticationFailed('Unauthenticated!')
 
-        # getting user's id for showing their classes
+        # Getting user's id for showing their classes
         user_id = str(payload['id'])
 
         queryset = classes_offered.objects.filter(participants__contains=[user_id])
         serializer = classSerializer(queryset, many=True)
         serialized_data = serializer.data
 
-        # filtering through participants list to show class name, instructor name, and class datetime
+        # Filtering through participants list to show class name, instructor name, and class datetime
         enrolled_class_name = [i['class_title'] for i in serialized_data]
         enrolled_class_instructor = [i['instructor_name'] for i in serialized_data]
         enrolled_class_datetime = [i['class_datetime'] for i in serialized_data]
 
-        # displaying message to user if they have no classes enrolled
+        # Displaying message to user if they have no classes enrolled
         if len(enrolled_class_name) == 0:
             return Response({'error': 'You are currently not enrolled in any classes'})
 
-        # returned to the user in json format
-        # {
-        #     "class_name": [
-        #         "classname1",
-        #         "classname2"
-        #     ],
-        #     "instructor_name": [
-        #         "name1",
-        #         "name2"
-        #     ],
-        #     "class_datetime": [
-        #         "2024-04-03T09:10:00Z",
-        #         "2004-07-19T02:10:00Z"
-        #     ]
-        # }
+        # Returned to the user in JSON format
         return Response({'class_name': enrolled_class_name,'instructor_name': enrolled_class_instructor, 'class_datetime': enrolled_class_datetime}, status=200)
 
-# function to show all of the classes that the coach is instructing
 class ShowAllClassesCoach(APIView):
+    """
+    Shows all the classes that a coach is instructing.
+    """
     def get(self, request):
-        # request body take the user's id from the user and sends it as a json to this function
+        """
+        Handles the GET request to show coach's classes.
+        """
+        # Retrieve the user's token from the request cookies
         token = request.COOKIES.get('jwt')
 
         if not token:
@@ -134,9 +138,9 @@ class ShowAllClassesCoach(APIView):
             raise AuthenticationFailed('Unauthenticated!')
 
         data = User.objects.get(id=payload['id'])
-        full_name = data.first_name + " " + data.last_name # getting the user's full name to check for objects
+        full_name = data.first_name + " " + data.last_name # Getting the user's full name to check for objects
 
-        # serializing data into python dictionary
+        # Serializing data into python dictionary
         queryset = classes_offered.objects.filter(instructor_name=full_name)
         serializer = classSerializer(queryset, many=True)
         serialized_data = serializer.data
@@ -144,15 +148,20 @@ class ShowAllClassesCoach(APIView):
         teaching_class_titles = [i['class_title'] for i in serialized_data]
         teaching_datetimes = [i['class_datetime'] for i in serialized_data]
 
-        # displaying message to coach if they have no classes enrolled
+        # Displaying message to coach if they have no classes enrolled
         if len(teaching_class_titles) == 0:
             return Response({'error': 'You are currently not teaching any classes'})
-        
+
         return Response({'class_titles': teaching_class_titles, 'datetimes': teaching_datetimes}, status=200)
 
-# function for showing all classes available for enrollment for member
 class ShowAvailableClasses(APIView):
+    """
+    Shows all the classes available for enrollment.
+    """
     def get(self, request):
+        """
+        Handles the GET request to show available classes.
+        """
         queryset = classes_offered.objects.all()
 
         if not queryset:
@@ -166,31 +175,37 @@ class ShowAvailableClasses(APIView):
         datetimes = [item['class_datetime'] for item in serialized_data]
 
         return Response({"class_titles": class_titles, "instructors": instructors, "datetimes": datetimes}, status=200)
-    
-# function for deleting a class from coach dashboard
+
 class DeleteClass(APIView):
+    """
+    Deletes a class from the coach dashboard.
+    """
     def delete(self, request):
+        """
+        Handles the DELETE request to delete a class.
+        """
         class_title = request.data.get('class_title')
 
-        # error checking if class name is correct for debugging
+        # Error checking if class name is correct for debugging
         try:
             class_name = classes_offered.objects.get(class_title=class_title)
         except classes_offered.DoesNotExist:
             return Response({'error': 'Class not found'}, status=404)
-        
+
         class_name.delete()
-        return Response({'message': 'class successfully deleted'}, status=200)
-    
-# function to show all the members in a specific class
-# body:
-# {
-#     "class_title": "class title name" 
-# }
+        return Response({'message': 'Class successfully deleted'}, status=200)
+
 class ClassShowMembers(APIView):
+    """
+    Shows all the members in a specific class.
+    """
     def get(self, request):
+        """
+        Handles the GET request to show class members.
+        """
         class_title = request.data['class_title']
 
         selected_class = classes_offered.objects.get(class_title=class_title)
         list_of_participants = selected_class.participants
-        
+
         return Response({"message": list_of_participants}, status=200)

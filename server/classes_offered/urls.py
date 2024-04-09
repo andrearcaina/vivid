@@ -1,5 +1,13 @@
 from django.urls import path
-from .views import CreateClass, JoinClass, UserShowClasses, DeleteClass, ShowAllClassesCoach, ShowAvailableClasses, ClassShowMembers
+from .views import ( 
+    CreateClass, 
+    JoinClass, 
+    UserShowClasses, 
+    DeleteClass, 
+    ShowAllClassesCoach, 
+    ShowAvailableClasses, 
+    ClassShowMembers
+)
 
 urlpatterns = [
     path("createclass/", CreateClass.as_view(), name="createclass"),

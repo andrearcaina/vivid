@@ -9,6 +9,9 @@ import os
 password = str(os.environ.get("SECRET_KEY"))
 
 class MemberTestCase(TestCase):
+    """
+        Test case for the member user role.
+    """
     def setUp(self):
         self.client = APIClient()
         self.user_data = {
@@ -63,6 +66,9 @@ class MemberTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
 class TreasurerTestCase(TestCase):
+    """
+        Test case for the treasurer user role.
+    """
     def setUp(self):
         self.client = APIClient()
         self.user_data = {
@@ -113,6 +119,9 @@ class TreasurerTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 class CoachTestCase(TestCase):
+    """
+        Test case for the coach user role.
+    """
     def setUp(self):
         self.client = APIClient()
         self.user_data = {
