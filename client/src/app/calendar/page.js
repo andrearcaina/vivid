@@ -32,7 +32,7 @@ export default function CalendarPage() {
     // function to convert the courses json data to event format
     function dataToEvents() {
         const newEvents = courses.class_name.map((name, i) => ({
-            title: name + ": Instructor (" + courses.instructor_name + ")",
+            title: name + " - Instructor (" + courses.instructor_name[i] + ")",
             start: new Date(courses.class_datetime[i]),
             end: new Date(courses.class_datetime[i])
         }));
@@ -43,15 +43,15 @@ export default function CalendarPage() {
     if (authReady && activated) {
         return(
             <div className={darkMode ? 'dark' : ''}>
-                <div className="calendarPage dark:bg-gray-700 dark:text-white h-[92vh] flex items-center justify-center py-10">
-                    <Calendar
-                    localizer={localizer} 
-                    events={courses && courses.class_name ? (
-                        dataToEvents()
-                    ) : []}
-                    startAccessor="start" 
-                    endAccessor="end"
-                    // defaultView='month'
+                <div className="calendarPage dark:bg-gray-700 dark:text-white h-[92vh] flex items-center justify-center">
+                    <Calendar className="w-full p-10"
+                        localizer={localizer}
+                        events={courses && courses.class_name ? dataToEvents() : []}
+                        startAccessor="start"
+                        endAccessor="end"
+                        toolbar={true}
+                        views={['month', 'week', 'day', 'agenda']}
+                        onSelectEvent={event => alert(event.title)}
                     />
                 </div>
             </div>
