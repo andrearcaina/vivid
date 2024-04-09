@@ -8,7 +8,6 @@ import { UnAuthorized, Deactivated } from '@/components';
 import { fetchMemberEnrolledClasses } from '@/utils/classes';
 import { useState, useEffect } from 'react';
 
-
 export default function CalendarPage() {
     const { authReady, role, activated } = useAuthContext();
     const { darkMode } = useDarkMode();
