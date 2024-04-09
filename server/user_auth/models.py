@@ -1,7 +1,30 @@
-from django.contrib.auth.models import AbstractUser
+from typing import Any
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
-# Create your models here.
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **kwargs):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        
+        user = self.model(email=email, **kwargs)
+        user.set_password(password)
+        
+        user.first_name = kwargs.get('first_name')
+        user.last_name = kwargs.get('last_name')
+        user.date_of_birth = kwargs.get('date_of_birth')
+        user.role = kwargs.get('role')
+        
+        user.save(using=self._db)
+        
+        return user
+
+    def create_superuser(self, email, password=None, **kwargs):
+        kwargs.setdefault('is_staff', True)
+        kwargs.setdefault('is_superuser', True)
+        return self.create_user(email, password, **kwargs)
+
 class User(AbstractUser):
     # change table name on Supabase
     class Meta:
@@ -16,3 +39,5 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
