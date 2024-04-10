@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
 from .serializers import UserSerializer
 from member_logs.models import Member
+from finance_tracking.models import CoachFinances
 from .models import User
 import datetime
 import jwt
@@ -34,6 +35,14 @@ class RegisterView(APIView):
             )
             member.save()
         
+        if user.role == 'coach':
+            coach_finances = CoachFinances.objects.create(
+                user=user,
+                payment_balance=0,
+                number_classes_taught=0
+            )
+            coach_finances.save()
+
         return Response(serializer.data, status=200)
 
 # this is the login view
