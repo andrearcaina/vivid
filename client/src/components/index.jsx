@@ -9,3 +9,4 @@ export { default as Deactivated } from './general/authorization/deactivated';
 export { default as CustomDropdown } from './general/buttons/dropdownMenu';
 export { default as CustomButton } from './general/buttons/manageButton';
 export { default as PaymentChart } from './general/payment/histories';
+export { default as DataTableVisualization } from './general/tables/dataTable';

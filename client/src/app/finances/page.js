@@ -1,12 +1,9 @@
 'use client';
-import { UnAuthorized } from '@/components';
+import { UnAuthorized, PaymentChart, DataTableVisualization } from '@/components';
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useState, useEffect } from 'react';
-import { fetchMembers } from '@/utils/logs';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { PaymentChart } from '@/components';
+import { getMembers } from '@/utils/logs';
 
 export default function Finances() {
     const { authReady, role, activated } = useAuthContext();
@@ -14,13 +11,8 @@ export default function Finances() {
     const [members, setMembers] = useState([]);
     
     useEffect(() => {
-        getMembers();
+        getMembers(setMembers);
     }, []);
-
-    const getMembers = async () => {
-        const data = await fetchMembers();    
-        setMembers(data);
-    }; 
 
     if (authReady && activated && (role == "treasurer")) {
         return (
@@ -30,21 +22,11 @@ export default function Finances() {
                     <section className="grid grid-cols-1 md:grid-cols-2 gap-4 m-2">
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Member Payments</h1>
-                            <DataTable value={members.members} tableStyle={{ minWidth: '40rem' }}>
-                                <Column field="user.first_name" header="First Name" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                                <Column field="user.last_name" header="Last Name" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black',padding: '10px' }}></Column>
-                                <Column field="payment_status" header="Payment Status" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                                <Column field="advance_payments" header="Prepaid Fees" style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                            </DataTable>
+                            <DataTableVisualization data={members} view="payments" role={role} setMembers={setMembers} />
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Coach Salaries</h1>
-                            <DataTable value={members.members} tableStyle={{ minWidth: '40rem' }}>
-                                <Column field="user.first_name" header="First Name" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                                <Column field="user.last_name" header="Last Name" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black',padding: '10px' }}></Column>
-                                <Column field="payment_balance" header="Payment Balance" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                                <Column field="number_classes_taught" header="Classes Taught This Month" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                            </DataTable>
+                            <DataTableVisualization data={members} view="salaries" role={role} setMembers={setMembers} />
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Operational Costs</h1>

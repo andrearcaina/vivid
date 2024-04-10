@@ -86,3 +86,8 @@ export async function fetchMembers() {
         console.error(err);
     }
 }
+
+export const getMembers = async (setMembers) => {
+    const data = await fetchMembers();    
+    setMembers(data);
+};
