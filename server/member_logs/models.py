@@ -12,3 +12,4 @@ class Member(models.Model):
     payment_status = models.CharField(max_length=100)
     membership_approved = models.BooleanField(default=False)
     attendance_count = models.IntegerField(default=0)
+    prepaid_fees = models.IntegerField(default=0)

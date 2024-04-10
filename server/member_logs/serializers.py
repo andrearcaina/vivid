@@ -7,4 +7,11 @@ class MemberSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Member
-        fields = ['id', 'payment_status', 'membership_approved', 'attendance_count', 'user']
+        fields = [
+            'id', 
+            'payment_status', 
+            'membership_approved', 
+            'attendance_count', 
+            'prepaid_fees', 
+            'user'
+        ]

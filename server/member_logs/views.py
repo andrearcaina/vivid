@@ -70,7 +70,7 @@ class GetMembers(APIView):
             members = Member.objects.all().order_by('id')
             serializer = MemberSerializer(members, many=True)
             
-            return Response({'members': serializer.data})
+            return Response({'members': serializer.data}, status=200)
         else:
             return Response({'error': 'You are not authorized to view this information'}, status=401)
         
