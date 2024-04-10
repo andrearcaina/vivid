@@ -6,4 +6,4 @@ class CoachFinancesSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = CoachFinances
-        fields = ['payment_balance', 'number_classes_taught', 'user']
+        fields = ['payment_balance', 'number_classes_taught', 'last_payment_balance', 'user']
