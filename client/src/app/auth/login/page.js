@@ -3,6 +3,7 @@ import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import Image from 'next/image';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -37,22 +38,27 @@ export default function LoginPage() {
 
     return (
         <main className={darkMode ? 'dark' : ''}>
-            <div className="h-[80vh] flex flex-col items-center justify-center dark:bg-gray-900">
-                <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300">Login</h1>
-                
-                <form className="w-64" action={submitLogin}>
-                    <label className="block mb-2 dark:text-neutral-300">
-                        Email:
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="email" name="email" />
-                    </label>
+            <div className="lg:flex lg:flex-row">
+                <div className="h-[80.5vh] px-[5vw] flex flex-col items-center lg:items-start justify-center dark:bg-gray-900">
+                    <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300">Login</h1>
                     
-                    <label className="block mb-2 dark:text-neutral-300">
-                        Password:
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="password" name="password" />
-                    </label>
-                    
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
-                </form>
+                    <form className="w-64" action={submitLogin}>
+                        <label className="block mb-2 dark:text-neutral-300">
+                            Email:
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="email" name="email" />
+                        </label>
+                        
+                        <label className="block mb-2 dark:text-neutral-300">
+                            Password:
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="password" name="password" />
+                        </label>
+                        
+                        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
+                    </form>
+                </div>
+                <div className="lg:relative lg:w-[1500px] lg:h-[750px] lg:overflow-hidden">
+                    <Image className="hidden lg:flex" src="/images/vividloginbackground.jpg" alt="login image" layout="fill" objectFit="cover" />
+                </div>
             </div>
         </main>
     );
