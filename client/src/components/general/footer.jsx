@@ -7,7 +7,7 @@ export default function Footer() {
         <div className={darkMode ? 'dark' : ''}>
             <footer className="dark:bg-gray-800 flex flex-col text-sm justify-center">
                 <h3 className="dark:text-neutral-300 text-gray-400 mt-5 text-center">© 2024 Vivid | All Rights Reserved</h3>
-                <h4 className="dark:text-neutral-300 text-gray-400 text-center mb-5">Developed by: Andre Arcaina, Tristan Cheng, Jack Heintz, Joseph Leung, and Felipe Quiroga</h4>
+                <h4 className="dark:text-neutral-300 text-gray-400 text-center mb-5">Developed by: Andre Arcaina, Felipe Quiroga, Jack Heintz, Joseph Leung, and Tristan Cheng</h4>
             </footer>            
         </div>
     );
