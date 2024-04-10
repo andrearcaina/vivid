@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { fetchMembers } from '@/utils/logs';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import PaymentHistories from './payment_histories';
 
 export default function Finances() {
     const { authReady, role, activated } = useAuthContext();
@@ -41,17 +42,17 @@ export default function Finances() {
                             <DataTable value={members.members} tableStyle={{ minWidth: '40rem' }}>
                                 <Column field="user.first_name" header="First Name" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
                                 <Column field="user.last_name" header="Last Name" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black',padding: '10px' }}></Column>
-                                <Column field="has_been_paid" header="Paid This Month?" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
-                                <Column field="total_classes" header="Classes Taught This Month" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
+                                <Column field="payment_balance" header="Payment Balance" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
+                                <Column field="number_classes_taught" header="Classes Taught This Month" sortable style={{ border: darkMode ? '1px solid lightgray' : '1px solid black', padding: '10px' }}></Column>
                             </DataTable>
                         </div>
-                        <div className=' m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600'>
+                        <div className='m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600'>
                             <h1>Operational Costs</h1>
                             <p>Costs for this month. Includes rent/utilities and total coach salaries</p>
                         </div>
                         <div className='m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600'>
-                            <h1>Payment History</h1>
-                            <p>Record of old payments and debts</p>
+                            <h1>Payment Histories</h1>
+                            <PaymentHistories />
                         </div>
                     </section>
                 </div>
