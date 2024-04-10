@@ -40,7 +40,7 @@ export default function LoginPage() {
         <main className={darkMode ? 'dark' : ''}>
             <div className="lg:flex lg:flex-row">
                 <div className="h-[80.5vh] px-[5vw] flex flex-col items-center lg:items-start justify-center dark:bg-gray-900">
-                    <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300">Login</h1>
+                    <h1 className="text-3xl font-bold mb-4 dark:text-neutral-300 dark:bg-sky-500 bg-sky-300 rounded-lg p-1">Login</h1>
                     
                     <form className="w-64" action={submitLogin}>
                         <label className="block mb-2 dark:text-neutral-300">
@@ -53,7 +53,7 @@ export default function LoginPage() {
                             <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1 w-full" type="password" name="password" />
                         </label>
                         
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
+                        <button className="bg-sky-300 hover:bg-sky-500 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold py-2 px-4 rounded" type="submit">Login</button>
                     </form>
                 </div>
                 <div className="lg:relative lg:w-[1500px] lg:h-[750px] lg:overflow-hidden">

@@ -14,7 +14,7 @@ export const NavGeneral = ({ links }) => {
                         <Link href="/">
                             <p className="flex items-center space-x-2 text-black dark:text-neutral-300">
                                 <Image src="/images/icon.ico" alt="Logo" width={80} height={80} className="rounded-md logo-image" />
-                                <span className="font-semibold text-2xl lg:text-3xl">Vivid</span>
+                                <span className="font-semibold text-3xl">Vivid</span>
                             </p>
                         </Link>
                     </div>
