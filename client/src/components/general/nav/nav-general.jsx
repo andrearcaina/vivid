@@ -14,13 +14,13 @@ export const NavGeneral = ({ links }) => {
                         <Link href="/">
                             <p className="flex items-center space-x-2 text-black dark:text-neutral-300">
                                 <Image src="/images/icon.ico" alt="Logo" width={80} height={80} className="rounded-md logo-image" />
-                                <span className="font-semibold text-2xl lg:text-3xl">Vivid</span>
+                                <span className="font-semibold text-3xl">Vivid</span>
                             </p>
                         </Link>
                     </div>
                     
-                    <div className="hidden lg:flex lg:items-center lg:w-auto">
-                        <div className="flex flex-col lg:flex-row lg:space-x-4">
+                    <div className="hidden ml-[30vw] lg:flex lg:items-center lg:w-auto">
+                        <div className="flex flex-col lg:flex-row lg:space-x-8">
                             {links.map((navItem, index) => (
                                 <Link key={index} href={navItem.link}>
                                     <div className="text-black dark:text-neutral-300 text-xl hover:text-green-500 transition-colors duration-200">{navItem.text}</div>
