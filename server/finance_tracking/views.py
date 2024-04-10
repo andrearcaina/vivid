@@ -21,10 +21,12 @@ class ShowAllCoaches(APIView):
 
 # must input
 # {
-# id: 0
+# id: (COACH TABLE ROW ID)
 # }
 class ResetBalance(APIView):
     def put(self, request):
         id = request.data['id']
-        print(CoachFinances.objects.get(payment_balance==0))
-        return Response({"message": "worked"}, status=200)
+        coach = CoachFinances.objects.get(id=id)
+        coach.payment_balance = 0
+        coach.save()
+        return Response({"message": "Balance successfully set to 0"}, status=200)
