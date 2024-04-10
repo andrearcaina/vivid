@@ -19,8 +19,8 @@ export const NavGeneral = ({ links }) => {
                         </Link>
                     </div>
                     
-                    <div className="hidden lg:flex lg:items-center lg:w-auto">
-                        <div className="flex flex-col lg:flex-row lg:space-x-4">
+                    <div className="hidden ml-[30vw] lg:flex lg:items-center lg:w-auto">
+                        <div className="flex flex-col lg:flex-row lg:space-x-8">
                             {links.map((navItem, index) => (
                                 <Link key={index} href={navItem.link}>
                                     <div className="text-black dark:text-neutral-300 text-xl hover:text-green-500 transition-colors duration-200">{navItem.text}</div>
