@@ -1,8 +1,10 @@
 from django.db import models
 from user_auth.models import User
+from user_auth.serializers import UserSerializer
 
 # Create your models here.
 class CoachFinances(models.Model):
+    user = UserSerializer(read_only=True)
     class Meta:
         db_table = "coach_tracking"
 

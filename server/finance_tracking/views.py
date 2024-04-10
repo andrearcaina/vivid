@@ -8,6 +8,7 @@ import jwt
 import os
 
 # Create your views here.
+# endpoint for showing all coaches information
 class ShowAllCoaches(APIView):
     def get(self, request):
 
@@ -16,16 +17,14 @@ class ShowAllCoaches(APIView):
         serializer = CoachFinancesSerializer(queryset, many=True)
         serialized_data = serializer.data
 
-        # filtering just the coaches from User Auth DB table and getting their first and last names into a list
-        coach_ids = [i['user'] for i in serialized_data]
-        coach_filter = User.objects.filter(id__in=coach_ids)
-        coach_first_names = list(coach_filter.values_list('first_name', flat=True))
-        coach_last_names = list(coach_filter.values_list('last_name', flat=True))
+        return Response(serialized_data, status=200)
 
-        # setting coach salary data into return list
-        payment_balance_list = [i['payment_balance'] for i in serialized_data]
-        number_classes_taught_list = [i['number_classes_taught'] for i in serialized_data]
-
-        return Response({"first_name": coach_first_names, "last_name": coach_last_names, "payment_balance": payment_balance_list, "classes_taught": number_classes_taught_list}, status=200)
-    
-
+# must input
+# {
+# id: 0
+# }
+class ResetBalance(APIView):
+    def put(self, request):
+        id = request.data['id']
+        print(CoachFinances.objects.get(payment_balance==0))
+        return Response({"message": "worked"}, status=200)
