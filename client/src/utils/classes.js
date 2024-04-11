@@ -15,7 +15,7 @@ export async function fetchClassesOffered() {
 
 export async function fetchMemberEnrolledClasses() {
     try {
-        const res = await fetch('http://127.0.0.1:8000/classes-offered/usershowclasses/', {
+        const res = await fetch('http://127.0.0.1:8000/classes-offered/showuserclasses/', {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -68,7 +68,7 @@ export async function UserRegisterClass(courseName) {
 
 export async function getCoachClasses() {
     try {
-        const res = await fetch('http://127.0.0.1:8000/classes-offered/coachshowclasses/', {
+        const res = await fetch('http://127.0.0.1:8000/classes-offered/showcoachclasses/', {
             method: 'GET',
             credentials: 'include',
             headers: {

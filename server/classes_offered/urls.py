@@ -2,19 +2,19 @@ from django.urls import path
 from .views import ( 
     CreateClass, 
     JoinClass, 
-    UserShowClasses, 
+    ShowUserClasses, 
     DeleteClass, 
-    ShowAllClassesCoach, 
+    ShowAllCoachClasses, 
     ShowAvailableClasses, 
-    ClassShowMembers
+    ShowClassMembers
 )
 
 urlpatterns = [
     path("createclass/", CreateClass.as_view(), name="createclass"),
     path("joinclass/", JoinClass.as_view(), name="joinclass"),
-    path("usershowclasses/", UserShowClasses.as_view(), name="usershowclasses"),
     path("deleteclass/", DeleteClass.as_view(), name="deleteclass"),
-    path("coachshowclasses/", ShowAllClassesCoach.as_view(), name="coachshowclasses"),
+    path("showuserclasses/", ShowUserClasses.as_view(), name="showuserclasses"),
+    path("showcoachclasses/", ShowAllCoachClasses.as_view(), name="showcoachclasses"),
     path("showavailableclasses/", ShowAvailableClasses.as_view(), name="showavailableclasses"),
-    path("showmembersinclass/", ClassShowMembers.as_view(), name="showmembersinclass"),
+    path("showmembersinclass/", ShowClassMembers.as_view(), name="showmembersinclass"),
 ]

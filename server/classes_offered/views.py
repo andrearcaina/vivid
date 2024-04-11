@@ -90,7 +90,7 @@ class JoinClass(APIView):
 
         return Response({'message': 'Participant added successfully'}, status=200)
 
-class UserShowClasses(APIView):
+class ShowUserClasses(APIView):
     """
     Shows the classes that a user is enrolled in.
     """
@@ -128,7 +128,7 @@ class UserShowClasses(APIView):
         # Returned to the user in JSON format
         return Response({'class_name': enrolled_class_name, 'instructor_name': enrolled_class_instructor, 'class_datetime': enrolled_class_datetime}, status=200)
 
-class ShowAllClassesCoach(APIView):
+class ShowAllCoachClasses(APIView):
     """
     Shows all the classes that a coach is instructing.
     """
@@ -223,7 +223,7 @@ class DeleteClass(APIView):
         class_name.delete()
         return Response({'message': 'Class successfully deleted'}, status=200)
 
-class ClassShowMembers(APIView):
+class ShowClassMembers(APIView):
     """
     Shows all the members in a specific class.
     """
