@@ -231,7 +231,8 @@ class ShowClassMembers(APIView):
         """
         Handles the GET request to show class members.
         """
-        class_title = request.data['class_title']
+        # query param
+        class_title = request.GET.get('class_title')
 
         selected_class = classes_offered.objects.get(class_title=class_title)
         list_of_participants = selected_class.participants
