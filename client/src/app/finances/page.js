@@ -3,15 +3,17 @@ import { UnAuthorized, PaymentChart, DataTableVisualization } from '@/components
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useState, useEffect } from 'react';
-import { getMembers } from '@/utils/logs';
+import { getCoaches, getMembers } from '@/utils/logs';
 
 export default function Finances() {
     const { authReady, role, activated } = useAuthContext();
     const { darkMode } = useDarkMode();
     const [members, setMembers] = useState([]);
-    
+    const [coaches, setCoaches] = useState([]);
+
     useEffect(() => {
         getMembers(setMembers);
+        getCoaches(setCoaches);
     }, []);
 
     if (authReady && activated && (role == "treasurer")) {
@@ -26,7 +28,7 @@ export default function Finances() {
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Coach Salaries</h1>
-                            <DataTableVisualization data={members} view="salaries" role={role} setMembers={setMembers} />
+                            <DataTableVisualization data={coaches} view="salaries" role={role} setMembers={setCoaches} />
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Operational Costs</h1>

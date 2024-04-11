@@ -4,9 +4,19 @@ import MemberClassSignUp from './members/memberClassSignUp';
 import MemberEnrolledClasses from './members/memberEnrolledClasses';
 import CoachCreateClass from './coach/coachCreateClass';
 import CoachUpcomingClasses from './coach/coachUpcomingClasses';
+import { getLastPayment } from '@/utils/logs';
+import { PaymentChart } from '@/components';
+import { useState, useEffect } from 'react';
 
 export default function Functionality() {
     const { role } = useAuthContext();
+    const [coachPayment, setCoachPayment] = useState([]);
+
+    useEffect(() => {
+        if (role === 'coach') {
+            getLastPayment(setCoachPayment);
+        }
+    }, [role]);
 
     const RoleBasedClasses = (role) => {
         return (
@@ -24,7 +34,12 @@ export default function Functionality() {
                 
                 <div className="rounded-md overflow-hidden shadow-md ml-4 mr-2 bg-white p-4 dark:bg-gray-600 text-center">
                     <h2 className="text-xl font-bold mb-2">Schedule a Class</h2>
-                    <CoachCreateClass/>
+                    <CoachCreateClass />
+                    <div>
+                        <h1 className="text-center">
+                            Last Month Payment: $ {coachPayment.last_payment_balance}
+                        </h1>
+                    </div>
                 </div>
             </>
         )
@@ -34,8 +49,8 @@ export default function Functionality() {
                 {RoleBasedClasses(role)}
                     
                 <div className="rounded-md overflow-hidden shadow-md ml-4 mr-2 bg-white p-4 dark:bg-gray-600">
-                    <h2 className="underline dark:text-neutral-300">Finances</h2>
-                    <p className="dark:text-neutral-300">money stuffs</p>
+                    <h1>Payment Histories</h1>
+                    <PaymentChart />
                 </div>
             </>
         )

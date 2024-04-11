@@ -42,7 +42,8 @@ export default function CalendarPage() {
     if (authReady && activated) {
         return(
             <div className={darkMode ? 'dark' : ''}>
-                <div className="dark:bg-gray-700 dark:text-white h-[92vh] flex items-center justify-center">
+                <div className="dark:bg-gray-700 dark:text-white h-[92vh] flex flex-col items-center justify-center">
+                    {role !== "treasurer" ? <h1 className="dark:bg-gray-700 dark:text-white mt-5 text-2xl text-center">Your Upcoming Classes</h1> : <h1 className="dark:bg-gray-700 dark:text-white mt-5 text-2xl text-center">Club Calendar</h1> }
                     <Calendar className="w-full p-10"
                         localizer={localizer}
                         events={courses && courses.class_name ? dataToEvents() : []}
