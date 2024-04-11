@@ -49,7 +49,7 @@ export default function Announcements() {
         return (
             <div className="flex-grow overflow-y-scroll border border-gray-300 dark:bg-gray-900 dark:border-w rounded-md w-3/4">
                 <div className="flex flex-col-reverse">
-                    {message && message.map((msg, index) => (
+                    {message?.map((msg, index) => (
                         <div key={index} className="flex flex-col">
                             <p className="text-gray-500 dark:text-neutral-300 text-center mb-1">{convertTimestamp(msg.timestamp)}</p>
                             <p className="text-black font-bold text-xl dark:text-neutral-300 text-center mb-1">{msg.title}</p> 

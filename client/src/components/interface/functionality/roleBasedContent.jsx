@@ -46,7 +46,6 @@ export default function Functionality() {
                     
                 <div className="rounded-md overflow-hidden shadow-md mb-4 ml-4 mr-2 bg-white p-4 dark:bg-gray-600 text-center">
                     <h2 className="text-xl font-bold mb-2">Sign up to Upcoming Classes</h2>
-                    {/*Remember to add onSubmit={submitSignUp} when backend is working */}
                     <MemberClassSignUp/>
                 </div>
             </>

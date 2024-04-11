@@ -1,47 +1,40 @@
 import { fetchClassesOffered } from '@/utils/classes';
-import { useEffect, useState} from 'react';
 import { convertTimestamp } from '@/utils/helpers';
 import { useAuthContext } from '@/hooks/useAuthContext';
+import { useEffect, useState} from 'react';
 
 export default function CoachUpcomingClasses(){
     const [courses, setCourses] = useState();
     const { user } = useAuthContext();  
-
-    let instructorName;
-    if (user) {
-        instructorName =  user.first_name + " " + user.last_name;
-    }
+    const instructorName =  user ? user.first_name + " " + user.last_name : null;
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await fetchClassesOffered();
-                setCourses(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            const data = await fetchClassesOffered();
+            setCourses(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div>
             <h1 className="text-3xl font-bold mb-4">Your Upcoming Classes</h1>
-            {courses && courses.class_titles ? (
+            {courses && courses.class_name ? (
                 <div>
-                    {courses.class_titles.map((title, index) => {
-                        // Check if instructorName matches the instructor for the current course
-                        if (instructorName === courses.instructors[index]) {
+                    {courses?.class_name?.map((title, index) => {
+                        if (instructorName === courses.instructor_name[index]) {
                             return (
                                 <div key={index} className="bg-green-500 rounded-md p-4 mb-4">
                                     <h2 className="text-xl font-bold mb-2">{title}</h2>
-                                    <p className="mb-1">Instructor: {courses.instructors[index]}</p>
-                                    <p className="mb-1">{convertTimestamp(courses.datetimes[index])}</p>
+                                    <p className="mb-1">Instructor: {courses.instructor_name[index]}</p>
+                                    <p className="mb-1">{convertTimestamp(courses.class_datetime[index])}</p>
                                 </div>
                             );
-                        } else {
-                            // Render nothing if the instructorName doesn't match
-                            return null;
                         }
                     })}
                 </div>

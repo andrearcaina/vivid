@@ -4,6 +4,8 @@ from rest_framework.exceptions import AuthenticationFailed
 from .serializers import classSerializer
 from .models import classes_offered
 from user_auth.models import User
+from django.utils import timezone
+from datetime import datetime
 import jwt
 import os
 
@@ -32,8 +34,16 @@ class CreateClass(APIView):
         if role != "coach":
             return Response({"error": "Role is not coach"}, status=404)
 
+        body = request.data
+
+        # Check if the class date and time is in the future
+        class_datetime = datetime.strptime(body['class_datetime'], '%Y-%m-%dT%H:%M')
+        
+        if class_datetime < datetime.now():
+            return Response({'error': 'Class date and time cannot be in the past'}, status=404)
+
         # Create a new instance of the classSerializer and validate the request data
-        serializer = classSerializer(data=request.data)
+        serializer = classSerializer(data=body)
         serializer.is_valid(raise_exception=True)
 
         # Save the serialized data to create a new class
@@ -116,7 +126,7 @@ class UserShowClasses(APIView):
             return Response({'error': 'You are currently not enrolled in any classes'})
 
         # Returned to the user in JSON format
-        return Response({'class_name': enrolled_class_name,'instructor_name': enrolled_class_instructor, 'class_datetime': enrolled_class_datetime}, status=200)
+        return Response({'class_name': enrolled_class_name, 'instructor_name': enrolled_class_instructor, 'class_datetime': enrolled_class_datetime}, status=200)
 
 class ShowAllClassesCoach(APIView):
     """
@@ -152,7 +162,7 @@ class ShowAllClassesCoach(APIView):
         if len(teaching_class_titles) == 0:
             return Response({'error': 'You are currently not teaching any classes'})
 
-        return Response({'class_titles': teaching_class_titles, 'datetimes': teaching_datetimes}, status=200)
+        return Response({'class_name': teaching_class_titles, "instructor_name": full_name, 'class_datetime': teaching_datetimes}, status=200)
 
 class ShowAvailableClasses(APIView):
     """
@@ -162,10 +172,28 @@ class ShowAvailableClasses(APIView):
         """
         Handles the GET request to show available classes.
         """
+        # Retrieve the user's token from the request cookies
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+
+        try:
+            payload = jwt.decode(token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Unauthenticated!')
+        
+        if not payload:
+            return Response({"error": "User not found"}, status=404)
+
         queryset = classes_offered.objects.all()
 
         if not queryset:
             return Response({"error": "There are no classes available for enrollment!"}, status=404)
+
+        for item in queryset:
+            if item.class_datetime < timezone.now():
+                queryset = queryset.exclude(class_title=item.class_title)
 
         serializer = classSerializer(queryset, many=True)
         serialized_data = serializer.data
@@ -174,7 +202,7 @@ class ShowAvailableClasses(APIView):
         instructors = [item['instructor_name'] for item in serialized_data]
         datetimes = [item['class_datetime'] for item in serialized_data]
 
-        return Response({"class_titles": class_titles, "instructors": instructors, "datetimes": datetimes}, status=200)
+        return Response({"class_name": class_titles, "instructor_name": instructors, "class_datetime": datetimes}, status=200)
 
 class DeleteClass(APIView):
     """

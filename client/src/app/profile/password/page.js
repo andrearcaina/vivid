@@ -2,12 +2,8 @@
 import { UnAuthorized } from "@/components";
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { useDarkMode } from "@/hooks/useDarkModeContext";
-<<<<<<< HEAD
 import { createNewPassword } from "@/utils/settings";
 import { toast } from 'react-hot-toast';
-=======
-import { createNewPassword } from "@/utils/settings/createNewPassword";
->>>>>>> 6d32ef75572c20abe207e3eab4746bbff0bf0c54
 
 export default function Password() {
     const { logout, authReady } = useAuthContext();

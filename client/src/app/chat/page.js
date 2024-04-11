@@ -53,7 +53,7 @@ export default function Chat() {
                 <div className="h-[92.5vh] flex flex-col items-center dark:bg-gray-900">
                     <div className="flex-grow overflow-y-scroll border border-gray-300 dark:border-w rounded-md p-2 mt-[5rem] mb-[3rem] w-3/4">
                         <div className="flex flex-col-reverse">
-                            {message && [...message].reverse().map((msg, index) => (
+                            {[...message]?.reverse().map((msg, index) => (
                                 <div key={index} className="flex flex-col">
                                     <p className="text-gray-500 dark:text-neutral-300 justify-end mb-1">{convertTimestamp(msg.timestamp)}</p>
                                     <p className="text-black dark:text-neutral-300 justify-end mb-3">{msg.first_name} {msg.last_name}: {msg.content}</p>

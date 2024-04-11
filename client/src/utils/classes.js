@@ -30,7 +30,6 @@ export async function fetchMemberEnrolledClasses() {
 
 export async function RegisterClass(courseName, instructor, date) {
     try {
-        // Need to add proper routing for the API
         const res = await fetch('http://127.0.0.1:8000/classes-offered/createclass/', {
             method: 'POST',
             credentials: 'include',
@@ -51,7 +50,6 @@ export async function RegisterClass(courseName, instructor, date) {
 
 export async function UserRegisterClass(courseName) {
     try {
-        // Need to add proper routing for the API
         const res = await fetch('http://127.0.0.1:8000/classes-offered/joinclass/', {
             method: 'PUT',
             credentials: 'include',
@@ -61,6 +59,21 @@ export async function UserRegisterClass(courseName) {
             body: JSON.stringify({
                 class_title: courseName
             }),
+        });
+        return await res.json();
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function getCoachClasses() {
+    try {
+        const res = await fetch('http://127.0.0.1:8000/classes-offered/coachshowclasses/', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
         return await res.json();
     } catch (err) {

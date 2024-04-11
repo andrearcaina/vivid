@@ -1,6 +1,6 @@
 import { useDarkMode } from '@/hooks/useDarkModeContext';
-import { RegisterClass } from '@/utils/classes';
 import { useAuthContext } from '@/hooks/useAuthContext';
+import { RegisterClass } from '@/utils/classes';
 import { toast } from 'react-hot-toast';
 
 export default function CoachCreateClass() {
@@ -9,16 +9,11 @@ export default function CoachCreateClass() {
 
     const submitRegister = async (formData) => {
         const courseName = formData.get('courseName');
-
-        let instructorName;
-        if (user) {
-            instructorName =  user.first_name + " " + user.last_name;
-            
-        }
         const date = formData.get('dateClass');
-
+        const instructor = user ? user.first_name + " " + user.last_name : null;
+        
         try {
-            const data = await RegisterClass(courseName, instructorName, date);
+            const data = await RegisterClass(courseName, instructor, date);
             if (data.id) {
                 toast.success('Successfully created class!');
             } else {
@@ -35,17 +30,13 @@ export default function CoachCreateClass() {
                     Class Name:
                     <input id="courseName" className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 text-gray-800 dark:text-white rounded-md px-2 py-1 w-full focus:outline-none focus:border-blue-500" type="text" name="courseName" />
                 </label>
-                                            
                 <label htmlFor="dateClass" className="block text-gray-700 text-sm font-bold mb- dark:text-neutral-300">
                     Date of Class:
                     <input id="dateClass" className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 text-gray-800 dark:text-white rounded-md px-2 py-1 w-full focus:outline-none focus:border-blue-500" type="datetime-local" name="dateClass" />
                 </label>
-                <br/>                            
+                <br />
                 <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full" type="submit">Register</button>
             </form>
         </div>
- 
-
-
-    )
+    );
 }
