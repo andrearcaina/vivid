@@ -42,6 +42,73 @@ server/
 └── .env                           # environment variables and config settings for database
 └── .env.example                   # environment variable example file
 └── .gitignore                     # ignore python files
+└── README.md                      # this README file
 └── manage.py                      # the main application entry point
 └── requirements.txt               # the dependencies associated with our application
 ```
+
+# Data Models
+
+## User
+| Field         | Type        | Description                              |
+|---------------|-------------|------------------------------------------|
+| ID            | int8        | The primary key (auto-incremented).      |
+| first_name    | varchar     | First name of user.                      |
+| last_name     | varchar     | Last name of user.                       |
+| is_active     | bool        | User activity (on the application).      |
+| date_joined   | timestamptz | When the user joined the application.    |
+| email         | varchar     | Unique email address for the user.       |
+| password      | varchar     | Hashed password for the user's account.  |
+| role          | varchar     | Role of the user.                        |
+| date_of_birth | date        | The date of birth of the user.           |
+
+## Member Logs
+| Field                | Type     | Description                                |
+|----------------------|----------|--------------------------------------------|
+| ID                   | int8     | The primary key (auto-incremented).        |
+| payment_status       | varchar  | Payment status of the member.              |
+| membership_approved  | bool     | If the member is approved.                 |
+| attendance_count     | int4     | How many classes the member has went to.   |
+| user_id              | int8     | The Member ID that relates to User model.  |
+| prepaid_fees         | int4     | How many fees the member has already paid. |
+
+## Coach Tracking
+| Field                   | Type     | Description                                |
+|-------------------------|----------|--------------------------------------------|
+| ID                      | int8     | The primary key (auto-incremented).        |
+| payment_balance         | int4     | Payment status of the member.              |
+| numbers_classes_taught  | int4     | If the member is approved.                 |
+| user_id                 | int8     | The Coach ID that relates to User model.   |
+| last_payment_balance    | int4     | The salary from last month.                |
+
+## Classes Offered
+| Field            | Type         | Description                                |
+|------------------|--------------|--------------------------------------------|
+| ID               | int8         | The primary key (auto-incremented).        |
+| class_title      | varchar      | The title of the class.                    |
+| instructor_name  | varchar      | The coach full name.                       |
+| class_datetime   | timestamptz  | When the class is held.                    |
+| participants     | varchar[]    | The members in the class.                  |
+
+## Rooms
+| Field            | Type         | Description                                |
+|------------------|--------------|--------------------------------------------|
+| ID               | int8         | The primary key (auto-incremented).        |
+| room_name        | varchar      | The room name for chatting.                |
+
+## Room Users
+| Field      | Type  | Description                         |
+|------------|-------|-------------------------------------|
+| ID         | int8  | The primary key (auto-incremented). |
+| room_name  | int8  | The room name for chatting.         |
+| user_id    | int8  | The User ID in the room ID.         |
+
+## Messages
+| Field          | Type        | Description                         |
+|----------------|-------------|-------------------------------------|
+| ID             | int8        | The primary key (auto-incremented). |
+| room_name      | int8        | The room name for chatting.         |
+| user_id        | int8        | The User ID in the room ID.         |
+| content        | text        | The content/message description.    |
+| class_datetime | timestamptz | The time stamp of the message.      |
+| title          | text        | The content/message title.          |
