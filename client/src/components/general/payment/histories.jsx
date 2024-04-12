@@ -1,13 +1,15 @@
 import "chart.js/auto";
 import { Bar } from 'react-chartjs-2';
 
-export default function PaymentChart() {
+export default function PaymentChart({ props }) {
+    const { label, money } = props;
+
     const data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
         datasets: [
             {
-                label: 'Total debts for each month',
-                data: [150, 140, 90, 120, 50, 20, 0, 0, 0],
+                label: label,
+                data: money,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.9)',
                 ],

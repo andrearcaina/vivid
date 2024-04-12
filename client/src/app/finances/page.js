@@ -33,10 +33,11 @@ export default function Finances() {
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Operational Costs</h1>
                             <p>Costs for this month. Includes rent/utilities and total coach salaries</p>
+                            <PaymentChart label={'Total revenue per month'} data={[1550, 1730, 1690, 820, 600, 510, 700, 950, 1230]} />
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Payment Histories</h1>
-                            <PaymentChart />
+                            <PaymentChart label={'Total debts per month'} data={[20, 0, 90, 120, 150, 120, 130, 50, 80]} />
                         </div>
                     </section>
                 </div>
