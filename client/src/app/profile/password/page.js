@@ -11,7 +11,7 @@ export default function Password() {
 
     const submitNewPassword = async (formData) => {
         const oldPassword = formData.get('oldPassword');
-        const newPassword = formData.get('oldPassword');
+        const newPassword = formData.get('newPassword');
         const checkNewPassword = formData.get('checkNewPassword');
         
         if (!oldPassword && !newPassword && !checkNewPassword) {
@@ -55,23 +55,23 @@ export default function Password() {
                     <section>
                         <h1 className="dark:text-neutral-300 text-3xl">Change Password</h1>
                     </section>
-                    <form onSubmit={submitNewPassword}>
-                    <label className="block mb-2 mt-4 dark:text-neutral-300">
-                        Current Password:
-                        <br />
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type='password' name='oldPassword' />
-                    </label>
-                    <label className="block mb-2 mt-4 dark:text-neutral-300">
-                        New Password:
-                        <br />
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="password" name="newPassword" />
-                    </label>
-                    <label className="block mb-2 dark:text-neutral-300">
-                        Confirm New Password:
-                        <br />
-                        <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="password" name="checkNewPassword" />
-                    </label>
-                    <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Update</button>
+                    <form action={submitNewPassword}>
+                        <label className="block mb-2 mt-4 dark:text-neutral-300">
+                            Current Password:
+                            <br />
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type='password' name="oldPassword" />
+                        </label>
+                        <label className="block mb-2 mt-4 dark:text-neutral-300">
+                            New Password:
+                            <br />
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="password" name="newPassword" />
+                        </label>
+                        <label className="block mb-2 dark:text-neutral-300">
+                            Confirm New Password:
+                            <br />
+                            <input className="border border-gray-300 dark:border-gray-700 dark:bg-gray-500 rounded-md px-2 py-1" type="password" name="checkNewPassword" />
+                        </label>
+                        <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">Update</button>
                     </form>
                 </div>
             </main>
