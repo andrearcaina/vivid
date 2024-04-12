@@ -21,7 +21,7 @@ export const LogoutButton = () => {
     return (
         <main>
             {showModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="z-[99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="text-black bg-white p-4 rounded-md">
                         <div>Are you sure you want to logout?</div>
                         

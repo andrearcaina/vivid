@@ -49,8 +49,8 @@ export default function Functionality() {
                 {RoleBasedClasses(role)}
                     
                 <div className="rounded-md overflow-hidden shadow-md ml-4 mr-2 bg-white p-4 dark:bg-gray-600">
-                    <h1>Payment Histories</h1>
-                    <PaymentChart />
+                    <h1>Monthly Expenses</h1>
+                    <PaymentChart label={'Total expenses per month'} money={[1530, 1730, 1600]} color={'rgba(255, 99, 132, 0.9)'} />
                 </div>
             </>
         )

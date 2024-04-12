@@ -31,13 +31,12 @@ export default function Finances() {
                             <DataTableVisualization data={coaches} view="salaries" role={role} setMembers={setCoaches} />
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
-                            <h1>Operational Costs</h1>
-                            <p>Costs for this month. Includes rent/utilities and total coach salaries</p>
-                            <PaymentChart label={'Total revenue per month'} data={[1550, 1730, 1690, 820, 600, 510, 700, 950, 1230]} />
+                            <h1>Revenue Histories</h1>
+                            <PaymentChart label={'Total revenue per month'} money={[1550, 1730, 1690]} color={'rgba(99, 255, 132, 0.9)'} />
                         </div>
                         <div className="m-2 w-full rounded-md overflow-hidden shadow-md bg-white p-4 dark:bg-gray-600">
                             <h1>Payment Histories</h1>
-                            <PaymentChart label={'Total debts per month'} data={[20, 0, 90, 120, 150, 120, 130, 50, 80]} />
+                            <PaymentChart label={'Total debts per month'} money={[20, 0, 90]} color={'rgba(255, 99, 132, 0.9)'} />
                         </div>
                     </section>
                 </div>

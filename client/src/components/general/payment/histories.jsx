@@ -1,8 +1,8 @@
 import "chart.js/auto";
 import { Bar } from 'react-chartjs-2';
 
-export default function PaymentChart({ props }) {
-    const { label, money } = props;
+export default function PaymentChart({ ...props }) {
+    const { label, money, color } = props;
 
     const data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
@@ -10,12 +10,8 @@ export default function PaymentChart({ props }) {
             {
                 label: label,
                 data: money,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.9)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
+                backgroundColor: color,
+                borderColor: color,
                 borderWidth: 1,
             },
         ],
