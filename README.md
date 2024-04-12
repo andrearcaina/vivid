@@ -136,4 +136,14 @@ $ npm install # using npm
 $ bun install # using bun
 $ pnpm install # using pnpm
 $ yarn install # using yarn
+
+# run the development server and go to localhost:3000
+$ npm run dev
+$ bun run dev
+$ pnpm run dev
+$ yarn run dev
+
+# run the server
+$ cd ../server
+$ python manage.py runserver
 ```
