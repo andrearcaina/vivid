@@ -46,46 +46,46 @@ With Django Channels, we establish persistent connections between the client and
 
 ## Functionality
 1. **`User Authentication`**:
-   - Members can register accounts and log in securely to access the application.
-   - Passwords are securely hashed and stored in the database.
-   - Administrators can manage member accounts, including resetting passwords and deactivating accounts if necessary.
+   - [x] Members can register accounts and log in securely to access the application.
+   - [x] Passwords are securely hashed and stored in the database.
+   - [x] Administrators can manage member accounts, including resetting passwords and deactivating accounts if necessary.
 
 2. **`Messaging Platform`**:
-   - All members and administrators have access to a messaging platform within the application.
-   - Administrators, notably the coaches and the treasurer, can broadcast annoucements to all members.
-     - Administrators can send and receive messages.
-   - Members can send and receive messages, and access announcements from coaches.
+   - [x] All members and administrators have access to a messaging platform within the application.
+   - [x] Administrators, notably the coaches, can broadcast annoucements to all members.
+     - [x] Administrators can send and receive messages.
+   - [x] Members can send and receive messages, and access announcements from coaches.
 
 4. **`Expense Tracking Panel`**:
-   - Administrators, particularly the treasurer, have access to an expense tracking panel.
-   - Expenses incurred by the club, such as rent for the meeting hall, coach salaries, and other operational costs, can be recorded and tracked.
-   - The panel includes a log of any unpaid debts from previous months, including instances where the rent for the hall was not paid in full or not paid at all, as well as any unpaid coach expenses.
-     - The treasurer can review and prioritize outstanding debts, follow up with relevant parties, and take necessary actions to settle outstanding balances.
-   - Historical data on unpaid debts allows the treasurer to identify trends, assess financial risks, and implement strategies to improve financial management and accountability within the club.
-   - The panel also provides information on the current month’s account payables, including members who have paid in advance. This allows the treasurer to maintain accurate records of prepaid fees, track membership dues, and ensure timely invoicing and collection processes.
-   - The treasurer has access to managing the coaches salary in this panel.
+   - [x] Administrators, particularly the treasurer, have access to an expense tracking panel.
+   - [x] Expenses incurred by the club, such as rent for the meeting hall, coach salaries, and other operational costs, can be recorded and tracked.
+   - [x] The panel includes a log of any unpaid debts from previous months, including instances where the rent for the hall was not paid in full or not paid at all, as well as any unpaid coach expenses.
+     - [x] The treasurer can review and prioritize outstanding debts, follow up with relevant parties, and take necessary actions to settle outstanding balances.
+   - [ ] Historical data on unpaid debts allows the treasurer to identify trends, assess financial risks, and implement strategies to improve financial management and accountability within the club.
+   - [ ] The panel also provides information on the current month’s account payables, including members who have paid in advance. This allows the treasurer to maintain accurate records of prepaid fees, track membership dues, and ensure timely invoicing and collection processes.
+   - [x] The treasurer has access to managing the coaches salary in this panel.
 
 5. **`Membership Management System`**:
-   - Administrators, including the treasurer and coaches, have tools to manage club memberships.
-   - New members can register and apply for membership through the application.
-   - Coaches can approve (add) or reject (remove) membership applications, and manage membership statuses.
-   - Membership dues, costs and fees can be collected securely through the application. 
-   - Coaches can communicate with members regarding membership-related matters, such as costs, sessions, and events.
-   - Both the treasurer and coaches can sort the membership list by attendance, and number of unpaid/paid times.
-     - Give a discount for members higher on the database, and a charge for those on the bottom.
+   - [x] Administrators, including the treasurer and coaches, have tools to manage club memberships.
+   - [x] New members can register and apply for membership through the application.
+   - [x] Coaches can approve (add) or reject (remove) membership applications, and manage membership statuses.
+   - [ ] Membership dues, costs and fees can be collected securely through the application. 
+   - [x] Coaches can communicate with members regarding membership-related matters, such as costs, sessions, and events.
+   - [x] Both the treasurer and coaches can sort the membership list by attendance, and number of unpaid/paid times.
+     - [ ] Give a discount for members higher on the database, and a charge for those on the bottom.
 
 6. **`Member Scheduling System`**:
-   - Members can schedule an existing practice session and quickly pay on the application.
-   - Members can update their profiles as well.
+   - [x] Members can schedule an existing practice session and quickly pay on the application.
+   - [ ] Members can update their profiles as well.
 
 7. **`Coach Management System`**:
-   - Administrators, particularly the treasurer, have tools to manage coach lists.
-   - This ties to #3: **`Expense Tracking Panel`**.
+   - [x] Administrators, particularly the treasurer, have tools to manage coach lists.
+   - [x] This ties to #3: **`Expense Tracking Panel`**.
 
 8. **`Coach Scheduling System`**:
-   - Coaches have a dedicated section where they can manage their schedules, availability, and coaching sessions.
-   - Coaches can mark their availability for practice sessions, update their profiles, and communicate with club members.
-   - Administrators have oversight of coach activities, including scheduling, attendance, and performance evaluations.
+   - [x] Coaches have a section to create new classes and manage their sessions.
+   - [ ] Coaches can mark their availability for practice sessions.
+   - [ ] Administrators have oversight of coach activities, including scheduling, attendance, and performance evaluations.
 
 <hr>
 
@@ -93,9 +93,9 @@ With Django Channels, we establish persistent connections between the client and
 Our plan for testing if our system and our implementation works will consist of 5 different types of tests:
 1. User Authentication
 3. Finance Tracking
-5. Membership Logging
-6. Message Platform
-7. Database Tracking
+4. Membership Logging
+5. Message Platform
+6. Database Tracking
 
 These tests will ensure that our product in mind is to the client's expectation.
 
