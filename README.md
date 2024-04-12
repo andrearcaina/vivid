@@ -42,6 +42,8 @@ Built on a RESTful API architecture, Vivid leverages HTTP methods such as POST, 
 Our application also utilizes Django Channels to implement WebSockets, enabling real-time chat functionality seamlessly integrated into the user experience. 
 With Django Channels, we establish persistent connections between the client and the server, allowing bidirectional communication without the need of traditional HTTP requests.
 
+For more information, check the [documentation](https://github.com/andrearcaina/vivid/blob/main/server/README.md).
+
 <hr>
 
 ## Functionality
