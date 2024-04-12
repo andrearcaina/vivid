@@ -74,7 +74,7 @@ export async function RegisterUser(first, last, email, date, password, role) {
                 first_name: first,
                 last_name: last,
                 email: email,
-                date: date,
+                date_of_birth: date,
                 password: password,
                 role: role
             }),
