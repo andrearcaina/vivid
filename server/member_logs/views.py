@@ -12,6 +12,10 @@ import os
 class UpdatePassword(APIView):
     def put(self, request):
         token = request.COOKIES.get('jwt')
+        
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+
         try:
             payload = jwt.decode(token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
@@ -30,12 +34,16 @@ class UpdatePassword(APIView):
         
         user.set_password(new_password)
         user.save()
-        
+
         return Response({'message': 'Password updated successfully'}, status=200)
     
 class UpdateEmail(APIView):
     def put(self, request):
         token = request.COOKIES.get('jwt')
+        
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+
         try:
             payload = jwt.decode(token, str(os.environ.get('SECRET_KEY')), algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
@@ -47,6 +55,7 @@ class UpdateEmail(APIView):
             return Response({'message': 'New email not provided'}, status=400)
         
         user = User.objects.filter(id=payload['id']).first()
+        
         user.email = new_email
         user.save()
 
@@ -91,8 +100,10 @@ class UpdateMembership(APIView):
             return Response({'error': 'You are not authorized to approve memberships'}, status=401)
         
         member = Member.objects.filter(id=member_id).first()
+        
         member.membership_approved = approved
         member.save()
+        
         return Response({'message': 'Membership approved successfully'}, status=200)
     
 class DeleteMember(APIView):
@@ -112,8 +123,10 @@ class DeleteMember(APIView):
         
         member = Member.objects.filter(id=member_id).first()
         user = member.user
+        
         member.delete()
         user.delete()
+        
         return Response({'message': 'Member deleted successfully'}, status=200)
 
 class ResetPassword(APIView):
@@ -134,8 +147,10 @@ class ResetPassword(APIView):
 
         member = Member.objects.filter(id=member_id).first()
         user = member.user
+
         user.set_password(secrets.token_hex(8))
         user.save()
+        
         return Response({'message': 'Password reset successfully'}, status=200)
 
 class MembershipApproval(APIView):
@@ -173,6 +188,8 @@ class ActivityStatus(APIView):
 
         member = Member.objects.filter(id=member_id).first()
         user = member.user
+        
         user.is_active = activity
         user.save()
+        
         return Response({'message': 'Activity status updated successfully'}, status=200)
