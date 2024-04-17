@@ -2,7 +2,6 @@
   Vivid
 </h1>
 
-
 <p align="center">... is a full-stack web application for any general amateur or professional club that allows administrators to manage the finances, membership, and coaches of their club. It includes user authentication, a messaging platform for all members and administrators, an expense tracking panel, and a membership management system for administration.</p>
 
 <hr>
@@ -23,6 +22,10 @@
 </div>
 
 <hr>
+
+## Test Demo
+
+https://github.com/andrearcaina/vivid/assets/96299635/6968f46a-0382-442e-a1f6-370134a05b4c
 
 ## Tech Stack + How it Works
 
