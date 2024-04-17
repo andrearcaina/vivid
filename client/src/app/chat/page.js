@@ -77,7 +77,7 @@ export default function Chat() {
                 </div>
             </main>
         );
-    } else if (role == 'member' && !activated) {
+    } else if (role === 'member' && !activated) {
         return <Deactivated />;
     } else {
         return <UnAuthorized />;
