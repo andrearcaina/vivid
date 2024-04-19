@@ -17,7 +17,7 @@ export function listenSocket(setMessage) {
 
 export async function sendMessage(socket, message, title, timestamp) {
     try {
-        socket.send(JSON.stringify({ message: message, title: title, timestamp: timestamp}));
+        socket.send(JSON.stringify({ message: message, title: title, timestamp: timestamp }));
     } catch (err) {
         console.error(err);
     }

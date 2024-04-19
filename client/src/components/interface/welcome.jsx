@@ -4,12 +4,8 @@ import { Capitalize } from '@/utils/helpers';
 export default function Welcome() {
     const { user } = useAuthContext();
     const hour = new Date(Date.now()).getHours();
+    const greeting = hour < 5 ? "Good Night, " : hour > 5 && hour < 12 ? "Good Morning, " : hour > 12 && hour < 17 ? "Good Afternoon, " : "Good Evening, ";
 
-    let greeting;
-
-    if (hour < 12) {greeting = "Good Morning, "}
-    else if (hour < 17) {greeting = "Good Afternoon, "}
-    else {greeting = "Good Evening, "}
     return (
         <main>
             <div className="dark:bg-gray-900 p-3 text-center">

@@ -94,7 +94,7 @@ export default function CustomButton({ ...props }) {
     }
 
     return (
-        <>
+        <div>
             {showModal && (
                 <div className="z-[100] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="text-black bg-white p-4 rounded-md">
@@ -116,6 +116,6 @@ export default function CustomButton({ ...props }) {
             <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleButtonClick()}>
                 {type === "Remove" ? "Remove" : type === "ResetPassword" ? "Reset" : type === "Count" ? "Count" : "Reset"}
             </button>
-        </>
+        </div>
     )
 }

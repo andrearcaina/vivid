@@ -19,7 +19,7 @@ export const LogoutButton = () => {
     }
 
     return (
-        <main>
+        <div>
             {showModal && (
                 <div className="z-[99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="text-black bg-white p-4 rounded-md">
@@ -41,6 +41,6 @@ export const LogoutButton = () => {
             <button onClick={handleLogout}>
                 Logout
             </button>
-        </main>
+        </div>
     )
 }

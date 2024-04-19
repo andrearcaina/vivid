@@ -10,10 +10,6 @@ export const DarkModeProvider = ({ children }) => {
     setDarkMode(prevMode => !prevMode);
   };
 
-  useEffect(() => {
-    console.log('dark mode:', darkMode);
-  }, [darkMode]);
-
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
       {children}

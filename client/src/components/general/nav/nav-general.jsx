@@ -33,6 +33,5 @@ export const NavGeneral = ({ links }) => {
                 </div>
             </nav>
         </div>
-        
     );
 };

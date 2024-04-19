@@ -28,37 +28,33 @@ const dashboardItems = () => {
         {
             text: 'Dashboard',
             link: '/dashboard',
-            icon: <IoSpeedometerOutline />
+            icon: <IoSpeedometerOutline/>
         },
         {
             text: 'Calendar',
             link: '/calendar',
-            icon: <IoCalendarNumberOutline />
+            icon: <IoCalendarNumberOutline/>
         },
     ]
-}
-
-const defaultItems = () => {
+}, defaultItems = () => {
     return [
         {
             text: 'Chat',
             link: '/chat',
-            icon: <IoChatbubblesOutline />
+            icon: <IoChatbubblesOutline/>
         },
         {
             text: 'Profile',
             link: '/profile',
-            icon: <IoPersonOutline />
+            icon: <IoPersonOutline/>
         },
         {
-            text: <LogoutButton />,
+            text: <LogoutButton/>,
             link: '',
-            icon: <IoLogOutOutline />
+            icon: <IoLogOutOutline/>
         }
     ];
-}
-
-const roleItems = (role) => {
+}, roleItems = (role) => {
     if (role == "member") {
         return [
             ...dashboardItems(),
@@ -70,7 +66,7 @@ const roleItems = (role) => {
             {
                 text: 'Management',
                 link: '/management',
-                icon: <MdOutlineManageAccounts />
+                icon: <MdOutlineManageAccounts/>
             },
             ...defaultItems()
         ];
@@ -80,23 +76,21 @@ const roleItems = (role) => {
             {
                 text: 'Management',
                 link: '/management',
-                icon: <MdOutlineManageAccounts />
+                icon: <MdOutlineManageAccounts/>
             },
             {
                 text: 'Finances',
                 link: '/finances',
-                icon: <IoWalletOutline />
+                icon: <IoWalletOutline/>
             },
             ...defaultItems()
         ];
     }
-}
-
-const regularItems = () => {
+}, regularItems = () => {
     return [
-        { text: 'Home', link: '/' },
-        { text: 'Login', link: '/auth/login' },
-        { text: 'Register', link: '/auth/register' },
-        { text: 'Reset Password', link: '/auth/reset' }
+        {text: 'Home', link: '/'},
+        {text: 'Login', link: '/auth/login'},
+        {text: 'Register', link: '/auth/register'},
+        {text: 'Reset Password', link: '/auth/reset'}
     ];
-}
+};
