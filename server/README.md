@@ -8,7 +8,7 @@ The backend framework chosen for Vivid is Django, a high-level framework based o
 
 For data storage, Vivid uses a PostgreSQL database structure hosted and managed through Supabase. This choice allows for efficient data management and scalability.
 
-The application follows a RESTful API architecture, which means that it uses HTTP methods such as POST, GET, PUT, and DELETE to perform CRUD operations. These operations enable the creation, retrieval, updating, and deletion of data, providing a robust foundation for managing information within the system.
+The application follows a RESTful API architecture, which means that it uses HTTP methods such as POST, GET, PUT, and DELETE to perform CRUD operations. These operations enable the creation, retrieval, updating, and deletion of data, providing a robust foundation for managing information within the system. These CRUD operations are used extensively within our application, as it is the basic structure of a server-client relationship.
 
 To enhance user interaction and provide real-time communication capabilities, Vivid incorporates Django Channels. These channels facilitate the implementation of WebSockets, establishing persistent connections between the client and server. Unlike traditional HTTP requests that are stateless and require continuous polling for updates, WebSockets allow for seamless bidirectional communication. This technology is particularly useful for features like real-time chat, where immediate and continuous interaction is essential for a smooth user experience.
 
@@ -18,15 +18,28 @@ For more information, read below.
 
 Our backend consists of 5 different "django applications".
 1. `classes_offered`
-2. `finance_tracking`
-3. `member_logs`
-4. `message_platform`
-5. `user_auth`
+    - this app takes care of coaches creating courses and user sign ups
+    - the routes handling PUT and POST requests are only defined for coaches
+    - the routes handling GET requests are for all users
+3. `finance_tracking`
+    - this app goes through the finance tracking and coach salaries
+    - the routes handling all requests here are only defined for treasurers
+5. `member_logs`
+    - this app goes through the logging of members in a table
+    - the routes handling all requests here are only defined for coaches and treasurers
+7. `message_platform`
+    - this app goes through real-time chat features and messaging
+    - the routes handling POST requests are handled by admins
+    - the routes handling GET requests with a chat history are defined for all users
+9. `user_auth`
+    - this app goes through the registration, logging in, and logging out of a user within the app
+    - this app essentially creates a cookie with a JSON Web Token of the user's credentials on the server
+    - this is how we can identify the differences between each user on our application
 
-Each of these apps handle specific parts of our application.
+Each of these apps handle specific parts of our entire application.
 
-For simplicity sake, these 5 apps will be noted as "membership_app" in the file structure below.
-Every single django application we've created has most of these files. 
+For simplicity sake in our file structure below, these 5 apps will be noted as "membership_app" in the file structure below. \
+Every single django application we've created has most of these files.
 
 ```plaintext
 server/
@@ -40,22 +53,25 @@ server/
 |    └── migrations/               # migration changes depending on the django application
 |          └── 0001_initial.py     # these depend on the number of migration changes in django
 │    └── __init__.py               # created after initializing django app
-|    └── admin.py                  # created after initializing django app
-|    └── apps.py                   # created after initializing django app
-|    └── consumers.py              # used only in 3. message_platform app, for websocket connections and handling
+|    └── admin.py                  # created after initializing django app. Used for admin purposes in the application
+|    └── apps.py                   # created after initializing django app. Used to define the django app in settings.py
+|    └── consumers.py              # used only in 4. message_platform app, for websocket connections and handling
 |    └── models.py                 # utilized to define objects for certain app requirements (logs, finances)
-|    └── routing.py                # used only in 3. message_platform app, for websocket connection routing
-|    └── seralizers.py             # used to convert database objects into readable python data types 
-|    └── tests.py                  # used for testing certain API routes or websocket handles
+|    └── routing.py                # used only in 4. message_platform app, for websocket connection routing
+|    └── seralizers.py             # used to convert database objects into readable python data types (into dictionaries or lists)
+|    └── tests.py                  # used for testing certain API routes and checking if the output is expected
 |    └── urls.py                   # used to define certain API routes for certain django applications
 |    └── views.py                  # used to define the functionality of the API routes (HTTP request handling)
 └── .env                           # environment variables and config settings for database
 └── .env.example                   # environment variable example file
-└── .gitignore                     # ignore python files
+└── .gitignore                     # github ignore file that essentially ignores python compiled files
 └── README.md                      # this README file
 └── manage.py                      # the main application entry point
-└── requirements.txt               # the dependencies associated with our application
+└── requirements.txt               # the dependencies and libraries used in our application
 ```
+
+For more information on what the different API routes and models each application has, read more below.
+
 
 # Data Models
 
