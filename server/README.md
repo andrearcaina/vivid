@@ -150,7 +150,7 @@ For more information on what the different API routes and models each applicatio
 | HTTP Method | Endpoint                                 | Description                                | Required JSON Body                                   | Middleware |
 |-------------|------------------------------------------|--------------------------------------------|------------------------------------------------------|------------|
 | GET         | `user-auth/user/`                        | Get user information.                      | None                                                 | JWT needed |
-| POST        | `user-auth/login/`                       | Login to user account.                     | {"email": "member@gmail.com", "password": "testing"} | JWT needed |
+| POST        | `user-auth/login/`                       | Login to user account.                     | {"email": "member@gmail.com", "password": "testing"} | None       |
 | POST        | `user-auth/logout/`                      | Logout of user account.                    | None                                                 | JWT needed |
 | POST        | `user-auth/register/`                    | Register a new user in the database.       | {"first_name": "Test", "last_name": "test", "email": "your@gmail.com", "date_of_birth": "2001-01-01", "password": "testing", "role": "member"} | None |
 | PUT         | `user-auth/reset/`                       | Reset password and create a new password.  | {"email": "member@gmail.com", "password": "new", "confirmPassword": "new"} | None |
@@ -177,5 +177,8 @@ For more information on what the different API routes and models each applicatio
 | GET         | `classes-offered/showmembersinclasses/`  | Shows all members in a specific class.     | {"class_title": "class"} | JWT needed |
 
 ## Notes
-- Middleware descriptions: a valid JWT token is needed for any user. 
+- Middleware descriptions:
+    - Certain endpoints need a middleware to access/create/delete the resources from the endpoint.
+    - Endpoints with a "JWT needed" is our custom authentication middleware, where certain endpoints need a valid JSON Web Token to request resources from that endpoint.
+    - This is to prevent random people from accessing, creating, and deleting our resources from our database.
 - Ensure to replace placeholder values like `member@gmail.com`, `testing`, etc., with actual information when making requests.
