@@ -81,7 +81,7 @@ For more information, check the [documentation](https://github.com/andrearcaina/
 
 6. **`Member Scheduling System`**:
    - [x] Members can schedule an existing practice session and quickly pay on the application.
-   - [ ] Members can update their profiles as well.
+   - [x] Members can update their profiles as well.
 
 7. **`Coach Management System`**:
    - [x] Administrators, particularly the treasurer, have tools to manage coach lists.
