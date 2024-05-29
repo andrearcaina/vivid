@@ -1,4 +1,4 @@
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { motion } from 'framer-motion';
 import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
 

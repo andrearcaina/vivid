@@ -1,5 +1,5 @@
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
-import { CustomDropdown, CustomButton } from '../..';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { CustomDropdown, CustomButton } from '@/components';
 import { convertTimestamp } from '@/utils/helpers';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';

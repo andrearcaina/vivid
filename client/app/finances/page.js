@@ -1,7 +1,7 @@
 'use client';
-import { UnAuthorized, PaymentChart, DataTableVisualization } from '../../components';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useDarkMode } from '../../hooks/useDarkModeContext';
+import { UnAuthorized, PaymentChart, DataTableVisualization } from '@/components';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useState, useEffect } from 'react';
 import { getCoaches, getMembers } from '@/utils/logs';
 

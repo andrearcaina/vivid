@@ -1,4 +1,4 @@
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { Capitalize } from '@/utils/helpers';
 
 export default function Welcome() {

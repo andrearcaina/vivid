@@ -1,6 +1,6 @@
 import { fetchClassesOffered } from '@/utils/classes';
 import { convertTimestamp } from '@/utils/helpers';
-import { useAuthContext } from '../../../../hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { useEffect, useState} from 'react';
 
 export default function CoachUpcomingClasses(){

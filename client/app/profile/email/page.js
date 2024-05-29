@@ -1,7 +1,7 @@
 'use client';
-import { UnAuthorized } from '../../../components';
-import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { UnAuthorized } from '@/components';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { createNewEmail } from '@/utils/settings';
 import { toast } from 'react-hot-toast';
 

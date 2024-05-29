@@ -1,6 +1,6 @@
 'use client';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { Menu, UnAuthorized, Deactivated } from '../../components';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { Menu, UnAuthorized, Deactivated } from '@/components';
 import { Capitalize } from '@/utils/helpers';
 
 export default function Dashboard() {

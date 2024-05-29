@@ -1,7 +1,7 @@
 'use client';
-import { UnAuthorized, DataTableVisualization } from '../../components';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useDarkMode } from '../../hooks/useDarkModeContext';
+import { UnAuthorized, DataTableVisualization } from '@/components';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { getMembers } from '@/utils/logs';
 import { useState, useEffect } from 'react';
 

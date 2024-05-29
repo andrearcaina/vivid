@@ -1,4 +1,4 @@
-import { useDarkMode } from '../../hooks/useDarkModeContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import Announcements from './functionality/announcements';
 import Functionality from './functionality/roleBasedContent';
 import Welcome from './welcome';

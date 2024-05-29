@@ -1,4 +1,4 @@
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { NavMobile } from './nav-mobile';
 import Link from 'next/link';
 import Image from 'next/image'; 

@@ -1,11 +1,11 @@
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import ClassesAvailable from './classesAvailable';
 import MemberClassSignUp from './members/memberClassSignUp';
 import MemberEnrolledClasses from './members/memberEnrolledClasses';
 import CoachCreateClass from './coach/coachCreateClass';
 import CoachUpcomingClasses from './coach/coachUpcomingClasses';
 import { getLastPayment } from '@/utils/logs';
-import { PaymentChart } from '../..';
+import { PaymentChart } from '@/components';
 import { useState, useEffect } from 'react';
 
 export default function Functionality() {

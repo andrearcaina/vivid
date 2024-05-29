@@ -1,4 +1,4 @@
-import { useDarkMode } from '../../../../hooks/useDarkModeContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { UserRegisterClass, fetchClassesOffered } from '@/utils/classes';
 import { useEffect, useState} from 'react';
 import { toast } from 'react-hot-toast';

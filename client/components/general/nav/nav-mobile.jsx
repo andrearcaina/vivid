@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useClickAway } from 'react-use';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Squash as Hamburger } from 'hamburger-react';
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import Link from 'next/link';
 
 export const NavMobile = ({ links }) => {

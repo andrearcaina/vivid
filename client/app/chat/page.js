@@ -1,9 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useDarkMode } from '../../hooks/useDarkModeContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { convertTimestamp } from '@/utils/helpers';
-import { UnAuthorized, Deactivated } from '../../components';
+import { UnAuthorized, Deactivated } from '@/components';
 import { joinWebSocket, listenSocket, fetchChatHistory, sendMessage } from '@/utils/socket';
 
 export default function Chat() {

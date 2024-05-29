@@ -1,6 +1,6 @@
 'use client';
-import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { useRouter } from 'next/navigation';
 
 export default function Approval() {

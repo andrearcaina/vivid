@@ -1,4 +1,4 @@
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { NavDashboard } from './nav-dashboard';
 import { NavGeneral } from './nav-general';
 import { LogoutButton } from '../buttons/logoutButton';

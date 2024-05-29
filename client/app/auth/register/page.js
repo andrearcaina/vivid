@@ -1,7 +1,7 @@
 'use client';
 import { RegisterUser } from '@/utils/services';
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { useRouter } from 'next/navigation';
 import { toast } from "react-hot-toast";
 import Image from 'next/image';

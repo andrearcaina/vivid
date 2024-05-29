@@ -1,7 +1,7 @@
 'use client';
 import { joinWebSocket, listenSocket, fetchChatHistory, sendMessage } from '@/utils/socket';
 import { useState, useEffect } from 'react';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { convertTimestamp } from '@/utils/helpers';
 
 export default function Announcements() {

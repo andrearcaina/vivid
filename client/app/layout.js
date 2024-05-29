@@ -1,6 +1,6 @@
-import { Body } from '../components';
-import { AuthContextProvider } from '../contexts/authContext';
-import { DarkModeProvider } from '../contexts/darkModeContext';
+import { Body } from '@/components';
+import { AuthContextProvider } from '@/contexts/authContext';
+import { DarkModeProvider } from '@/contexts/darkModeContext';
 import './globals.css';
 
 export const metadata = {

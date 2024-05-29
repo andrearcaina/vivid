@@ -1,4 +1,4 @@
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { usePathname } from 'next/navigation';
 import { NavMobile } from './nav-mobile';
 import classNames from 'classnames';

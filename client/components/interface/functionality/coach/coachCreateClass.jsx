@@ -1,5 +1,5 @@
-import { useDarkMode } from '../../../../hooks/useDarkModeContext';
-import { useAuthContext } from '../../../../hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { RegisterClass } from '@/utils/classes';
 import { toast } from 'react-hot-toast';
 

@@ -1,8 +1,8 @@
 'use client';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useDarkMode } from '../../hooks/useDarkModeContext';
-import { UnAuthorized, Deactivated } from '../../components';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
+import { UnAuthorized, Deactivated } from '@/components';
 import { fetchMemberEnrolledClasses, getCoachClasses, fetchClassesOffered } from '@/utils/classes';
 import { Calendar, momentLocalizer, } from 'react-big-calendar';
 import { useState, useEffect } from 'react';

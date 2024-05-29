@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
 
 export const LogoutButton = () => {
     const { logout } = useAuthContext();

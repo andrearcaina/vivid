@@ -1,6 +1,6 @@
 'use client';
-import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useDarkMode } from '../../../hooks/useDarkModeContext';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useDarkMode } from '@/hooks/useDarkModeContext';
 import { resetPassword } from '@/utils/services';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
