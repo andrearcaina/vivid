@@ -12,7 +12,7 @@ daphne==4.1.0
 Django==5.0.4
 django-channels==0.7.0
 django-cors-headers==4.3.1
-djangorestframework==3.15.1
+djangorestframework==3.15.2
 hyperlink==21.0.0
 idna==3.7
 incremental==22.10.0
