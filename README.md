@@ -148,7 +148,6 @@ $ bun run dev
 $ pnpm run dev
 $ yarn run dev
 
-# run the server
-$ cd ../server
+# open up a new terminal, go back to that directory, and then run the server
 $ python manage.py runserver
 ```
