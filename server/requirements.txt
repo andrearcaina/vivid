@@ -22,7 +22,7 @@ pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycparser==2.22
 PyJWT==2.8.0
-pyOpenSSL==24.1.0
+pyOpenSSL==25.1.0
 python-dotenv==1.0.1
 requests==2.32.0
 requests-oauthlib==2.0.0
